@@ -1063,48 +1063,58 @@ void InitStatsAndGear(bool isDeathTakingItems) {
     }
 
     if (isDeathTakingItems == true) {
-        if (g_Status.equipment[LEFT_HAND_SLOT] == ITEM_ALUCARD_SWORD) {
+        if (g_Status.equipment[LEFT_HAND_SLOT] == STARTING_WEAPON) {
             g_Status.equipment[LEFT_HAND_SLOT] = ITEM_EMPTY_HAND;
-        } else if (g_Status.equipment[RIGHT_HAND_SLOT] == ITEM_ALUCARD_SWORD) {
+        } else if (g_Status.equipment[RIGHT_HAND_SLOT] == STARTING_WEAPON) {
             g_Status.equipment[RIGHT_HAND_SLOT] = ITEM_EMPTY_HAND;
-        } else if (g_Status.equipHandCount[ITEM_ALUCARD_SWORD] != 0) {
-            g_Status.equipHandCount[ITEM_ALUCARD_SWORD]--;
+        } else if (g_Status.equipHandCount[STARTING_WEAPON] != 0) {
+            g_Status.equipHandCount[STARTING_WEAPON]--;
         }
 
-        if (g_Status.equipment[LEFT_HAND_SLOT] == ITEM_ALUCARD_SHIELD) {
+        if (g_Status.equipment[LEFT_HAND_SLOT] == STARTING_SHIELD) {
             g_Status.equipment[LEFT_HAND_SLOT] = ITEM_EMPTY_HAND;
-        } else if (g_Status.equipment[RIGHT_HAND_SLOT] == ITEM_ALUCARD_SHIELD) {
+        } else if (g_Status.equipment[RIGHT_HAND_SLOT] == STARTING_SHIELD) {
             g_Status.equipment[RIGHT_HAND_SLOT] = ITEM_EMPTY_HAND;
-        } else if (g_Status.equipHandCount[ITEM_ALUCARD_SHIELD] != 0) {
-            g_Status.equipHandCount[ITEM_ALUCARD_SHIELD]--;
+        } else if (g_Status.equipHandCount[STARTING_SHIELD] != 0) {
+            g_Status.equipHandCount[STARTING_SHIELD]--;
         }
 
-        if (g_Status.equipment[HEAD_SLOT] == ITEM_DRAGON_HELM) {
+        if (g_Status.equipment[HEAD_SLOT] == STARTING_HAT) {
             g_Status.equipment[HEAD_SLOT] = ITEM_EMPTY_HEAD;
-        } else if (g_Status.equipBodyCount[ITEM_DRAGON_HELM] != 0) {
-            g_Status.equipBodyCount[ITEM_DRAGON_HELM]--;
+        } else if (g_Status.equipBodyCount[STARTING_HAT] != 0) {
+            g_Status.equipBodyCount[STARTING_HAT]--;
         }
 
-        if (g_Status.equipment[ARMOR_SLOT] == ITEM_ALUCARD_MAIL) {
+        if (g_Status.equipment[ARMOR_SLOT] == STARTING_ARMOR) {
             g_Status.equipment[ARMOR_SLOT] = ITEM_NO_ARMOR;
-        } else if (g_Status.equipBodyCount[ITEM_ALUCARD_MAIL] != 0) {
-            g_Status.equipBodyCount[ITEM_ALUCARD_MAIL]--;
+        } else if (g_Status.equipBodyCount[STARTING_ARMOR] != 0) {
+            g_Status.equipBodyCount[STARTING_ARMOR]--;
         }
 
-        if (g_Status.equipment[CAPE_SLOT] == ITEM_TWILIGHT_CLOAK) {
+        if (g_Status.equipment[CAPE_SLOT] == STARTING_CAPE) {
             g_Status.equipment[CAPE_SLOT] = ITEM_NO_CAPE;
             UpdateCapePalette();
-        } else if (g_Status.equipBodyCount[ITEM_TWILIGHT_CLOAK] != 0) {
-            g_Status.equipBodyCount[ITEM_TWILIGHT_CLOAK]--;
+        } else if (g_Status.equipBodyCount[STARTING_CAPE] != 0) {
+            g_Status.equipBodyCount[STARTING_CAPE]--;
         }
 
-        if (g_Status.equipment[ACCESSORY_1_SLOT] == ITEM_NECKLACE_OF_J) {
+        if (g_Status.equipment[ACCESSORY_1_SLOT] == STARTING_ACCESSORY_1) {
             g_Status.equipment[ACCESSORY_1_SLOT] = ITEM_NO_ACCESSORY;
-        } else if (g_Status.equipment[ACCESSORY_2_SLOT] == ITEM_NECKLACE_OF_J) {
+        } else if (g_Status.equipment[ACCESSORY_2_SLOT] == STARTING_ACCESSORY_1) {
             g_Status.equipment[ACCESSORY_2_SLOT] = ITEM_NO_ACCESSORY;
-        } else if (g_Status.equipBodyCount[ITEM_NECKLACE_OF_J] != 0) {
-            g_Status.equipBodyCount[ITEM_NECKLACE_OF_J]--;
+        } else if (g_Status.equipBodyCount[STARTING_ACCESSORY_1] != 0) {
+            g_Status.equipBodyCount[STARTING_ACCESSORY_1]--;
         }
+
+        #ifdef STARTING_ACCESSORY_2
+        if (g_Status.equipment[ACCESSORY_2_SLOT] == STARTING_ACCESSORY_2) {
+            g_Status.equipment[ACCESSORY_2_SLOT] = ITEM_NO_ACCESSORY;
+        } else if (g_Status.equipment[ACCESSORY_1_SLOT] == STARTING_ACCESSORY_2) {
+            g_Status.equipment[ACCESSORY_1_SLOT] = ITEM_NO_ACCESSORY;
+        } else if (g_Status.equipBodyCount[STARTING_ACCESSORY_2] != 0) {
+            g_Status.equipBodyCount[STARTING_ACCESSORY_2]--;
+        }
+        #endif
     } else {
         // I think this zeros out all the rooms to mark as unvisited
         for (i = 0; i < 2048; i++) {
@@ -1319,14 +1329,18 @@ void InitStatsAndGear(bool isDeathTakingItems) {
                 } else if (dracDefeatTime >= 1000) {
                     g_Status.statsBase[STAT_CON]++;
                 }
-                g_Status.equipment[LEFT_HAND_SLOT] = ITEM_ALUCARD_SWORD;
-                g_Status.equipment[RIGHT_HAND_SLOT] = ITEM_ALUCARD_SHIELD;
-                g_Status.equipment[HEAD_SLOT] = ITEM_DRAGON_HELM;
-                g_Status.equipment[ARMOR_SLOT] = ITEM_ALUCARD_MAIL;
-                g_Status.equipment[CAPE_SLOT] = ITEM_TWILIGHT_CLOAK;
-                g_Status.equipment[ACCESSORY_1_SLOT] = ITEM_NECKLACE_OF_J;
+                g_Status.equipment[LEFT_HAND_SLOT] = STARTING_WEAPON;
+                g_Status.equipment[RIGHT_HAND_SLOT] = STARTING_SHIELD;
+                g_Status.equipment[HEAD_SLOT] = STARTING_HAT;
+                g_Status.equipment[ARMOR_SLOT] = STARTING_ARMOR;
+                g_Status.equipment[CAPE_SLOT] = STARTING_CAPE;
+                g_Status.equipment[ACCESSORY_1_SLOT] = STARTING_ACCESSORY_1;
                 g_Status.subWeapon = 0;
+                #ifndef STARTING_ACCESSORY_2
                 g_Status.equipment[ACCESSORY_2_SLOT] = ITEM_NO_ACCESSORY;
+                #else
+                g_Status.equipment[ACCESSORY_2_SLOT] = STARTING_ACCESSORY_2;
+                #endif
                 g_Status.hp = g_Status.hpMax;
                 g_Status.mp = g_Status.mpMax;
 
@@ -1360,7 +1374,11 @@ void InitStatsAndGear(bool isDeathTakingItems) {
                         }
                     }
                     if (i == 8) {
+                        #ifdef BOUNTY_HUNTER
+                        AddToInventory(ITEM_MONSTER_VIAL_2, EQUIP_ARMOR);
+                        #else
                         AddToInventory(ITEM_AXE_LORD_ARMOR, EQUIP_ARMOR);
+                        #endif
                     }
                 }
             } else {

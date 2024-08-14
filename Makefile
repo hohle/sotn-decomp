@@ -19,6 +19,7 @@ CC_FLAGS        += -G0 -w -O2 -funsigned-char -fpeephole -ffunction-cse -fpcc-st
 CPP_FLAGS       += -Iinclude -Iinclude/psxsdk -undef -Wall -fno-builtin
 CPP_FLAGS       += -Dmips -D__GNUC__=2 -D__OPTIMIZE__ -D__mips__ -D__mips -Dpsx -D__psx__ -D__psx -D_PSYQ -D__EXTENSIONS__ -D_MIPSEL -D_LANGUAGE_C -DLANGUAGE_C -DNO_LOGS -DHACKS -DUSE_INCLUDE_ASM
 CPP_FLAGS       += -D_internal_version_$(VERSION) -DSOTN_STR
+CPP_FLAGS       += $(RANDOMIZER_FLAGS)
 LD_FLAGS        := -nostdlib --no-check-sections
 
 # Directories
@@ -73,6 +74,10 @@ GFXSTAGE        := $(PYTHON) $(TOOLS_DIR)/gfxstage.py
 PNG2S           := $(PYTHON) $(TOOLS_DIR)/png2s.py
 ICONV           := iconv --from-code=UTF-8 --to-code=Shift-JIS
 DIRT_PATCHER    := $(PYTHON) $(TOOLS_DIR)/dirt_patcher.py
+
+include make.conf
+
+RANDOMIZER_FLAGS ?=
 
 define list_src_files
 	$(foreach dir,$(ASM_DIR)/$(1),$(wildcard $(dir)/**.s))

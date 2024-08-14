@@ -1,0 +1,34 @@
+#ifndef RANDOMIZER_H
+#define RANDOMIZER_H
+
+#include <game.h>
+
+#ifndef STARTING_WEAPON
+#define STARTING_WEAPON ITEM_ALUCARD_SWORD
+#endif
+
+#ifndef STARTING_SHIELD
+#define STARTING_SHIELD ITEM_ALUCARD_SHIELD
+#endif
+
+#ifndef STARTING_HAT
+#define STARTING_HAT ITEM_DRAGON_HELM
+#endif
+
+#ifndef STARTING_ARMOR
+#define STARTING_ARMOR ITEM_ALUCARD_MAIL
+#endif
+
+#ifndef STARTING_CAPE
+#define STARTING_CAPE ITEM_TWILIGHT_CLOAK
+#endif
+
+#ifndef STARTING_ACCESSORY_1
+#define STARTING_ACCESSORY_1 ITEM_NECKLACE_OF_J
+#endif
+
+#ifndef STARTING_ACCESSORY_2
+// do not define
+#endif
+
+#endif // RANDOMIZER_H

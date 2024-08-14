@@ -3,6 +3,7 @@
 #include "common.h"
 #include "log.h"
 #include "macros.h"
+#include "randomizer.h"
 #include <psxsdk/kernel.h>
 
 // lseek etc. conflicts

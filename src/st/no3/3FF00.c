@@ -111,10 +111,19 @@ void EntityRoomTransition2(Entity* self) {
     }
 }
 
+static s16 StolenItems[] = {
+    STARTING_WEAPON,
+    STARTING_SHIELD,
+    STARTING_ARMOR + NUM_HAND_ITEMS,
+    STARTING_HAT + NUM_HAND_ITEMS,
+    STARTING_CAPE + NUM_HAND_ITEMS,
+    STARTING_ACCESSORY_1 + NUM_HAND_ITEMS,
+};
+
 // Displays items took by Death in the cutscene
 void EntityDeathStolenItem(Entity* self) {
     u16 params = self->params;
-    u16 itemId = D_80181AD4[params];
+    u16 itemId = StolenItems[params];
     volatile char pad;
     Primitive* prim;
     s32 primIndex;

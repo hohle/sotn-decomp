@@ -47,6 +47,8 @@ segments:
       - [0xE90, data]
       - [0xEA0, data]
       - [0x11F0, data]
+      - [0x1AD4, .data, 3FF00]
+      - [0x1AE0, data]
       - [0x1B40, data]
       - [0x1CC0, .data, st_update]
       - [0x1CEC, .data, collision]
