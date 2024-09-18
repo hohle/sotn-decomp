@@ -3,10 +3,10 @@
 #include "sfx.h"
 
 void func_8018D8C8(u16* tilemap);
-INCLUDE_ASM("asm/us/st/mad/nonmatchings/D8C8", func_8018D8C8);
+INCLUDE_ASM("st/mad/nonmatchings/D8C8", func_8018D8C8);
 
 void func_8018DC28(u16* tilemap);
-INCLUDE_ASM("asm/us/st/mad/nonmatchings/D8C8", func_8018DC28);
+INCLUDE_ASM("st/mad/nonmatchings/D8C8", func_8018DC28);
 
 void func_8018DF0C(u16* tilemap, s32 arg1) {
     const int RoomWidth = 32;
@@ -91,7 +91,7 @@ void func_8018E13C(u16* tilemap) {
 }
 
 void func_8018E1D4(void);
-INCLUDE_ASM("asm/us/st/mad/nonmatchings/D8C8", func_8018E1D4);
+INCLUDE_ASM("st/mad/nonmatchings/D8C8", func_8018E1D4);
 
 void func_8018E5AC(Entity* self) {
     s32 temp_v0;

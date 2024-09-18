@@ -361,7 +361,7 @@ void func_80197A9C(s16 sfxId) {
     }
 }
 
-INCLUDE_ASM("asm/us/st/mad/nonmatchings/15520", func_80197B94);
+INCLUDE_ASM("st/mad/nonmatchings/15520", func_80197B94);
 
 #include "../entity_soul_steal_orb.h"
 

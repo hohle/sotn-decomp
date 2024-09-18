@@ -10,33 +10,24 @@
 
 #ifndef INCLUDE_ASM
 
-#ifndef INCLUDE_ASM_OLD
-#define INCLUDE_ASM(FOLDER, NAME)                                              \
-    __asm__(".pushsection .text\n"                                             \
-            "\t.align\t2\n"                                                    \
-            "\t.globl\t" #NAME "\n"                                            \
-            "\t.ent\t" #NAME "\n" #NAME ":\n"                                  \
-            ".include \"asm/" VERSION "/" FOLDER "/" #NAME ".s\"\n"            \
-            "\t.set reorder\n"                                                 \
-            "\t.set at\n"                                                      \
-            "\t.end\t" #NAME "\n"                                              \
-            ".popsection")
-#else
-#define INCLUDE_ASM(FOLDER, NAME)                                              \
-    __asm__(".pushsection .text\n"                                             \
-            "\t.align\t2\n"                                                    \
-            "\t.globl\t" #NAME "\n"                                            \
-            "\t.ent\t" #NAME "\n" #NAME ":\n"                                  \
-            ".include \"" FOLDER "/" #NAME ".s\"\n"                            \
-            "\t.set reorder\n"                                                 \
-            "\t.set at\n"                                                      \
-            "\t.end\t" #NAME "\n"                                              \
-            ".popsection")
+#ifndef ASM_PREFIX
+#define ASM_PREFIX "asm/" VERSION
 #endif
+
+#define INCLUDE_ASM(FOLDER, NAME)                                              \
+    __asm__(".pushsection .text\n"                                             \
+            "\t.align\t2\n"                                                    \
+            "\t.globl\t" #NAME "\n"                                            \
+            "\t.ent\t" #NAME "\n" #NAME ":\n"                                  \
+            ".include \"" ASM_PREFIX "/" FOLDER "/" #NAME ".s\"\n"            \
+            "\t.set reorder\n"                                                 \
+            "\t.set at\n"                                                      \
+            "\t.end\t" #NAME "\n"                                              \
+            ".popsection")
 
 #define INCLUDE_RODATA(FOLDER, NAME)                                           \
     __asm__(".pushsection .rodata\n"                                           \
-            ".include \"asm/" VERSION "/" FOLDER "/" #NAME ".s\"\n"            \
+            ".include \"" ASM_PREFIX "/" FOLDER "/" #NAME ".s\"\n"            \
             ".popsection")
 
 #endif
