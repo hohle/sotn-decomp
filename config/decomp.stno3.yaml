@@ -1,0 +1,21 @@
+name: Castlevania Symphony of the Night
+github: https://github.com/xeeyanmo/sotn-decomp
+platform: ps1
+discord:
+versions:
+- name: us
+  fullname: US ST/NO3
+  sha1: 5d06216b895ab5ff892c88b0d9eff67ff16e2bd1
+  paths:
+    baserom: "../disks/us/ST/NO3.BIN"
+    build: "../build/us/NO3.BIN"
+    asm: "asm"
+    nonmatchings: "../asm/us/st/no3/nonmatchings"
+    map: "../build/us/stno3.map"
+    elf: "../build/us/stno3.elf"
+tools:
+  decompme:
+    preset: 14
+  permuter:
+    decompme_compilers:
+      bin/cc-psx-26: gcc26

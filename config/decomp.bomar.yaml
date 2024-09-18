@@ -1,0 +1,21 @@
+name: Castlevania Symphony of the Night
+github: https://github.com/xeeyanmo/sotn-decomp
+discord: 
+platform: ps1
+versions:
+- name: us
+  fullname: US BOSS/MAR
+  sha1: 4cd6c07959db859f5bc19390a283f34df4bf1619
+  paths:
+    baserom: "../disks/us/BOSS/MAR.BIN"
+    build: "../build/us/MAR.BIN"
+    asm: "asm"
+    nonmatchings: "asm/us/boss/mar/nonmatchings"
+    map: "../build/us/bomar.map"
+    elf: "../build/us/bomar.elf"
+tools:
+  decompme:
+    preset: 14
+  permuter:
+    decompme_compilers:
+      bin/cc-psx-26: gcc26

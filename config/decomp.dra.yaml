@@ -1,0 +1,41 @@
+name: Castlevania Symphony of the Night
+github: https://github.com/xeeyanmo/sotn-decomp
+platform: ps1
+versions:
+- name: us
+  fullname: US DRA PSX
+  sha1: 2eac5f7162e77416166c2511c787995488f01c37
+  paths:
+    baserom: "../disks/us/DRA.BIN"
+    build: "../build/us/DRA.BIN"
+    asm: "asm"
+    nonmatchings: "../asm/us/dra/nonmatchings"
+    map: "../build/us/dra.map"
+    elf: "../build/us/dra.elf"
+- name: hd
+  fullname: HD DRA PSX
+  sha1: ea268a06a7eb7cd99928ba40e774577c4a1c504d
+  paths:
+    baserom: "../disks/pspeu/PSP_GAME/USRDIR/res/ps/hdbin/dra.bin"
+    build: "../build/hd/DRA.BIN"
+    asm: "asm"
+    nonmatchings: "asm/hd/dra/nonmatchings"
+    map: "../build/hd/dra.map"
+    elf: "../build/hd/dra.elf"
+- name: pspeu
+  fullname: EU DRA PSP
+  sha1: 2ba697c152e240ee0d69619f4a460d145fae04c0
+  paths:
+    baserom: "../disks/pspeu/PSP_GAME/USRDIR/res/ps/PSPBIN/dra.bin"
+    build: "../build/pspeu/DRA.BIN"
+    asm: "asm"
+    nonmatchings: "asm/pspeu/dra/nonmatchings"
+    map: "../build/pspeu/dra.map"
+    elf: "../build/pspeu/dra.elf"
+tools:
+  decompme:
+    # n.b.! this is the PSX SOTN preset
+    preset: 14
+  permuter:
+    decompme_compilers:
+      bin/cc-psx-26: gcc26
