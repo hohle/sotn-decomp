@@ -1152,7 +1152,7 @@ void EntityMerman2(Entity* self) {
 
         case 2:
             PlaySfxPositional(SFX_FM_EXPLODE_B);
-            func_801C13F8();
+            AxeKnightDeath();
             DestroyEntity(self);
         }
         break;

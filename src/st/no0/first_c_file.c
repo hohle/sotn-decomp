@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "common.h"
+#include "no0.h"
 
 INCLUDE_ASM("st/no0/nonmatchings/first_c_file", func_us_801C1854);
 
@@ -29,6 +30,6 @@ INCLUDE_ASM("st/no0/nonmatchings/first_c_file", func_us_801C2E7C);
 
 INCLUDE_ASM("st/no0/nonmatchings/first_c_file", func_us_801C3308);
 
-INCLUDE_ASM("st/no0/nonmatchings/first_c_file", MakeExplosions);
+#include "../axe_knight_death.h"
 
 INCLUDE_ASM("st/no0/nonmatchings/first_c_file", EntityWargExplosionPuffOpaque);

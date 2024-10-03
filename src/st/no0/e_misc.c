@@ -29,7 +29,7 @@ INCLUDE_ASM("st/no0/nonmatchings/e_misc", InitializeUnkEntity);
 
 INCLUDE_ASM("st/no0/nonmatchings/e_misc", MakeEntityFromId);
 
-INCLUDE_ASM("st/no0/nonmatchings/e_misc", func_us_801CC1D0);
+INCLUDE_ASM("st/no0/nonmatchings/e_misc", MakeExplosions);
 
 INCLUDE_ASM("st/no0/nonmatchings/e_misc", EntityBigRedFireball);
 

@@ -53,13 +53,13 @@ typedef enum EntityIDs {
     /* 0x43 */ E_MERMAN_JUMP_AIR,
     /* 0x44 */ E_MERMAN_DYING,
     /* 0x47 */ E_BONE_SCIMITAR_HEAD = 0x47,
+    /* 0x49 */ E_WARG_EXP_OPAQUE = 0x49,
     /* 0x4C */ E_ZOMBIE = 0x4C,
     /* 0x59 */ E_ID_59 = 0x59,
     /* 0x5B */ E_DEATH_5B = 0x5B,
     /* 0x5D */ E_FALLING_ROCK = 0x5D,
     /* 0x5E */ E_DEATH_5E,
     /* 0x60 */ E_FLYING_OWL_UNK60 = 0x60,
-    /* 0x62 */ E_WARG_EXP_OPAQUE = 0x62,
 } EntityIDs;
 
 extern s16 g_SineTable[];

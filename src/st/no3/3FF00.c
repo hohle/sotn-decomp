@@ -640,27 +640,7 @@ void EntityUnkId5E(Entity* entity) {
     }
 }
 
-void func_801C13F8() {
-    Entity* entity;
-    s16 temp_s3;
-    s8 temp_s4;
-    s32 i;
-
-    temp_s4 = Random() & 3;
-    temp_s3 = ((Random() & 0xF) << 8) - 0x800;
-
-    for (i = 0; i < 6; i++) {
-        entity = AllocEntity(&g_Entities[224], &g_Entities[256]);
-        if (entity != NULL) {
-            // Make a EntityWargExplosionPuffOpaque
-            CreateEntityFromEntity(E_WARG_EXP_OPAQUE, g_CurrentEntity, entity);
-            entity->params = 2;
-            entity->ext.wargpuff.unk89 = 6 - i;
-            entity->ext.wargpuff.unk84 = temp_s3;
-            entity->ext.wargpuff.unk88 = temp_s4;
-        }
-    }
-}
+#include "../axe_knight_death.h"
 
 // A single "puff" of the warg explosion animation, opaque
 void EntityWargExplosionPuffOpaque(Entity* self) {
