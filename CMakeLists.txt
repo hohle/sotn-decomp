@@ -421,6 +421,19 @@ endif()
 add_executable(${PROJECT_NAME}_null
     src/pc/null.c
 )
+target_include_directories(${PROJECT_NAME}_null PRIVATE
+    include
+)
+
+# mc target
+add_executable(${PROJECT_NAME}_mc
+    src/pc/mc.c
+    src/pc/stubs.c
+)
+target_include_directories(${PROJECT_NAME}_mc PRIVATE
+    include
+    src/dra
+)
 
 if (WIN32)
     target_link_libraries(${PROJECT_NAME}_null PRIVATE core)

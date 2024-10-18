@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-// something is off with the headers in this target
-#include "../../include/common.h"
-#include "../../include/psxsdk/libgpu.h"
+#include "common.h"
+#include "psxsdk/libgpu.h"
 
 extern bool g_TimedExit;
 extern int g_TimeLimit;
