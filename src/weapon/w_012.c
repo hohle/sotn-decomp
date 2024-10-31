@@ -189,7 +189,7 @@ static void EntityWeaponAttack(Entity* self) {
         self->ext.sword.unk9A = 0x19;
         self->ext.sword.unkA0 = 0;
 
-        if (PLAYER.step == 2) {
+        if (PLAYER.step == Player_Crouch) {
             if (PLAYER.step_s != PLAYER.step) {
                 self->ext.sword.unkA0 = 0x18;
             }
@@ -346,7 +346,7 @@ static s32 func_ptr_80170004(Entity* self) {
         self->ext.weapon_012.unk7E = 0x1C;
         offsetY = PLAYER.posY.i.hi + PLAYER.hitboxOffY;
         self->posY.i.hi = offsetY - 8;
-        if (PLAYER.step != 2) {
+        if (PLAYER.step != Player_Crouch) {
             self->posY.i.hi = offsetY - 0x10;
         }
         if (self->facingLeft != 0) {

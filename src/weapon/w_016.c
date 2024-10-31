@@ -243,7 +243,7 @@ static void func_ptr_8017000C(Entity* self) {
         self->drawFlags = DRAW_COLORS;
         temp_a0 = PLAYER.posY.i.hi + PLAYER.hitboxOffY;
         self->posY.i.hi = temp_a0 - 6;
-        if (PLAYER.step != 2) {
+        if (PLAYER.step != Player_Crouch) {
             self->posY.i.hi = temp_a0 - 14;
         }
         if (self->facingLeft) {

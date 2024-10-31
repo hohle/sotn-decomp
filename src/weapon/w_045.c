@@ -66,12 +66,12 @@ static void EntityWeaponAttack(Entity* self) {
     }
 
     if (g_Player.pl_vram_flag & 1) {
-        PLAYER.step = 0x28;
+        PLAYER.step = Player_AxearmorStand;
         PLAYER.step_s = 0;
         PLAYER.velocityX = PLAYER.velocityY = 0;
         PLAYER.ext.player.anim = 0xCF;
     } else {
-        PLAYER.step = 0x2A;
+        PLAYER.step = Player_AxearmorJump;
         PLAYER.step_s = 0;
         PLAYER.velocityX = PLAYER.velocityY = 0;
         PLAYER.ext.player.anim = 0xCD;
@@ -94,7 +94,7 @@ static s32 func_ptr_80170004(Entity* self) {
     }
     DecelerateX(FIX(0.125));
     if (!(g_Player.pl_vram_flag & 1)) {
-        PLAYER.step = 0x2A;
+        PLAYER.step = Player_AxearmorJump;
         PLAYER.step_s = 0;
         PLAYER.velocityX = PLAYER.velocityY = 0;
         PLAYER.ext.player.anim = 0xD0;
@@ -105,7 +105,7 @@ static s32 func_ptr_80170004(Entity* self) {
     switch (PLAYER.step_s) {
     case 0:
         if (func_13F000_8017A718() != 0) {
-            PLAYER.step = 0x29;
+            PLAYER.step = Player_AxearmorWalk;
             PLAYER.step_s = 0;
             SetSpeedX(FIX(2.5));
             PLAYER.ext.player.anim = 0xCD;
@@ -125,7 +125,7 @@ static s32 func_ptr_80170004(Entity* self) {
             if (g_Player.padTapped & PAD_CROSS) {
                 if (g_Player.unk72 == 0) {
                     PLAYER.ext.player.anim = 0xD0;
-                    PLAYER.step = 0x2A;
+                    PLAYER.step = Player_AxearmorJump;
                     PLAYER.animFrameIdx = 0;
                     PLAYER.animFrameDuration = 0;
                     PLAYER.step_s = 0;
@@ -169,7 +169,7 @@ static void func_ptr_80170008(Entity* self) {
     }
     SetSpeedX(FIX(2.5));
     if (!(g_Player.pl_vram_flag & 1)) {
-        PLAYER.step = 0x2A;
+        PLAYER.step = Player_AxearmorJump;
         PLAYER.step_s = 0;
         PLAYER.velocityY = 0;
         PLAYER.ext.player.anim = 0xD0;
@@ -178,7 +178,7 @@ static void func_ptr_80170008(Entity* self) {
         return;
     }
     if (func_13F000_8017A718() == 0) {
-        PLAYER.step = 0x28;
+        PLAYER.step = Player_AxearmorStand;
         PLAYER.step_s = 0;
         PLAYER.ext.player.anim = 0xCF;
         PLAYER.animFrameIdx = 0;
@@ -189,7 +189,7 @@ static void func_ptr_80170008(Entity* self) {
     if (g_Player.padTapped & PAD_SQUARE) {
         PLAYER.ext.player.anim = 0xCE;
         g_api.PlaySfx(SFX_VO_ALU_ATTACK_C);
-        PLAYER.step = 0x28;
+        PLAYER.step = Player_AxearmorStand;
         PLAYER.step_s = 1;
         PLAYER.animFrameIdx = 0;
         PLAYER.animFrameDuration = 0;
@@ -199,7 +199,7 @@ static void func_ptr_80170008(Entity* self) {
     }
     if ((g_Player.padTapped & PAD_CROSS) && (g_Player.unk72 == 0)) {
         PLAYER.ext.player.anim = 0xD0;
-        PLAYER.step = 0x2A;
+        PLAYER.step = Player_AxearmorJump;
         PLAYER.animFrameIdx = 0;
         PLAYER.animFrameDuration = 0;
         PLAYER.step_s = 0;
@@ -231,14 +231,14 @@ static s32 func_ptr_8017000C(Entity* self) {
     }
     if (g_Player.pl_vram_flag & 1) {
         if (PLAYER.step_s != 0) {
-            PLAYER.step = 0x28;
+            PLAYER.step = Player_AxearmorStand;
             PLAYER.velocityY = 0;
             PLAYER.velocityX = 0;
             g_api.PlaySfx(SFX_STOMP_SOFT_A);
             return;
         }
         if (func_13F000_8017A718() != 0) {
-            PLAYER.step = 0x29;
+            PLAYER.step = Player_AxearmorWalk;
             PLAYER.step_s = 0;
             PLAYER.velocityY = 0;
             SetSpeedX(FIX(2.5));
@@ -246,7 +246,7 @@ static s32 func_ptr_8017000C(Entity* self) {
             PLAYER.animFrameIdx = 0;
             PLAYER.animFrameDuration = 0;
         } else {
-            PLAYER.step = 0x28;
+            PLAYER.step = Player_AxearmorStand;
             PLAYER.step_s = 0;
             PLAYER.velocityX = PLAYER.velocityY = 0;
             PLAYER.ext.player.anim = 0xCF;

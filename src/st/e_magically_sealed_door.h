@@ -161,7 +161,7 @@ void EntityMagicallySealedDoor(Entity* self) {
 
         if (!(((PLAYER.facingLeft != GetSideToPlayer()) & 1) ^ 1) &&
             ((PLAYER.step == 0x19 && g_PlayableCharacter) ||
-             PLAYER.step == 1) &&
+             PLAYER.step == Player_Walk) &&
             MagicallySealedDoorIsNearPlayer(self)) {
             // If player does not have the jewel, show the box.
             if (!(g_Status.relics[RELIC_JEWEL_OF_OPEN] & RELIC_FLAG_ACTIVE)) {

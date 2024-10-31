@@ -242,7 +242,8 @@ static void func_801572A8(bool arg0) {
         argX = PLAYER.posX.i.hi + D_801545F4[i].x;
         argY = PLAYER.posY.i.hi + D_801545F4[i].y;
         g_api.CheckCollision(argX, argY, &g_Player.colliders[i], 0);
-        if (g_Player.timers[PL_T_7] && (g_Player.colliders[i].effects & 0x40)) {
+        if (g_Player.timers[PL_T_7] &&
+            (g_Player.colliders[i].effects & EFFECT_SOLID_FROM_ABOVE)) {
             g_api.CheckCollision(argX, argY + 0xC, &collider, 0);
             if (!(collider.effects & EFFECT_SOLID)) {
                 g_Player.colliders[i].effects = 0;

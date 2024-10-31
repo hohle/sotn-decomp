@@ -536,7 +536,7 @@ void func_8011B480(Entity* entity) {
 }
 
 void func_8011B530(Entity* entity) {
-    if (PLAYER.step != 0x25) {
+    if (PLAYER.step != Player_SpellSoulSteal) {
         DestroyEntity(entity);
     } else if (entity->step == 0) {
         entity->flags = FLAG_UNK_20000 | FLAG_POS_PLAYER_LOCKED;
@@ -604,7 +604,8 @@ void func_8011B5A4(Entity* self) {
         }
         if (paramsHi == 4) {
             for (i = paramsLo * 2; i < 14; i++) {
-                if (g_Player.colliders3[D_800AD5E0[i]].effects & 3) {
+                if (g_Player.colliders3[D_800AD5E0[i]].effects &
+                    (EFFECT_UNK_0002 | EFFECT_SOLID)) {
                     break;
                 }
             }
@@ -621,7 +622,8 @@ void func_8011B5A4(Entity* self) {
         }
         if (paramsHi == 8) { /* switch 1 */
             for (i = paramsLo * 2; i < 10; i++) {
-                if (g_Player.colliders3[D_800AD5F0[i]].effects & 3) {
+                if (g_Player.colliders3[D_800AD5F0[i]].effects &
+                    (EFFECT_UNK_0002 | EFFECT_SOLID)) {
                     break;
                 }
             }

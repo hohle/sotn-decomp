@@ -42,7 +42,7 @@ void EntityWeaponAttack(Entity* self) {
             SetSpeedX(FIX(5.33333));
         }
         self->posY.i.hi = PLAYER.posY.i.hi + PLAYER.hitboxOffY - 3;
-        if (PLAYER.step != 2) {
+        if (PLAYER.step != Player_Crouch) {
             self->posY.i.hi -= 6;
         }
 
@@ -220,7 +220,7 @@ void func_ptr_8017000C(Entity* self) {
         SetSpeedX(FIX(3.0 / 2.0));
 
         self->posY.i.hi = PLAYER.posY.i.hi + PLAYER.hitboxOffY - 8;
-        if (PLAYER.step != 2) {
+        if (PLAYER.step != Player_Crouch) {
             self->posY.i.hi -= 6;
         }
 

@@ -137,7 +137,7 @@ void EntityRedDoor(Entity* self) {
 #else
         if (!(((PLAYER.facingLeft != GetSideToPlayer()) & 1) ^ 1) &&
             ((PLAYER.step == 0x19 && g_PlayableCharacter) ||
-             PLAYER.step == 1) &&
+             PLAYER.step == Player_Walk) &&
             EntityIsNearPlayer(self))
 #endif
         {

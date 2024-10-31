@@ -335,7 +335,7 @@ void func_801120B4(void) {
             if (PLAYER.animFrameIdx < 2U) {
                 CheckMoveDirection();
                 if (g_Player.padPressed & PAD_DOWN) {
-                    PLAYER.step = 2;
+                    PLAYER.step = Player_Crouch;
                     PLAYER.ext.player.anim = 0x26;
                 }
             }
@@ -381,7 +381,7 @@ void func_801120B4(void) {
             if (g_Player.padPressed & PAD_DOWN) {
                 // Note that to reach this point, our minimum case is 0x41
                 PLAYER.ext.player.anim = D_800B0608[PLAYER.step_s - 0x41] + 2;
-                PLAYER.step = 2;
+                PLAYER.step = Player_Crouch;
             }
         } else {
             g_Player.unk46 &= 0x7FFF;
@@ -434,7 +434,7 @@ void func_801120B4(void) {
             !(g_Player.pl_vram_flag & 1)) {
             PLAYER.animFrameIdx = 5;
             PLAYER.ext.player.anim = 0x6C;
-            PLAYER.step = 4;
+            PLAYER.step = Player_Jump;
             g_Player.unk44 = 1;
         }
         break;

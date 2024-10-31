@@ -783,7 +783,7 @@ static s32 func_8010EB5C(void) {
     g_Player.timers[10] = 4;
     if (PLAYER.step_s < 64) {
         anim = subWpn.anim;
-        if (PLAYER.step == 0) {
+        if (PLAYER.step == Player_Stand) {
             SetPlayerAnim(anim + atLedge);
         }
         func_8010EA54(8);
@@ -962,7 +962,8 @@ block_45:
     if (equipped_id != 0) {
         if (equipped_item->unk13 == 55) {     // Medicines
             if (equipped_item->unk14 == 20) { // Library card!
-                if (PLAYER.step == 0 || PLAYER.step == 1 || PLAYER.step == 2) {
+                if (PLAYER.step == 0 || PLAYER.step == 1 ||
+                    PLAYER.step == Player_Crouch) {
                     func_8010E42C(0);
                     func_800FDD44(hand);
                     return 1;
@@ -1039,16 +1040,16 @@ block_45:
                 case 0:
                 case 1:
                     SetPlayerAnim(0xB5);
-                    PLAYER.step = 0;
+                    PLAYER.step = Player_Stand;
                     break;
                 case 2:
                     SetPlayerAnim(0xB6);
-                    PLAYER.step = 2;
+                    PLAYER.step = Player_Crouch;
                     break;
                 case 3:
                 case 4:
                     SetPlayerAnim(0xB7);
-                    PLAYER.step = 4;
+                    PLAYER.step = Player_Jump;
                     break;
                 }
                 g_Player.unk46 = 0x8012;
@@ -1074,36 +1075,36 @@ block_45:
         goto block_98;
     case 19: // Unknown, not a direct equippable item
         D_80139824 = 0x28;
-        PLAYER.step = 0;
+        PLAYER.step = Player_Stand;
         g_CurrentEntity->velocityX = 0;
         PlaySfx(SFX_VO_ALU_ATTACK_B);
         goto block_98;
     case 20: // Unknown, not a direct equippable item
-        PLAYER.step = 0;
+        PLAYER.step = Player_Stand;
         D_80139824 = 0x28;
         g_CurrentEntity->velocityX = 0;
         PlaySfx(SFX_VO_ALU_ATTACK_B);
         goto block_98;
     case 21: // Unknown, not a direct equippable item
-        PLAYER.step = 0;
+        PLAYER.step = Player_Stand;
         D_80139824 = 0x28;
         g_CurrentEntity->velocityX = 0;
         PlaySfx(SFX_VO_ALU_ATTACK_B);
         goto block_98;
     case 22: // Unknown, not a direct equippable item (but there are 4 of them)
-        PLAYER.step = 0;
+        PLAYER.step = Player_Stand;
         D_80139824 = 0x28;
         g_CurrentEntity->velocityX = 0;
         PlaySfx(SFX_VO_ALU_ATTACK_B);
         goto block_98;
     case 28: // Unknown, not a direct equippable item
-        PLAYER.step = 0;
+        PLAYER.step = Player_Stand;
         D_80139824 = 0xA;
         g_CurrentEntity->velocityX = 0;
         PlaySfx(SFX_VO_ALU_ATTACK_B);
         goto block_98;
     case 23: // Unknown, not a direct equippable item (but there are 4 of them)
-        PLAYER.step = 0;
+        PLAYER.step = Player_Stand;
         CheckMoveDirection();
         SetSpeedX(FIX(5));
         g_CurrentEntity->velocityY = 0;
@@ -1116,10 +1117,10 @@ block_45:
         PLAYER.velocityX >>= 1;
         PlaySfx(SFX_VO_ALU_ATTACK_B);
         if (g_Player.pl_vram_flag & 1) {
-            PLAYER.step = 0;
+            PLAYER.step = Player_Stand;
             g_CurrentEntity->velocityY = 0;
         } else {
-            PLAYER.step = 4;
+            PLAYER.step = Player_Jump;
         }
         SetPlayerAnim(var_s2 + animVariant);
         g_Player.unk46 = equipped_item->unk11 - 0x7FFF;
@@ -1129,9 +1130,9 @@ block_45:
         break;
     case 24: // Unknown, not a direct equippable item (but there are 2 of them)
         if (2 < PLAYER.step && PLAYER.step < 5) {
-            PLAYER.step = 4;
+            PLAYER.step = Player_Jump;
         } else {
-            PLAYER.step = 0;
+            PLAYER.step = Player_Stand;
         }
         D_80139824 = 0x80;
         g_CurrentEntity->velocityY = 0;
@@ -1139,7 +1140,7 @@ block_45:
         PlaySfx(SFX_VO_ALU_ATTACK_B);
         goto block_98;
     case 26: // Unknown, not a direct equippable item (but there are 2 of them)
-        PLAYER.step = 0;
+        PLAYER.step = Player_Stand;
         D_80139824 = 0x28;
         g_CurrentEntity->velocityY = 0;
         g_CurrentEntity->velocityX = 0;
@@ -1167,7 +1168,7 @@ block_45:
         case 0:
         case 1:
             g_CurrentEntity->velocityX >>= 1;
-            PLAYER.step = 0;
+            PLAYER.step = Player_Stand;
             animVariant = atLedge;
             break;
         case 2:
@@ -1176,7 +1177,7 @@ block_45:
                 animVariant = 3;
             }
             if (g_Player.unk72 == 0 && PLAYER.step_s == 2) {
-                PLAYER.step = 0;
+                PLAYER.step = Player_Stand;
                 animVariant = atLedge;
             }
             break;
@@ -1210,7 +1211,7 @@ block_45:
                 SetPlayerAnim(var_s2 + atLedge);
                 g_Player.unk46 = equipped_item->unk11 - 0x7FFF;
                 g_Player.unk54 = equipped_item->lockDuration;
-                PLAYER.step = 0;
+                PLAYER.step = Player_Stand;
                 PLAYER.step_s = equipped_item->unk11 + 0x40;
                 g_CurrentEntity->velocityX = 0;
             }
@@ -1263,7 +1264,7 @@ block_45:
     case 131: // Medicines
         if (PLAYER.step_s < 0x40) {
             var_s2 = equipped_item->playerAnim;
-            if (PLAYER.step == 0) {
+            if (PLAYER.step == Player_Stand) {
                 SetPlayerAnim(var_s2 + atLedge);
             }
         }
@@ -1434,7 +1435,7 @@ bool func_8010FDF8(s32 branchFlags) {
             }
 
             if (PLAYER.velocityY > FIX(6.875)) {
-                if ((PLAYER.step_s == 112) || (PLAYER.step == 4)) {
+                if ((PLAYER.step_s == 112) || (PLAYER.step == Player_Jump)) {
                     func_8010E470(3, PLAYER.velocityX / 2);
                 } else {
                     func_8010E470(1, 0);

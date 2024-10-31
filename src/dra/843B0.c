@@ -716,7 +716,7 @@ s32 CheckHolyWaterCollision(s32 baseY, s32 baseX) {
     if ((colRes1 & colSet1) == EFFECT_SOLID ||
         (colRes1 & colSet1) == (EFFECT_UNK_0800 | EFFECT_SOLID)) {
         colRes2 = res2.effects & colSetNo800;
-        if (!((s16)res2.effects & 1)) {
+        if (!((s16)res2.effects & EFFECT_SOLID)) {
             g_CurrentEntity->posY.i.hi = y;
             return 1;
         }
@@ -1618,7 +1618,7 @@ void func_80127CC8(Entity* entity) {
     Primitive* prim;
     s32 ret;
 
-    if (PLAYER.step != 34) {
+    if (PLAYER.step != Player_SpellHellfire) {
         DestroyEntity(entity);
         return;
     }

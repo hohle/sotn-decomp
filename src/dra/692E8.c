@@ -103,7 +103,7 @@ void func_80109328(void) {
     s16* player_unk1E = &PLAYER.rotZ;
 
     g_Player.unk66 = 0;
-    if (*player_unk1E == 0x800 && PLAYER.step == 8) {
+    if (*player_unk1E == 0x800 && PLAYER.step == Player_HighJump) {
         PLAYER.rotZ = 0;
         PLAYER.animCurFrame = 0x9D;
         PLAYER.facingLeft = (PLAYER.facingLeft + 1) & 1;
@@ -438,9 +438,9 @@ void func_80109A44(s32 isTransformed) {
     if (*pl_vram & 0x8000) {
         *pl_vram |= 0x20;
     }
-    if (!(g_Player.colliders[1].effects & 1) ||
-        !(g_Player.colliders[2].effects & 1) ||
-        !(g_Player.colliders[3].effects & 1)) {
+    if (!(g_Player.colliders[1].effects & EFFECT_SOLID) ||
+        !(g_Player.colliders[2].effects & EFFECT_SOLID) ||
+        !(g_Player.colliders[3].effects & EFFECT_SOLID)) {
         *pl_vram |= 0x20;
     }
 }
@@ -571,7 +571,7 @@ void EntityAlucard(void) {
         if (var_s0 != 0) {
             func_8010E42C(var_s0);
         }
-        if (PLAYER.step != 0x12) {
+        if (PLAYER.step != Player_Teleport) {
             func_8010A234(0);
             func_8010A3F0();
             func_80109990();
@@ -673,7 +673,7 @@ void EntityAlucard(void) {
                             draw->enableColorBlend = 0;
                             continue;
                         case 6:
-                            if ((PLAYER.step == 3) &&
+                            if ((PLAYER.step == Player_Fall) &&
                                 (PLAYER.ext.player.anim != 0x1C)) {
                                 SetPlayerAnim(0x1C);
                                 g_Player.unk44 &= 0xFFEF;
@@ -869,13 +869,16 @@ void EntityAlucard(void) {
                             if ((g_Player.padTapped & PAD_L1) &&
                                 (HandleTransformationMP(
                                      FORM_MIST, CHECK_ONLY) == 0) &&
-                                ((PLAYER.step == 0) || (PLAYER.step == 1) ||
-                                 (PLAYER.step == 2) || (PLAYER.step == 3) ||
-                                 (PLAYER.step == 4) || (PLAYER.step == 6) ||
-                                 (PLAYER.step == 8) ||
+                                ((PLAYER.step == Player_Stand) ||
+                                 (PLAYER.step == Player_Walk) ||
+                                 (PLAYER.step == Player_Crouch) ||
+                                 (PLAYER.step == Player_Fall) ||
+                                 (PLAYER.step == Player_Jump) ||
+                                 (PLAYER.step == Player_AlucardStuck) ||
+                                 (PLAYER.step == Player_HighJump) ||
                                  ((PLAYER.step == Player_MorphBat) &&
                                   (PLAYER.step_s != 0)) ||
-                                 ((PLAYER.step == 0x18) &&
+                                 ((PLAYER.step == Player_MorphWolf) &&
                                   (PLAYER.step_s != 0) &&
                                   (PLAYER.step_s != 8)))) {
                                 func_80109328();
@@ -886,18 +889,22 @@ void EntityAlucard(void) {
                             if ((g_Player.padTapped & PAD_R1) &&
                                 (HandleTransformationMP(FORM_BAT, CHECK_ONLY) ==
                                  0)) {
-                                if (PLAYER.step == 0 || (PLAYER.step == 1) ||
-                                    (PLAYER.step == 2) || (PLAYER.step == 3) ||
-                                    (PLAYER.step == 4) || (PLAYER.step == 6)) {
+                                if (PLAYER.step == 0 ||
+                                    (PLAYER.step == Player_Walk) ||
+                                    (PLAYER.step == Player_Crouch) ||
+                                    (PLAYER.step == Player_Fall) ||
+                                    (PLAYER.step == Player_Jump) ||
+                                    (PLAYER.step == Player_AlucardStuck)) {
                                     goto block_62check;
                                 }
                                 if ((PLAYER.step == Player_MorphMist) ||
-                                    (PLAYER.step == 8) ||
+                                    (PLAYER.step == Player_HighJump) ||
                                     (PLAYER.step == 24 &&
                                      (PLAYER.step_s != 0 &&
                                       PLAYER.step_s != 8))) {
                                 block_62check:
-                                    if (PLAYER.step == 6 || PLAYER.step == 2) {
+                                    if (PLAYER.step == 6 ||
+                                        PLAYER.step == Player_Crouch) {
                                         D_8013AECC = 0xC;
                                     }
                                     func_80109328();
@@ -912,11 +919,13 @@ void EntityAlucard(void) {
                              0) &&
                             ((D_80097448[1] == 0) ||
                              IsRelicActive(RELIC_HOLY_SYMBOL)) &&
-                            (PLAYER.step == 0 || (PLAYER.step == 1) ||
-                             (PLAYER.step == 2) || (PLAYER.step == 3) ||
-                             (PLAYER.step == 4) || (PLAYER.step == 6) ||
+                            (PLAYER.step == 0 || (PLAYER.step == Player_Walk) ||
+                             (PLAYER.step == Player_Crouch) ||
+                             (PLAYER.step == Player_Fall) ||
+                             (PLAYER.step == Player_Jump) ||
+                             (PLAYER.step == Player_AlucardStuck) ||
                              ((PLAYER.step == Player_MorphMist) ||
-                              (PLAYER.step == 8)) ||
+                              (PLAYER.step == Player_HighJump)) ||
                              ((PLAYER.step == Player_MorphBat) &&
                               (PLAYER.step_s != 0)))) {
                             func_80109328();
@@ -1249,7 +1258,8 @@ block_160:
         if (!(g_Player.status &
               (PLAYER_STATUS_BAT_FORM | PLAYER_STATUS_WOLF_FORM |
                PLAYER_STATUS_UNK400000 | PLAYER_STATUS_UNK40000000))) {
-            if ((abs(PLAYER.velocityX) >= FIX(2)) || (PLAYER.step == 8)) {
+            if ((abs(PLAYER.velocityX) >= FIX(2)) ||
+                (PLAYER.step == Player_HighJump)) {
                 goto block_293;
             } else {
                 goto oddblock;
@@ -1329,7 +1339,7 @@ void func_8010BFFC(void) {
 #if defined(VERSION_US)
         (g_Player.status &
          (PLAYER_STATUS_TRANSFORM | PLAYER_STATUS_UNK40000000)) ||
-        ((g_PlayableCharacter != 0) && (PLAYER.step == 0x18)) ||
+        ((g_PlayableCharacter != 0) && (PLAYER.step == Player_MorphWolf)) ||
 #elif defined(VERSION_HD)
         (g_Player.status & PLAYER_STATUS_TRANSFORM) ||
 #endif
@@ -1455,13 +1465,14 @@ void func_8010C36C(void) {
             argY += (g_Player.colliders[i].unk18 - 1);
             CheckCollision(argX, argY, &sp10, 0);
             if ((g_Player.status & PLAYER_STATUS_MIST_FORM) &&
-                (sp10.effects & 0x10)) {
-                sp10.effects &= ~3;
+                (sp10.effects & EFFECT_MIST_ONLY)) {
+                sp10.effects &= ~(EFFECT_UNK_0002 | EFFECT_SOLID);
             }
             var_s1 = sp10.effects;
             if (!(sp10.effects & EFFECT_SOLID)) {
-                if (((g_Player.colliders[i].effects != 1) &&
-                     (g_Player.colliders[i].effects != 0x41)) ||
+                if (((g_Player.colliders[i].effects != EFFECT_SOLID) &&
+                     (g_Player.colliders[i].effects !=
+                      (EFFECT_SOLID_FROM_ABOVE | EFFECT_SOLID))) ||
                     (PLAYER.velocityY >= 0)) {
                     if (var_s2 & EFFECT_UNK_0800) {
                         *yPosPtr += var_s5 + g_Player.colliders[i].unk8;
@@ -1513,14 +1524,14 @@ void func_8010C36C(void) {
         *yPosPtr += var_s5 + g_Player.colliders[i].unk18;
         return;
     }
-    if (g_Player.colliders[1].effects & 4) {
+    if (g_Player.colliders[1].effects & EFFECT_QUICKSAND) {
         *vram_ptr |= 0x11;
         if ((g_Timer & 3) == 0) {
             (*yPosPtr)++;
         }
         return;
     }
-    if (g_Player.colliders[1].effects & 8) {
+    if (g_Player.colliders[1].effects & EFFECT_WATER) {
         *vram_ptr |= 0x80;
     }
     if (PLAYER.velocityY < 0) {
@@ -1558,7 +1569,7 @@ void func_8010C36C(void) {
             argX = var_s6 + (*xPosPtr + D_800ACED0[i].x);
             argY = *yPosPtr + D_800ACED0[i].y;
             CheckCollision(argX, argY, &sp10, 0);
-            if (sp10.effects & 1) {
+            if (sp10.effects & EFFECT_SOLID) {
                 *yPosPtr += sp10.unk18;
                 *vram_ptr |= sp30;
                 return;
@@ -1574,7 +1585,7 @@ void func_8010C36C(void) {
         argX = var_s6 + (*xPosPtr + D_800ACED0[i].x);
         argY = *yPosPtr + D_800ACED0[i].y + g_Player.colliders[i].unk10;
         CheckCollision(argX, argY, &sp10, 0);
-        if (sp10.effects & 1) {
+        if (sp10.effects & EFFECT_SOLID) {
             *yPosPtr += (sp10.unk18 + g_Player.colliders[i].unk10);
             *vram_ptr |= sp30;
             return;
@@ -1633,7 +1644,7 @@ void func_8010C9F4(void) {
             }
             collidereffects = collider.effects;
             if (!(collidereffects & 1)) {
-                if ((g_Player.colliders2[i].effects != 1) ||
+                if ((g_Player.colliders2[i].effects != EFFECT_SOLID) ||
                     (PLAYER.velocityY <= 0)) {
                     *vram_ptr |= 2;
                     if (!(*vram_ptr & 1) &&

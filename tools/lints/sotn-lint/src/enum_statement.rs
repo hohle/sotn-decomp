@@ -27,8 +27,9 @@ impl EnumStatementMatcher {
                 {}                        #   * a field name (provided by format!)
                 \s*                       #   * optional whitespace
                 (                         #   * <2> a binary operator, one of:
-                    (?:(?:[&|=!^~]?)=) |  #      * any comparison operator
-                    (?:[&|^])             #      * a bitwise operator
+                    (?:(?:[&|=!^~]?)=) |  #      * any assignment or comparison operator
+                    (?:[&|^]) |           #      * a bitwise operator
+                    (?:[?]) |             #      * a ternary operator
                 )
                 \s*                       #   * optional whitespace
             )

@@ -214,7 +214,7 @@ static void EntityWeaponAttack(Entity* self) {
         self->flags = FLAG_POS_CAMERA_LOCKED;
         self->animCurFrame = 0x3E;
     }
-    if ((PLAYER.step == 2) && (PLAYER.step_s != PLAYER.step)) {
+    if ((PLAYER.step == Player_Crouch) && (PLAYER.step_s != PLAYER.step)) {
         anim2++;
     }
     if ((D_170000_8017ABBC != 0) && !(self->params & 0x7F00) &&

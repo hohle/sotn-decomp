@@ -174,7 +174,7 @@ static s32 func_ptr_80170004(Entity* self) {
         self->ext.sword.unk7E = 0x1C;
         offsetY = PLAYER.posY.i.hi + PLAYER.hitboxOffY;
         self->posY.i.hi = offsetY - 8;
-        if (PLAYER.step != 2) {
+        if (PLAYER.step != Player_Crouch) {
             self->posY.i.hi = offsetY - 0x10;
         }
 

@@ -699,13 +699,13 @@ void RicHandleHit(
             if ((g_StageId != STAGE_BO6) && (g_StageId != STAGE_RBO6) &&
                 (g_StageId != STAGE_DRE)) {
                 for (i = 2; i < 7; i++) {
-                    if (g_Player.colliders3[i].effects & 2) {
+                    if (g_Player.colliders3[i].effects & EFFECT_UNK_0002) {
                         break;
                     }
                 }
                 if (i == 7) {
                     for (i = 9; i < 0xE; i++) {
-                        if (g_Player.colliders3[i].effects & 2) {
+                        if (g_Player.colliders3[i].effects & EFFECT_UNK_0002) {
                             break;
                         }
                     }

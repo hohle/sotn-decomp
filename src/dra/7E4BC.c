@@ -365,7 +365,7 @@ void func_8011E4BC(Entity* self) {
     case 1:
         switch (upperParams) {
         case 10:
-            if (PLAYER.step != 0x22) {
+            if (PLAYER.step != Player_SpellHellfire) {
                 DestroyEntity(self);
                 return;
             }
@@ -640,7 +640,7 @@ void EntityHitByLightning(Entity* self) {
 
     if ((self->params & 0xFF00) != 0) {
         var_s0 = (++self->ext.hitbylightning.unk9C) > 0xA8;
-    } else if (PLAYER.step != 10) {
+    } else if (PLAYER.step != Player_Hit) {
         var_s0 = true;
     }
     switch (self->step) {
@@ -670,7 +670,7 @@ void EntityHitByLightning(Entity* self) {
                              DRAW_UNK02 | DRAW_TRANSP;
             prim = prim->next;
         }
-        if ((PLAYER.velocityY != 0) && (PLAYER.step != 0x10)) {
+        if ((PLAYER.velocityY != 0) && (PLAYER.step != Player_Kill)) {
             self->ext.hitbylightning.unk92 = 1;
         }
         self->ext.hitbylightning.unk94 = 0x10;
@@ -1425,7 +1425,7 @@ void EntityPlayerDissolves(Entity* self) {
         }
         break;
     case 4:
-        if (PLAYER.step == 0x10) {
+        if (PLAYER.step == Player_Kill) {
             if (g_Timer % 2 == 0) {
                 break;
             }
@@ -2198,7 +2198,8 @@ void UnknownEntId48(Entity* self) {
 void UnknownEntId49(Entity* self) {
     s32 x_offset;
 
-    if (!(g_Player.status & PLAYER_STATUS_AXEARMOR) || (PLAYER.step != 0x2B)) {
+    if (!(g_Player.status & PLAYER_STATUS_AXEARMOR) ||
+        (PLAYER.step != Player_AxearmorHit)) {
         DestroyEntity(self);
         return;
     }

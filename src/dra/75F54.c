@@ -63,7 +63,7 @@ void func_80115F54(void) {
         }
         if (PLAYER.animFrameDuration < 0) {
             StoreImage(&D_800AE130, D_80139A7C);
-            PLAYER.step = 0x10;
+            PLAYER.step = Player_Kill;
             D_80137FE4 = 0;
             D_80137FE8 = 0x40;
             g_CurrentEntity->step_s++;
@@ -900,14 +900,14 @@ void func_80117AC0(void) {
             if (PLAYER.animFrameIdx >= 2) {
                 PLAYER.animFrameIdx = 2;
                 PLAYER.animFrameDuration = 3;
-                PLAYER.step = 2;
+                PLAYER.step = Player_Crouch;
                 PLAYER.step_s = 5;
             }
         } else if (g_Player.unk72 == 4) {
             if (PLAYER.animFrameIdx >= 3) {
                 PLAYER.animFrameIdx = 3;
                 PLAYER.animFrameDuration = 3;
-                PLAYER.step = 2;
+                PLAYER.step = Player_Crouch;
                 PLAYER.step_s = 5;
             }
         }

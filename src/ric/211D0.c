@@ -545,9 +545,12 @@ void func_8015E484(void) {
                                      &g_Player.colliders[i], 0);
             }
 
-            if ((g_Player.colliders[1].effects & 0x81) == 1 ||
-                (g_Player.colliders[2].effects & 0x81) == 1 ||
-                (g_Player.colliders[3].effects & 0x81) == 1) {
+            if ((g_Player.colliders[1].effects &
+                 (EFFECT_SOLID_FROM_BELOW | EFFECT_SOLID)) == EFFECT_SOLID ||
+                (g_Player.colliders[2].effects &
+                 (EFFECT_SOLID_FROM_BELOW | EFFECT_SOLID)) == EFFECT_SOLID ||
+                (g_Player.colliders[3].effects &
+                 (EFFECT_SOLID_FROM_BELOW | EFFECT_SOLID)) == EFFECT_SOLID) {
                 PLAYER.velocityY = 0;
                 PLAYER.posY.i.hi -= 1;
                 collision = 1;
@@ -571,9 +574,12 @@ void func_8015E484(void) {
                                      &g_Player.colliders2[i], 0);
             }
 
-            if ((g_Player.colliders2[1].effects & 0x41) == 1 ||
-                (g_Player.colliders2[2].effects & 0x41) == 1 ||
-                (g_Player.colliders2[3].effects & 0x41) == 1) {
+            if ((g_Player.colliders2[1].effects &
+                 (EFFECT_SOLID_FROM_ABOVE | EFFECT_SOLID)) == 1 ||
+                (g_Player.colliders2[2].effects &
+                 (EFFECT_SOLID_FROM_ABOVE | EFFECT_SOLID)) == 1 ||
+                (g_Player.colliders2[3].effects &
+                 (EFFECT_SOLID_FROM_ABOVE | EFFECT_SOLID)) == 1) {
                 PLAYER.velocityY = 0;
                 PLAYER.posY.i.hi += 1;
                 collision = 1;
@@ -702,14 +708,14 @@ void func_8015E800(void) {
             return;
         }
     }
-    if (g_Player.colliders[1].effects & 4) {
+    if (g_Player.colliders[1].effects & EFFECT_QUICKSAND) {
         *vram_ptr |= 0x11;
         if ((g_Timer & 3) == 0) {
             (*yPosPtr)++;
         }
         return;
     }
-    if (g_Player.colliders[1].effects & 8) {
+    if (g_Player.colliders[1].effects & EFFECT_WATER) {
         *vram_ptr |= 0x80;
     }
     if (PLAYER.velocityY < 0) {
@@ -749,7 +755,7 @@ void func_8015E800(void) {
             argX = var_a1 + (*xPosPtr + D_801545F4[i].x);
             argY = *yPosPtr + D_801545F4[i].y;
             g_api.CheckCollision(argX, argY, &sp10, 0);
-            if (sp10.effects & 1) {
+            if (sp10.effects & EFFECT_SOLID) {
                 *yPosPtr += sp10.unk18;
                 *vram_ptr |= temp_s7;
                 return;
@@ -765,7 +771,7 @@ void func_8015E800(void) {
         argX = var_a1 + (*xPosPtr + D_801545F4[i].x);
         argY = *yPosPtr + D_801545F4[i].y + g_Player.colliders[i].unk10;
         g_api.CheckCollision(argX, argY, &sp10, 0);
-        if (sp10.effects & 1) {
+        if (sp10.effects & EFFECT_SOLID) {
             *yPosPtr += (sp10.unk18 + g_Player.colliders[i].unk10);
             *vram_ptr |= temp_s7;
             return;

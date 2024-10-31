@@ -2,6 +2,7 @@ use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
 
 mod bit_flag_line_transformer;
+mod collider_effect;
 mod drawflags;
 mod drawmodes;
 mod enum_line_transformer;
@@ -10,15 +11,18 @@ mod fixed;
 mod flags;
 mod line_transformer;
 mod player_status;
+mod player_step;
 mod primitive_type;
 mod relics;
 
+use collider_effect::ColliderEffectTransformer;
 use drawflags::DrawFlagsTransformer;
 use drawmodes::DrawModeTransformer;
 use fixed::FixedTransformer;
 use flags::FlagsTransformer;
 use line_transformer::LineTransformer;
 use player_status::PlayerStatusTransformer;
+use player_step::PlayerStepTransformer;
 use primitive_type::PrimitiveTypeTransformer;
 use rayon::prelude::*;
 use relics::RelicsTransformer;
@@ -57,23 +61,17 @@ fn transform_file(file_path: &str, transformers: &Vec<Box<dyn LineTransformer>>)
 }
 
 fn process_directory(dir_path: &str) {
-    let fixed_transformer = FixedTransformer;
-    let relics_transformer = RelicsTransformer;
-    let draw_mode_transformer = DrawModeTransformer::new();
-    let flags_transformer = FlagsTransformer::new();
-    let draw_flags_transformer = DrawFlagsTransformer::new();
-    let primitive_type_transformer = PrimitiveTypeTransformer::new();
-    let player_status_transformer = PlayerStatusTransformer::new();
-
     let transformers: Vec<Box<dyn LineTransformer>> = vec![
-        Box::new(fixed_transformer),
-        Box::new(relics_transformer),
-        Box::new(draw_mode_transformer),
-        Box::new(flags_transformer),
-        Box::new(draw_flags_transformer),
-        Box::new(primitive_type_transformer),
-        Box::new(player_status_transformer),
-        ];
+        Box::new(FixedTransformer),
+        Box::new(RelicsTransformer),
+        Box::new(DrawModeTransformer::new()),
+        Box::new(FlagsTransformer::new()),
+        Box::new(DrawFlagsTransformer::new()),
+        Box::new(PrimitiveTypeTransformer::new()),
+        Box::new(PlayerStatusTransformer::new()),
+        Box::new(PlayerStepTransformer::new()),
+        Box::new(ColliderEffectTransformer::new()),
+    ];
 
     let entries = std::fs::read_dir(dir_path).expect("Unable to read directory");
 

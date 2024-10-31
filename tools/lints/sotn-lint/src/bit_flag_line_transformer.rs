@@ -144,7 +144,9 @@ impl<U: EnumValue> BitFlagLineTransformer<U> where <U as FromStr>::Err: Debug {
 
                 if field_value.count_ones() > 1 &&
                     (operator == "^" || operator == "&" || operator == "|" ||
-                     invert == "~" || inverted) {
+                     operator == "==" || operator == "!=" || operator == "?" ||
+                     invert == "~" || inverted ||
+                     terminal_string == ")") {
                     rvalue = format!("({})", rvalue);
                 }
             }

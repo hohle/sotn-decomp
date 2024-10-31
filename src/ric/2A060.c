@@ -771,7 +771,7 @@ void RicEntityArmBrandishWhip(Entity* entity) {
         } else {
             entity->animCurFrame = D_80155CB8[D_80175080];
         }
-    } else if (PLAYER.step == 0) {
+    } else if (PLAYER.step == Player_Stand) {
         if (PLAYER.facingLeft) {
             entity->animCurFrame = D_80155CF4[D_80175080];
         } else {
@@ -1067,7 +1067,7 @@ s32 RicCheckHolyWaterCollision(s32 baseY, s32 baseX) {
     if ((colRes1 & colSet1) == EFFECT_SOLID ||
         (colRes1 & colSet1) == (EFFECT_UNK_0800 | EFFECT_SOLID)) {
         colRes2 = res2.effects & colSetNo800;
-        if (!((s16)res2.effects & 1)) {
+        if (!((s16)res2.effects & EFFECT_SOLID)) {
             g_CurrentEntity->posY.i.hi = y;
             return 1;
         }
