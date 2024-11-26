@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+#define NO_SERVANT_CLUT
 #include <servant.h>
 
 typedef enum {
@@ -17,6 +18,12 @@ typedef enum {
     SWORD_UNK_DD,
     SWORD_UNK_DE,
     SWORD_UNK_DF,
-} SwordEntity;
+} SwordEntityId;
+
+typedef struct {
+    s32 x;
+    s32 y;
+    s32 unk8;
+} SwordStruct;
 
 extern ServantDesc sword_ServantDesc;
