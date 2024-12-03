@@ -754,7 +754,89 @@ INCLUDE_ASM("servant/tt_004/nonmatchings/sword", func_us_80176674);
 
 void func_us_80176BF0(Entity* self) {}
 
-INCLUDE_ASM("servant/tt_004/nonmatchings/sword", func_us_80176BF8);
+extern s16 D_us_8017865C[];
+extern u32 D_us_8017866C;
+
+void func_us_80176BF8(Entity* self) {
+    const int PRIM_COUNT = 16;
+    Primitive* prim;
+    Primitive* next;
+    s32 i;
+
+    switch (self->step) {
+    case 0:
+        self->primIndex = g_api.AllocPrimitives(PRIM_GT4, PRIM_COUNT);
+        if (self->primIndex == -1) {
+            DestroyEntity(self);
+            return;
+        }
+
+        self->flags = 0x0C820000;
+        prim = &g_PrimBuf[self->primIndex];
+        for (i = 0; i < PRIM_COUNT; i++) {
+
+            prim->tpage = 0x1B;
+            prim->clut = 0x141;
+            prim->u0 = prim->u2 = 0;
+            prim->v0 = prim->v1 = 0;
+            prim->u1 = prim->u3 = 0x10;
+            prim->v2 = prim->v3 = 0x10;
+            prim->r0 = prim->r1 = ((i + 1) * 4) + 8;
+            prim->g0 = prim->g1 = ((i + 1) * 0xE) + 8;
+            prim->b0 = prim->b1 = ((i + 1) * 8) + 8;
+            prim->r2 = prim->r3 = (i * 4) + 8;
+            prim->g2 = prim->g3 = (i * 0xE) + 8;
+            prim->b2 = prim->b3 = (i * 8) + 8;
+            prim->drawMode = 0x57F;
+            prim = prim->next;
+        }
+        self->step++;
+        break;
+    case 1:
+        prim = &g_PrimBuf[self->primIndex];
+        for (i = 0; i < (PRIM_COUNT - 1); i++) {
+            prim = prim->next;
+        }
+        LOW(prim->x0) = LOW(D_us_8017865C[0]);
+        LOW(prim->x1) = LOW(D_us_8017865C[2]);
+        self->step++;
+        break;
+
+    case 2:
+        prim = &g_PrimBuf[self->primIndex];
+        if (D_us_80178B78) {
+            for (i = 0; i < (PRIM_COUNT - 1); i++) {
+                next = prim->next;
+                prim->priority = next->priority;
+                prim->drawMode = next->drawMode;
+                LOW(prim->x0) = LOW(next->x0);
+                LOW(prim->x1) = LOW(next->x1);
+                LOW(prim->x2) = LOW(next->x2);
+                LOW(prim->x3) = LOW(next->x3);
+                prim = next;
+            }
+            prim->priority = D_us_8017866C;
+            prim->drawMode &= 0xFFF7;
+
+            LOW(prim->x2) = LOW(prim->x0);
+            LOW(prim->x3) = LOW(prim->x1);
+            do {} while(0);
+            LOW(prim->x0) = LOW(D_us_8017865C[0]);
+            LOW(prim->x1) = LOW(D_us_8017865C[2]);
+        } else {
+            for (i = 0; i < PRIM_COUNT; i++) {
+                prim->drawMode |= 8;
+                LOW(prim->x0) = LOW(prim->x1) = LOW(D_us_8017865C[0]);
+                LOW(prim->x2) = LOW(prim->x3) = LOW(D_us_8017865C[2]);
+                prim = prim->next;
+            }
+            self->step--;
+        }
+        break;
+    }
+
+    D_us_80178B78 = 0;
+}
 
 INCLUDE_ASM("servant/tt_004/nonmatchings/sword", func_us_80176F28);
 
