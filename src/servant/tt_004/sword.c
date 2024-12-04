@@ -48,9 +48,9 @@ static s32 D_us_80178344[128];
 STATIC_PAD_BSS(4);
 static s32 D_us_80178548;
 static s32 D_us_8017854C;
-static s32 D_us_80178550;
-static s32 D_us_80178554;
-static s32 D_us_80178558;
+static s32 D_us_80178550; // x
+static s32 D_us_80178554; // y
+static s32 D_us_80178558; // z
 static s32 D_us_8017855C;
 
 
@@ -369,7 +369,6 @@ void func_us_80172C8C(MATRIX* arg0, MATRIX* arg1) {
 void func_us_80172E84(Entity*, s32);
 INCLUDE_ASM("servant/tt_004/nonmatchings/sword", func_us_80172E84);
 
-extern s32 D_us_80178344[128];
 extern s32 D_us_80178B88;
 
 Entity* func_us_80173AA0(Entity* self) {
@@ -561,7 +560,7 @@ void ServantInit(InitializeMode mode) {
 
     D_us_80170080.x = (self->posX.i.hi - 0x80) << 5;
     D_us_80170080.y = (self->posY.i.hi - 0x80) << 5;
-    D_us_80170080.unk8 = 0;
+    D_us_80170080.z = 0;
 
     g_api.GetServantStats(self, 0, 0, &s_SwordStats);
     if (D_us_801700A8[(s_SwordStats.level / 10) * 3][0] & 1) {
@@ -584,12 +583,6 @@ void ServantInit(InitializeMode mode) {
 
 extern u16 D_us_80170078;
 extern s16 D_us_8017007C;
-extern s32 D_us_80178548;
-extern s32 D_us_8017854C;
-extern s32 D_us_80178550;
-extern s32 D_us_80178554;
-extern s32 D_us_80178558;
-extern s32 D_us_8017855C;
 extern s32 D_us_80178560;
 extern s32 D_us_80178564;
 // this is likely a struct of 3 s32 big fields
@@ -696,7 +689,7 @@ void UpdateServantDefault(Entity* self) {
         self->ext.swordFamiliar.unk88 = self->ext.swordFamiliar.unk86;
         D_us_8017007C = self->ext.swordFamiliar.unk86 - 0x400;
 
-        D_us_80178558 = -D_us_80170080.unk8;
+        D_us_80178558 = -D_us_80170080.z;
         D_us_80178550 = __builtin_abs(D_us_80178550) << 5;
         D_us_80178554 = __builtin_abs(D_us_80178554) << 5;
 
@@ -715,7 +708,7 @@ void UpdateServantDefault(Entity* self) {
             32);
         self->ext.swordFamiliar.targetX = self->ext.swordFamiliar.unk8c;
 
-        D_us_80170080.unk8 += FLT_TO_I(rsin(self->ext.swordFamiliar.unk8c) * 0x60);
+        D_us_80170080.z += FLT_TO_I(rsin(self->ext.swordFamiliar.unk8c) * 0x60);
         D_us_80170078 = self->ext.swordFamiliar.unk8c;
 
         if (!g_CutsceneHasControl) {
