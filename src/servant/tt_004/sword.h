@@ -23,7 +23,7 @@ typedef enum {
 typedef struct {
     s32 x;
     s32 y;
-    s32 unk8;
+    s32 z;
 } SwordStruct;
 
 extern ServantDesc sword_ServantDesc;

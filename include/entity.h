@@ -681,7 +681,7 @@ typedef struct {
     /* 0x80 */ s16 unk80;
     /* 0x82 */ s16 unk82;
     /* 0x84 */ s16 unk84;
-    /* 0x86 */ u16 unk86;
+    /* 0x86 */ s16 unk86;
     /* 0x88 */ s16 unk88;
     /* 0x8A */ s16 currentX;
     /* 0x8c */ s16 unk8c;
