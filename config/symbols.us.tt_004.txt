@@ -30,5 +30,5 @@ s_SwordStats = 0x8017864C;
 s_SwordStats_unk8 = 0x80178654;
 s_SwordCurrentLevel = 0x80178658;
 D_us_80170080_y = 0x80170084;
-D_us_80170080_unk8 = 0x80170088;
+D_us_80170080_z = 0x80170088;
 // s_IsServantDestroyed = 0x

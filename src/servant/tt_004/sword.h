@@ -27,4 +27,11 @@ typedef struct {
     s32 unk8;
 } SwordUnk_A0;
 
+typedef struct {
+    s32 unk0;
+    s16 unk4;
+    s16 unk6;
+    s32 unk8;
+} SwordUnk_A0;
+
 extern ServantDesc sword_ServantDesc;
