@@ -688,7 +688,8 @@ typedef struct {
     /* 0x8e */ s16 targetX;
     /* 0x90 */ s32 posX;
     /* 0x94 */ s32 posY;
-    /* 0x98 */ s32 : 32;
+    /* 0x98 */ s16 unk98;
+    /* 0x9A */ s16 : 16;
     /* 0x9C */ s32 : 32;
     /* 0xA0 */ s32 : 32;
     /* 0xA4 */ s32 : 32;
