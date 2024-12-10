@@ -72,6 +72,8 @@ extern int rcos(int a);
 extern int rsin(int a);
 extern long ratan2(long y, long x);
 
+extern long NormalClip(long sxy0, long sxy1, long sxy2);
+
 #if !defined(VERSION_PC) && !defined(M2CTX) && !defined(PERMUTER)
 #define gte_ldv0(r0)                                                           \
     __asm__ volatile("lwc2	$0, 0( %0 );"                                       \
