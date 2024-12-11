@@ -283,6 +283,34 @@ extern long NormalClip(long sxy0, long sxy1, long sxy2);
                      : "r"(r0)                                                 \
                      : "memory")
 
+#ifndef VERSION_PSP
+// Store depth queuing value pointed to by `r0`
+//
+// - Params:
+//   - long* r0 - depth queuing value
+#define gte_stdp(r0)                                                           \
+    __asm__ volatile("swc2   $8, 0( %0 )" : : "r"(r0) : "memory")
+#else
+#define gte_stdp(x) func_892804C();
+#endif
+
+#ifndef VERSION_PSP
+// Store flag value pointed to by `r0`
+//
+// - Params:
+//   - long* r0 - flag value
+#define gte_stflg( r0 ) __asm__ volatile (                                     \
+    "cfc2   $12, $31;"                                                         \
+    "nop;"                                                                     \
+    "sw $12, 0( %0 )"                                                          \
+    :                                                                          \
+    : "r"( r0 )                                                                \
+    : "$12", "memory" )
+#else
+#define gte_stflg(x) func_892804C();
+#endif
+
+
 #define gte_stszotz(r0)                                                        \
     __asm__ volatile(                                                          \
         "mfc2	$12, $19;"                                                       \

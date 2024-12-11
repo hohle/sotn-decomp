@@ -21,12 +21,6 @@ typedef enum {
 } SwordEntityId;
 
 typedef struct {
-    s32 x;
-    s32 y;
-    s32 z;
-} SwordStruct;
-
-typedef struct {
     s32 unk0;
     s16 unk4;
     s16 unk6;
