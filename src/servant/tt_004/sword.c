@@ -102,6 +102,15 @@ static s32 D_us_8017860C;
 static s32 D_us_80178610;
 static s32 D_us_80178614;
 STATIC_PAD_BSS(4);
+static s32 D_us_8017861C; // x
+static s32 D_us_80178620; // y
+static s32 D_us_80178624; // x
+static s32 D_us_80178628; // y
+static s32 D_us_8017862C; // z
+static s32 D_us_80178630;
+static s32 D_us_80178634;
+static s32 D_us_80178638;
+
 
 void func_us_80172420(Entity* self, s32 entityId) {
     Entity* entity;
@@ -568,18 +577,18 @@ void ServantInit(InitializeMode mode) {
 #else
         if ((LOW(D_8003C708.flags) & 0x60) != 0) {
 #endif
-            self->entityId = 0xD1;
+            self->entityId = SWORD_UNK_D1;
             if (g_CastleFlags[CASTLE_FLAG_464] == 1 ||
                 g_CastleFlags[CASTLE_FLAG_464] == 2) {
                 g_CastleFlags[CASTLE_FLAG_464] = 4;
             }
         } else {
-            self->entityId = 0xD8;
+            self->entityId = SWORD_UNK_D8;
         }
         self->posX.val = FIX(128);
         self->posY.val = -FIX(32);
     } else {
-        self->entityId = 0xD1;
+        self->entityId = SWORD_UNK_D1;
         if (D_8003C708.flags & FLAG_UNK_20) {
             if (ServantUnk0()) {
                 self->posX.val = FIX(192);
@@ -641,14 +650,14 @@ void UpdateServantDefault(Entity* self) {
 
     func_us_80173CB8(self);
     if (g_CastleFlags[CASTLE_FLAG_464] == 1) {
-        self->entityId = 0xD5;
+        self->entityId = SWORD_UNK_D5;
         self->step = 0;
         g_CastleFlags[CASTLE_FLAG_464] = 2;
         return;
     }
 
     if (g_Player.unk70) {
-        self->entityId = 0xD4;
+        self->entityId = SWORD_UNK_D4;
         self->step = 0;
         return;
     }
@@ -695,12 +704,12 @@ void UpdateServantDefault(Entity* self) {
 
     case 1:
 
-        D_us_80178550 = (D_us_80178548 - self->posX.val) >> 0x10;
-        D_us_80178554 = (D_us_8017854C - self->posY.val) >> 0x10;
+        D_us_80178550 = FIX_TO_I(D_us_80178548 - self->posX.val);
+        D_us_80178554 = FIX_TO_I(D_us_8017854C - self->posY.val);
 
         D_us_80178560 =
-            FLT_TO_I(SquareRoot12(I_TO_FLT((D_us_80178550 * D_us_80178550) +
-                                           (D_us_80178554 * D_us_80178554))));
+            FLT_TO_I(SquareRoot12(I_TO_FLT(SQ(D_us_80178550) +
+                                           SQ(D_us_80178554))));
 
         if (D_us_80178560 < 0x10) {
             self->velocityX = (D_us_80178548 - self->posX.val) >> 6;
@@ -759,9 +768,9 @@ void UpdateServantDefault(Entity* self) {
             if ((self->ext.swordFamiliar.follow = func_us_80173AA0(self)) !=
                 NULL) {
                 if (!D_us_801700A0[(s_SwordStats.level / 10)].unk0) {
-                    self->entityId = 0xD2;
+                    self->entityId = SWORD_UNK_D2;
                 } else {
-                    self->entityId = 0xD3;
+                    self->entityId = SWORD_UNK_D3;
                 }
                 self->step = 0;
             }
@@ -785,7 +794,7 @@ void func_us_801746BC(Entity* self) {
 
     func_us_80173CB8(self);
     if (g_Player.unk70) {
-        self->entityId = 0xD4;
+        self->entityId = SWORD_UNK_D4;
         self->step = 0;
         return;
     }
@@ -879,11 +888,11 @@ void func_us_801746BC(Entity* self) {
     case 8:
         if (CheckEntityValid(self->ext.swordFamiliar.follow) == 0 &&
             (self->ext.swordFamiliar.follow = func_us_80173AA0(self)) == 0) {
-            self->entityId = 0xD1;
+            self->entityId = SWORD_UNK_D1;
             self->step = 0;
             break;
         } else if (g_CutsceneHasControl) {
-            self->entityId = 0xD1;
+            self->entityId = SWORD_UNK_D1;
             self->step = 0;
             break;
         }
@@ -1024,17 +1033,8 @@ void func_us_80176664(Entity* self) {}
 
 void func_us_8017666C(Entity* self) {}
 
-// INCLUDE_ASM("servant/tt_004/nonmatchings/sword", func_us_80176674);
 extern u8 D_8003BFBC[];
 extern s32 D_800973FC;
-extern s32 D_us_8017861C;
-extern s32 D_us_80178620;
-extern s32 D_us_80178624;
-extern s32 D_us_80178628;
-extern s32 D_us_8017862C;
-extern s32 D_us_80178630;
-extern s32 D_us_80178634;
-extern s32 D_us_80178638;
 extern s32 D_us_80178B80;
 
 void func_us_80176674(Entity* self) {
@@ -1053,14 +1053,13 @@ void func_us_80176674(Entity* self) {
 
     D_us_80178620 =
         PLAYER.posY.val - (((rcos(D_us_80178638) << 4) << 4) + D_us_80178628);
-    D_us_80178624 = (D_us_8017861C - self->posX.val) >> 16;
-    D_us_80178628 = ((D_us_80178620)-self->posY.val) >> 0x10;
+    D_us_80178624 = FIX_TO_I(D_us_8017861C - self->posX.val);
+    D_us_80178628 = FIX_TO_I(D_us_80178620 - self->posY.val);
 
     D_us_80178634 =
-        SquareRoot12(
-            ((D_us_80178624 * D_us_80178624) + (D_us_80178628 * D_us_80178628))
-            << 0xC) >>
-        0xC;
+        FLT_TO_I(SquareRoot12(
+            I_TO_FLT(SQ(D_us_80178624) + SQ(D_us_80178628))
+            ));
 
     if (D_us_80178634 < 0x3C) {
         self->velocityX = (s32)(D_us_8017861C - self->posX.val) >> 6;
@@ -1090,8 +1089,8 @@ void func_us_80176674(Entity* self) {
     D_us_8017007C.start = self->ext.swordFamiliar.unk86 - 0x400;
 
     D_us_8017862C = -D_us_80170080.vz;
-    D_us_80178624 = __builtin_abs(D_us_80178624) << 5;
-    D_us_80178628 = __builtin_abs(D_us_80178628) << 5;
+    D_us_80178624 = abs(D_us_80178624) << 5;
+    D_us_80178628 = abs(D_us_80178628) << 5;
 
     if (D_us_80178628 > D_us_80178624) {
         tmp = D_us_80178628;
@@ -1107,7 +1106,7 @@ void func_us_80176674(Entity* self) {
         0x20);
     ;
     self->ext.swordFamiliar.targetX = self->ext.swordFamiliar.unk8c;
-    D_us_80170080.vz += (rsin(self->ext.swordFamiliar.unk8c) * 0x60) >> 0xC;
+    D_us_80170080.vz += FLT_TO_I(rsin(self->ext.swordFamiliar.unk8c) * 96);
     D_us_80170078[0] = self->ext.swordFamiliar.unk8c;
 
     switch (self->step) {
@@ -1121,7 +1120,7 @@ void func_us_80176674(Entity* self) {
         if ((IsMovementAllowed(1)) || (CheckAllEntitiesValid()) ||
             (D_us_80178B80 == 1) || (g_CutsceneHasControl) ||
             (D_800973FC != 0)) {
-            self->entityId = 0xD1;
+            self->entityId = SWORD_UNK_D1;
             self->step = 0;
             if (D_8003BFBC[0] == 3) {
                 D_8003BFBC[0] = 4;
@@ -1129,14 +1128,13 @@ void func_us_80176674(Entity* self) {
             return;
         }
 
-        D_us_80178624 = (D_us_8017861C - self->posX.val) >> 0x10;
-        D_us_80178628 = (D_us_80178620 - self->posY.val) >> 0x10;
-        D_us_80178634 = SquareRoot12(((D_us_80178624 * D_us_80178624) +
-                                      (D_us_80178628 * D_us_80178628))
-                                     << 0xC) >>
-                        0xC;
+        D_us_80178624 = FIX_TO_I(D_us_8017861C - self->posX.val);
+        D_us_80178628 = FIX_TO_I(D_us_80178620 - self->posY.val);
+        D_us_80178634 = FLT_TO_I(SquareRoot12(I_TO_FLT((SQ(D_us_80178624) +
+                                      SQ(D_us_80178628))
+                                     )));
 
-        if (D_us_80178634 < 0x20) {
+        if (D_us_80178634 < 32) {
             self->step++;
         }
         break;
@@ -1144,16 +1142,16 @@ void func_us_80176674(Entity* self) {
     case 2:
         g_PauseAllowed = false;
         if (s_SwordStats.unk8 == 1) {
-            CreateEventEntity(self, 0xDD, 0x4FB);
+            CreateEventEntity(self, SWORD_UNK_DD, 0x4FB);
         } else if (D_8003BFBC[0] == 3) {
-            CreateEventEntity(self, 0xDD, 0x4FE);
+            CreateEventEntity(self, SWORD_UNK_DD, 0x4FE);
             D_8003BFBC[0] = 4;
         } else {
             // at level 50, change
             if (s_SwordStats.level < 50) {
-                CreateEventEntity(self, 0xDD, 0x4FC);
+                CreateEventEntity(self, SWORD_UNK_DD, 0x4FC);
             } else {
-                CreateEventEntity(self, 0xDD, 0x4FF);
+                CreateEventEntity(self, SWORD_UNK_DD, 0x4FF);
             }
         }
         self->step++;
@@ -1167,7 +1165,7 @@ void func_us_80176674(Entity* self) {
 
     case 4:
         g_PauseAllowed = true;
-        self->entityId = 0xD1;
+        self->entityId = SWORD_UNK_D1;
         self->step = 0;
         break;
     }
