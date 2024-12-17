@@ -598,12 +598,12 @@ void ServantInit(InitializeMode mode) {
         } else {
 #ifdef VERSION_PSP
             if (PLAYER.facingLeft) {
-                posX = 0x001c0000;
+                posX = FIX(28);
             } else {
-                posX = -0x001c0000;
+                posX = -FIX(28);
             }
             self->posX.val = PLAYER.posX.val + posX;
-            self->posY.val = PLAYER.posY.val - 0x001c0000;
+            self->posY.val = PLAYER.posY.val - FIX(28);
 #else
             posX = PLAYER.posX.val;
             if (PLAYER.facingLeft) {
@@ -616,8 +616,8 @@ void ServantInit(InitializeMode mode) {
         }
     }
 
-    D_us_80170080.vx = (self->posX.i.hi - 0x80) << 5;
-    D_us_80170080.vy = (self->posY.i.hi - 0x80) << 5;
+    D_us_80170080.vx = (self->posX.i.hi - 128) << 5;
+    D_us_80170080.vy = (self->posY.i.hi - 128) << 5;
     D_us_80170080.vz = 0;
 
     g_api.GetServantStats(self, 0, 0, &s_SwordStats);
@@ -673,7 +673,7 @@ void UpdateServantDefault(Entity* self) {
             D_us_80178548 = FIX(0xC0);
             break;
         case 2:
-            if (self->posX.i.hi > 0x80) {
+            if (self->posX.i.hi > 128) {
                 var_v1 = FIX(0xC0);
             } else {
                 var_v1 = FIX(0x40);
@@ -778,8 +778,8 @@ void UpdateServantDefault(Entity* self) {
     }
 
     ProcessEvent(self, false);
-    D_us_80170080.vx = (self->posX.i.hi - 0x80) << 5;
-    D_us_80170080.vy = (self->posY.i.hi - 0x80) << 5;
+    D_us_80170080.vx = (self->posX.i.hi - 128) << 5;
+    D_us_80170080.vy = (self->posY.i.hi - 128) << 5;
     func_us_80172E84(self, self->ext.swordFamiliar.unk80);
 }
 
@@ -798,8 +798,8 @@ void func_us_801746BC(Entity* self) {
         return;
     }
 
-    D_us_80170080.vx = (self->posX.i.hi - 0x80) << 5;
-    D_us_80170080.vy = (self->posY.i.hi - 0x80) << 5;
+    D_us_80170080.vx = (self->posX.i.hi - 128) << 5;
+    D_us_80170080.vy = (self->posY.i.hi - 128) << 5;
     self->ext.swordFamiliar.posX =
         (g_Tilemap.left << 8) + g_Tilemap.scrollX.i.hi;
     self->ext.swordFamiliar.posY =
@@ -813,8 +813,8 @@ void func_us_801746BC(Entity* self) {
     case 1:
         self->ext.swordFamiliar.unk98 = 1;
 
-        D_us_80178578 = (rand() % 128) + 0x40 + self->ext.swordFamiliar.posX;
-        D_us_8017857C = (rand() % 128) + 0x40 + self->ext.swordFamiliar.posY;
+        D_us_80178578 = (rand() % 128) + 64 + self->ext.swordFamiliar.posX;
+        D_us_8017857C = (rand() % 128) + 64 + self->ext.swordFamiliar.posY;
 
         self->step++;
         break;
@@ -868,7 +868,7 @@ void func_us_801746BC(Entity* self) {
 
     case 5:
     case 6:
-        LOH(D_us_8017007C) += 0x80;
+        LOH(D_us_8017007C) += 128;
         LOH(D_us_8017007C) &= 0xFFF;
 
         if (LOH(D_us_8017007C) == D_us_80178568) {
@@ -902,8 +902,8 @@ void func_us_801746BC(Entity* self) {
     }
 
     ProcessEvent(self, false);
-    D_us_80170080.vx = (self->posX.i.hi - 0x80) << 5;
-    D_us_80170080.vy = (self->posY.i.hi - 0x80) << 5;
+    D_us_80170080.vx = (self->posX.i.hi - 128) << 5;
+    D_us_80170080.vy = (self->posY.i.hi - 128) << 5;
     // n.b.! func_us_80172E84 has args Entity*, s16 but this
     //       call site requires Entity*, s32
     func_us_80172E84(self, self->ext.swordFamiliar.unk80);
@@ -930,8 +930,8 @@ extern EntitySearch D_us_8017007C;
 void func_us_80176270(Entity* self) {
     s32 i;
 
-    D_us_80170080.vx = (self->posX.i.hi - 0x80) << 5;
-    D_us_80170080.vy = (self->posY.i.hi - 0x80) << 5;
+    D_us_80170080.vx = (self->posX.i.hi - 128) << 5;
+    D_us_80170080.vy = (self->posY.i.hi - 128) << 5;
 
     switch (self->step) {
     case 0:
@@ -1046,8 +1046,8 @@ void func_us_80176674(Entity* self) {
     D_us_80178638 = (D_us_80178638 + 0x10);
     D_us_80178638 &= 0xFFF;
 
-    D_us_80178624 = PLAYER.facingLeft ? -0x180000 : 0x180000;
-    D_us_80178628 = 0x1C0000;
+    D_us_80178624 = PLAYER.facingLeft ? -FIX(24) : FIX(24);
+    D_us_80178628 = FIX(28);
     D_us_8017861C = PLAYER.posX.val + D_us_80178624;
 
     D_us_80178620 =
@@ -1170,8 +1170,8 @@ void func_us_80176674(Entity* self) {
     }
 
     ProcessEvent(self, false);
-    D_us_80170080.vx = (self->posX.i.hi - 0x80) << 5;
-    D_us_80170080.vy = (self->posY.i.hi - 0x80) << 5;
+    D_us_80170080.vx = (self->posX.i.hi - 128) << 5;
+    D_us_80170080.vy = (self->posY.i.hi - 128) << 5;
     func_us_80172E84(self, self->ext.swordFamiliar.unk80);
 }
 
