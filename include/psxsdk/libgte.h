@@ -299,17 +299,17 @@ extern long NormalClip(long sxy0, long sxy1, long sxy2);
 //
 // - Params:
 //   - long* r0 - flag value
-#define gte_stflg( r0 ) __asm__ volatile (                                     \
-    "cfc2   $12, $31;"                                                         \
-    "nop;"                                                                     \
-    "sw $12, 0( %0 )"                                                          \
-    :                                                                          \
-    : "r"( r0 )                                                                \
-    : "$12", "memory" )
+#define gte_stflg(r0)                                                          \
+    __asm__ volatile(                                                          \
+        "cfc2   $12, $31;"                                                     \
+        "nop;"                                                                 \
+        "sw $12, 0( %0 )"                                                      \
+        :                                                                      \
+        : "r"(r0)                                                              \
+        : "$12", "memory")
 #else
 #define gte_stflg(x) func_892804C();
 #endif
-
 
 #define gte_stszotz(r0)                                                        \
     __asm__ volatile(                                                          \

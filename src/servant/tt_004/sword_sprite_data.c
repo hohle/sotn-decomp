@@ -35,6 +35,7 @@ s16 D_us_80170090[] = {
     0x8B5,
 };
 
+// more sound effect IDs
 s16 D_us_80170098[] = {
     0x8B6,
     0x8B7,
