@@ -42,15 +42,16 @@ static s32 D_us_801782D0;
 // static VECTOR D_us_801782D4;
 static s32 D_us_801782D4;
 static s32 D_us_801782D8;
-static s32 D_us_801782DC[2];
+static s32 D_us_801782DC;
+STATIC_PAD_BSS(4);
 // end static VECTOR D_us_801782D4;
 static MATRIX D_us_801782E4;
 static MATRIX D_us_80178304;
 static MATRIX D_us_80178324;
 static s32 D_us_80178344[128];
 STATIC_PAD_BSS(4);
-static s32 D_us_80178548;
-static s32 D_us_8017854C;
+static s32 D_us_80178548; // x
+static s32 D_us_8017854C; // y
 static s32 D_us_80178550; // x
 static s32 D_us_80178554; // y
 static s32 D_us_80178558; // z
@@ -319,8 +320,6 @@ extern s32 D_us_80178B74;
 extern s32 D_us_80178B80;
 extern FamiliarStats s_SwordStats;
 
-extern SwordUnk_A0 D_us_801700A0[];
-
 void func_us_80172940(Entity* self) {
     Primitive* prim;
     s32 i;
@@ -461,8 +460,6 @@ void func_us_80172C8C(MATRIX* arg0, MATRIX* arg1) {
 void func_us_80172E84(Entity*, s32);
 INCLUDE_ASM("servant/tt_004/nonmatchings/sword", func_us_80172E84);
 
-extern s32 D_us_80178B88;
-
 Entity* func_us_80173AA0(Entity* self) {
     Entity* entity;
     s32 i;
@@ -543,11 +540,6 @@ extern VECTOR D_us_80170060;
 extern SVECTOR D_us_80170070;
 
 extern VECTOR D_us_80170080;
-extern s32 D_us_80178B78;
-extern s32 D_us_80178B7C;
-extern s32 D_us_80178B84;
-extern s32 D_us_80178B80;
-extern MATRIX D_us_80178B54;
 
 #ifdef VERSION_PSP
 extern u16 D_91F8618[];
@@ -674,7 +666,7 @@ void ServantInit(InitializeMode mode) {
 }
 
 extern s16 D_us_80170078[];
-extern EntitySearch D_us_8017007C;
+extern Point16 D_us_8017007C;
 
 void UpdateServantDefault(Entity* self) {
     Entity* follow;
@@ -774,7 +766,7 @@ void UpdateServantDefault(Entity* self) {
         }
 
         self->ext.swordFamiliar.unk88 = self->ext.swordFamiliar.unk86;
-        D_us_8017007C.start = self->ext.swordFamiliar.unk86 - 0x400;
+        D_us_8017007C.x = self->ext.swordFamiliar.unk86 - 0x400;
 
         D_us_80178558 = -D_us_80170080.vz;
         D_us_80178550 = abs(D_us_80178550) << 5;
@@ -818,7 +810,6 @@ void UpdateServantDefault(Entity* self) {
     func_us_80172E84(self, self->ext.swordFamiliar.unk80);
 }
 
-extern s32 D_us_80170084;
 extern s16 D_us_80170090[];
 extern s32 D_us_80170218;
 
@@ -869,7 +860,7 @@ void func_us_801746BC(Entity* self) {
             self->step++;
         }
 
-        D_us_8017007C.start = self->ext.swordFamiliar.unk86 - 0x400;
+        D_us_8017007C.x = self->ext.swordFamiliar.unk86 - 0x400;
         break;
 
     case 3:
@@ -888,7 +879,7 @@ void func_us_801746BC(Entity* self) {
                 self, D_us_80178578 - self->ext.swordFamiliar.posX,
                 D_us_8017857C - self->ext.swordFamiliar.posY) < 2) {
             D_us_8017856C = 0;
-            D_us_80178568 = D_us_8017007C.start & 0xFFF;
+            D_us_80178568 = D_us_8017007C.x & 0xFFF;
             self->step++;
         }
         break;
@@ -903,10 +894,10 @@ void func_us_801746BC(Entity* self) {
 
     case 5:
     case 6:
-        LOH(D_us_8017007C) += 128;
-        LOH(D_us_8017007C) &= 0xFFF;
+        D_us_8017007C.x += 128;
+        D_us_8017007C.x &= 0xFFF;
 
-        if (LOH(D_us_8017007C) == D_us_80178568) {
+        if (D_us_8017007C.x == D_us_80178568) {
             D_us_8017856C = 0;
             self->step++;
         }
@@ -939,15 +930,11 @@ void func_us_801746BC(Entity* self) {
     ProcessEvent(self, false);
     D_us_80170080.vx = (self->posX.i.hi - 128) << 5;
     D_us_80170080.vy = (self->posY.i.hi - 128) << 5;
-    // n.b.! func_us_80172E84 has args Entity*, s16 but this
-    //       call site requires Entity*, s32
     func_us_80172E84(self, self->ext.swordFamiliar.unk80);
 
     if (self->step > 4 && self->step < 7) {
         if (self->ext.swordFamiliar.unk98) {
-            roll = rand() % 16;
-
-            if (roll < 2) {
+            if ((roll = rand() % 16) < 2) {
                 g_api.PlaySfx(D_us_80170090[roll ? 0 : 1]);
             }
             self->ext.swordFamiliar.unk98 = 0;
@@ -961,7 +948,6 @@ INCLUDE_ASM("servant/tt_004/nonmatchings/sword", func_us_80174B6C);
 
 INCLUDE_ASM("servant/tt_004/nonmatchings/sword", func_us_801758C8);
 
-extern EntitySearch D_us_8017007C;
 void func_us_80176270(Entity* self) {
     s32 i;
 
@@ -996,7 +982,7 @@ void func_us_80176270(Entity* self) {
         self->ext.swordFamiliar.unk88 = self->ext.swordFamiliar.unk86;
         D_us_80178608 = FLT_TO_I(rcos(self->ext.swordFamiliar.unk86) << 8);
         D_us_8017860C = FLT_TO_I(rsin(self->ext.swordFamiliar.unk86) << 8);
-        D_us_8017007C.start = self->ext.swordFamiliar.unk86 - 0x400;
+        D_us_8017007C.x = self->ext.swordFamiliar.unk86 - 0x400;
 
         D_us_801785F8 = abs(D_us_801785F8);
         D_us_801785FC = abs(D_us_801785FC);
@@ -1067,10 +1053,6 @@ void func_us_80176664(Entity* self) {}
 
 void func_us_8017666C(Entity* self) {}
 
-extern u8 D_8003BFBC[];
-extern s32 D_800973FC;
-extern s32 D_us_80178B80;
-
 void func_us_80176674(Entity* self) {
     s32 params;
     s32 x, y;
@@ -1118,7 +1100,7 @@ void func_us_80176674(Entity* self) {
     }
 
     self->ext.swordFamiliar.unk88 = self->ext.swordFamiliar.unk86;
-    D_us_8017007C.start = self->ext.swordFamiliar.unk86 - 0x400;
+    D_us_8017007C.x = self->ext.swordFamiliar.unk86 - 0x400;
 
     D_us_8017862C = -D_us_80170080.vz;
     D_us_80178624 = abs(D_us_80178624) << 5;
@@ -1144,18 +1126,19 @@ void func_us_80176674(Entity* self) {
     switch (self->step) {
     case 0:
         func_us_80172940(self);
-        if (D_8003BFBC[0] == 1 || D_8003BFBC[0] == 2) {
-            D_8003BFBC[0] = 3;
+        if (g_CastleFlags[CASTLE_FLAG_464] == 1 ||
+            g_CastleFlags[CASTLE_FLAG_464] == 2) {
+            g_CastleFlags[CASTLE_FLAG_464] = 3;
         }
         break;
     case 1:
         if ((IsMovementAllowed(1)) || (CheckAllEntitiesValid()) ||
             (D_us_80178B80 == 1) || (g_CutsceneHasControl) ||
-            (D_800973FC != 0)) {
+            (g_unkGraphicsStruct.D_800973FC != 0)) {
             self->entityId = SWORD_UNK_D1;
             self->step = 0;
-            if (D_8003BFBC[0] == 3) {
-                D_8003BFBC[0] = 4;
+            if (g_CastleFlags[CASTLE_FLAG_464] == 3) {
+                g_CastleFlags[CASTLE_FLAG_464] = 4;
             }
             return;
         }
@@ -1174,9 +1157,9 @@ void func_us_80176674(Entity* self) {
         g_PauseAllowed = false;
         if (s_SwordStats.unk8 == 1) {
             CreateEventEntity(self, SWORD_UNK_DD, 0x4FB);
-        } else if (D_8003BFBC[0] == 3) {
+        } else if (g_CastleFlags[CASTLE_FLAG_464] == 3) {
             CreateEventEntity(self, SWORD_UNK_DD, 0x4FE);
-            D_8003BFBC[0] = 4;
+            g_CastleFlags[CASTLE_FLAG_464] = 4;
         } else {
             // at level 50, change
             if (s_SwordStats.level < 50) {
@@ -1208,9 +1191,6 @@ void func_us_80176674(Entity* self) {
 }
 
 void func_us_80176BF0(Entity* self) {}
-
-extern s32 D_us_8017865C[];
-extern u32 D_us_8017866C;
 
 void func_us_80176BF8(Entity* self) {
     const int PRIM_COUNT = 16;
@@ -1296,9 +1276,6 @@ void func_us_80176BF8(Entity* self) {
 }
 
 INCLUDE_ASM("servant/tt_004/nonmatchings/sword", func_us_80176F28);
-
-extern s32 D_us_80178B80;
-extern s32 D_us_80178B84;
 
 void func_us_801773CC(Entity* self) {
     Entity* entity;
