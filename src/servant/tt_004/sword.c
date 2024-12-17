@@ -110,7 +110,42 @@ static s32 D_us_8017862C; // z
 static s32 D_us_80178630;
 static s32 D_us_80178634;
 static s32 D_us_80178638;
+static Primitive* D_us_8017863C;
+STATIC_PAD_BSS(4);
+static s32 D_us_80178644;
+static s32 D_us_80178648;
+static FamiliarStats s_SwordStats;
+static s32 s_SwordCurrentLevel;
+static s32 D_us_8017865C[1];
+static s32 D_us_80178660[3]; // should be part of the proceeding array
+static u32 D_us_8017866C;
+// looks like a struct like:
+//  {
+//    Point16 coord0, coord1, coord2, coord3;
+//    s16 priority;
+//    s16 drawMode;
+//  }
+// but theaddressing is funny
+static s32 D_us_80178670; // 0
+static s32 D_us_80178674; // 1
+static s32 D_us_80178678; // 2
+static s32 D_us_8017867C; // 3
+static s16 D_us_80178680;
+static s16 D_us_80178682;
+static s32 D_us_80178684[5][3];
 
+static Point16 D_us_801786C0[1];
+static Point16 D_us_801786C4[4]; // should be part of the preceding array
+static s32 D_us_801786D4[96];
+static s32 D_us_80178854[96];
+static s32 D_us_801789D4[96];
+static MATRIX D_us_80178B54;
+static s32 D_us_80178B74;
+static s32 D_us_80178B78;
+static s32 D_us_80178B7C;
+static s32 D_us_80178B80;
+static s32 D_us_80178B84;
+static s32 D_us_80178B88;
 
 void func_us_80172420(Entity* self, s32 entityId) {
     Entity* entity;
@@ -638,7 +673,7 @@ void ServantInit(InitializeMode mode) {
     D_us_80178B78 = 0;
 }
 
-extern u16 D_us_80170078[];
+extern s16 D_us_80170078[];
 extern EntitySearch D_us_8017007C;
 
 void UpdateServantDefault(Entity* self) {
@@ -707,9 +742,8 @@ void UpdateServantDefault(Entity* self) {
         D_us_80178550 = FIX_TO_I(D_us_80178548 - self->posX.val);
         D_us_80178554 = FIX_TO_I(D_us_8017854C - self->posY.val);
 
-        D_us_80178560 =
-            FLT_TO_I(SquareRoot12(I_TO_FLT(SQ(D_us_80178550) +
-                                           SQ(D_us_80178554))));
+        D_us_80178560 = FLT_TO_I(
+            SquareRoot12(I_TO_FLT(SQ(D_us_80178550) + SQ(D_us_80178554))));
 
         if (D_us_80178560 < 0x10) {
             self->velocityX = (D_us_80178548 - self->posX.val) >> 6;
@@ -854,7 +888,7 @@ void func_us_801746BC(Entity* self) {
                 self, D_us_80178578 - self->ext.swordFamiliar.posX,
                 D_us_8017857C - self->ext.swordFamiliar.posY) < 2) {
             D_us_8017856C = 0;
-            D_us_80178568 = LOH(D_us_8017007C) & 0xFFF;
+            D_us_80178568 = D_us_8017007C.start & 0xFFF;
             self->step++;
         }
         break;
@@ -1057,9 +1091,7 @@ void func_us_80176674(Entity* self) {
     D_us_80178628 = FIX_TO_I(D_us_80178620 - self->posY.val);
 
     D_us_80178634 =
-        FLT_TO_I(SquareRoot12(
-            I_TO_FLT(SQ(D_us_80178624) + SQ(D_us_80178628))
-            ));
+        FLT_TO_I(SquareRoot12(I_TO_FLT(SQ(D_us_80178624) + SQ(D_us_80178628))));
 
     if (D_us_80178634 < 0x3C) {
         self->velocityX = (s32)(D_us_8017861C - self->posX.val) >> 6;
@@ -1130,9 +1162,8 @@ void func_us_80176674(Entity* self) {
 
         D_us_80178624 = FIX_TO_I(D_us_8017861C - self->posX.val);
         D_us_80178628 = FIX_TO_I(D_us_80178620 - self->posY.val);
-        D_us_80178634 = FLT_TO_I(SquareRoot12(I_TO_FLT((SQ(D_us_80178624) +
-                                      SQ(D_us_80178628))
-                                     )));
+        D_us_80178634 = FLT_TO_I(
+            SquareRoot12(I_TO_FLT(SQ(D_us_80178624) + SQ(D_us_80178628))));
 
         if (D_us_80178634 < 32) {
             self->step++;
@@ -1178,7 +1209,7 @@ void func_us_80176674(Entity* self) {
 
 void func_us_80176BF0(Entity* self) {}
 
-extern s16 D_us_8017865C[];
+extern s32 D_us_8017865C[];
 extern u32 D_us_8017866C;
 
 void func_us_80176BF8(Entity* self) {
@@ -1222,8 +1253,8 @@ void func_us_80176BF8(Entity* self) {
         for (i = 0; i < (PRIM_COUNT - 1); i++) {
             prim = prim->next;
         }
-        LOW(prim->x0) = LOW(D_us_8017865C[0]);
-        LOW(prim->x1) = LOW(D_us_8017865C[2]);
+        LOW(prim->x0) = D_us_8017865C[0];
+        LOW(prim->x1) = D_us_8017865C[1];
         self->step++;
         break;
 
@@ -1247,13 +1278,13 @@ void func_us_80176BF8(Entity* self) {
             LOW(prim->x3) = LOW(prim->x1);
             do {
             } while (0);
-            LOW(prim->x0) = LOW(D_us_8017865C[0]);
-            LOW(prim->x1) = LOW(D_us_8017865C[2]);
+            LOW(prim->x0) = D_us_8017865C[0];
+            LOW(prim->x1) = D_us_8017865C[1];
         } else {
             for (i = 0; i < PRIM_COUNT; i++) {
                 prim->drawMode |= DRAW_HIDE;
-                LOW(prim->x0) = LOW(prim->x1) = LOW(D_us_8017865C[0]);
-                LOW(prim->x2) = LOW(prim->x3) = LOW(D_us_8017865C[2]);
+                LOW(prim->x0) = LOW(prim->x1) = D_us_8017865C[0];
+                LOW(prim->x2) = LOW(prim->x3) = D_us_8017865C[1];
                 prim = prim->next;
             }
             self->step--;
