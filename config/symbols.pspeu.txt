@@ -83,4 +83,3 @@ g_GameTimer = 0x091FC460;
 g_CurrentBuffer = 0x091FC4E0;
 g_CastleFlags = 0x09234730;
 DestroyEntity = 0x092EE938;
-
