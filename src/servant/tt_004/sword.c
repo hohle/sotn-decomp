@@ -118,7 +118,7 @@ static s32 D_us_80178648;
 static FamiliarStats s_SwordStats;
 static s32 s_SwordCurrentLevel;
 static s32 D_us_8017865C[1];
-static s32 D_us_80178660[3]; // should be part of the proceeding array
+static s32 D_us_80178660[3]; // should be part of the preceeding array
 static u32 D_us_8017866C;
 // looks like a struct like:
 //  {
@@ -126,13 +126,13 @@ static u32 D_us_8017866C;
 //    s16 priority;
 //    s16 drawMode;
 //  }
-// but theaddressing is funny
+// but thea ddressing is funny
 static s32 D_us_80178670; // 0
 static s32 D_us_80178674; // 1
 static s32 D_us_80178678; // 2
 static s32 D_us_8017867C; // 3
-static s16 D_us_80178680;
-static s16 D_us_80178682;
+static s16 D_us_80178680; // priority
+static s16 D_us_80178682; // drawMode
 static s32 D_us_80178684[5][3];
 
 static Point16 D_us_801786C0[1];
@@ -536,8 +536,8 @@ extern u16 D_psp_092F1138[];
 #define CLUT_INDEX_SERVANT_2 0x1410
 extern u16 g_ServantClut[16];
 extern u16 g_SwordClut[32];
-extern VECTOR D_us_80170060;
-extern SVECTOR D_us_80170070;
+extern VECTOR g_TransferVector;
+extern SVECTOR g_RotationAngle;
 
 extern VECTOR D_us_80170080;
 
@@ -656,8 +656,8 @@ void ServantInit(InitializeMode mode) {
         func_us_80172420(self, 1);
     }
 
-    RotMatrix(&D_us_80170070, &D_us_80178B54);
-    TransMatrix(&D_us_80178B54, &D_us_80170060);
+    RotMatrix(&g_RotationAngle, &D_us_80178B54);
+    TransMatrix(&D_us_80178B54, &g_TransferVector);
 
     D_us_80178B80 = 0;
     D_us_80178B84 = 0;
