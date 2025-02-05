@@ -1,0 +1,3 @@
+parent: splat.yaml
+options:
+  compiler:     GCC

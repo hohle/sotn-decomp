@@ -1,31 +1,15 @@
+parent: splat.us.st.yaml
 options:
-  platform:     psx
   basename:     stwrp
-  base_path:    ..
-  build_path:   build/us
   target_path:  disks/us/ST/WRP/WRP.BIN
   asm_path:     asm/us/st/wrp
   asset_path:   assets/st/wrp
   src_path:     src/st/wrp
   ld_script_path: build/us/stwrp.ld
-  compiler:     GCC
   symbol_addrs_path:
-    - config/symbols.us.txt
     - config/symbols.us.stwrp.txt
   undefined_funcs_auto_path: config/undefined_funcs_auto.us.stwrp.txt
   undefined_syms_auto_path:  config/undefined_syms_auto.us.stwrp.txt
-  find_file_boundaries: yes
-  use_legacy_include_asm: no
-  migrate_rodata_to_functions: no
-  asm_jtbl_label_macro: jlabel
-  extensions_path: tools/splat_ext
-  disassemble_all: true
-  section_order:
-    - ".data"
-    - ".rodata"
-    - ".text"
-    - ".bss"
-    - ".sbss"
 sha1: 2ae313f4e394422e4c5f37a2d8e976e92f9e3cda
 segments:
   - name: stwrp

@@ -1,0 +1,13 @@
+parent: splat.psx.yaml
+options:
+  platform:     psx
+  build_path:   build/us
+  symbol_addrs_path:
+    - config/symbols.us.txt
+  section_order:
+    - ".data"
+    - ".rodata"
+    - ".text"
+    - ".bss"
+    - ".sbss"
+

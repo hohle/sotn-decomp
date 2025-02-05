@@ -1,31 +1,15 @@
+parent: splat.us.st.yaml
 options:
-  platform:     psx
   basename:     stcen
-  base_path:    ..
-  build_path:   build/us
   target_path:  disks/us/ST/CEN/CEN.BIN
   asm_path:     asm/us/st/cen
   asset_path:   assets/st/cen
   src_path:     src/st/cen
   ld_script_path: build/us/stcen.ld
-  compiler:     GCC
   symbol_addrs_path:
-    - config/symbols.us.txt
     - config/symbols.us.stcen.txt
   undefined_funcs_auto_path: config/undefined_funcs_auto.us.stcen.txt
   undefined_syms_auto_path:  config/undefined_syms_auto.us.stcen.txt
-  find_file_boundaries: yes
-  use_legacy_include_asm: no
-  migrate_rodata_to_functions: no
-  asm_jtbl_label_macro: jlabel
-  extensions_path: tools/splat_ext
-  disassemble_all: true
-  section_order:
-    - ".data"
-    - ".rodata"
-    - ".text"
-    - ".bss"
-    - ".sbss"
 sha1: 42226b6d9ed24448eed61b3c6cd2949e96bebab6
 segments:
   - name: stcen
