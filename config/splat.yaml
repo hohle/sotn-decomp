@@ -12,3 +12,4 @@ options:
     - ".text"
     - ".bss"
     - ".sbss"
+  ld_generate_symbol_per_data_segment: true
