@@ -7,6 +7,7 @@ pub struct Function {
     pub file: String,
     pub similarity: f64,
     pub decompiled: bool,
+    pub file_offset: u64,
 }
 
 #[derive(Clone, Debug, PartialEq)]

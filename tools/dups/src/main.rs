@@ -4,6 +4,7 @@ use std::fs::File;
 use std::io::BufReader;
 use std::io::Read;
 use std::io::Write;
+use std::path::Path;
 use std::process::exit;
 
 mod levenshtein_hashmap;
@@ -15,6 +16,7 @@ fn parse_instructions(input: &str, dir: &str, file: &str) -> Function {
     let mut instructions = Vec::new();
     let mut func_name = "";
     let mut section = ".text";
+    let mut file_offset = 0;
 
     for line in input.lines() {
         let parts: Vec<&str> = line.split_whitespace().collect();
@@ -53,6 +55,10 @@ fn parse_instructions(input: &str, dir: &str, file: &str) -> Function {
                         op: reversed_num,
                     };
 
+                    if instructions.is_empty() {
+                        file_offset = file_addr;
+                    }
+
                     instructions.push(instruction);
                 }
             }
@@ -74,6 +80,7 @@ fn parse_instructions(input: &str, dir: &str, file: &str) -> Function {
         file: file.to_string(),
         similarity: 0.0,
         decompiled: file.contains("/matchings/"),
+        file_offset: file_offset,
     }
 }
 
@@ -486,7 +493,13 @@ fn do_dups_report(output_file: Option<String>, threshold: f64) {
                 temp_functions.sort_by(|a, b| {
                     b.decompiled
                         .cmp(&a.decompiled)
-                        .then_with(|| a.file.cmp(&b.file))
+                        .then_with(|| {
+                            let a_dir = Path::new(&a.file).parent();
+                            let b_dir = Path::new(&b.file).parent();
+
+                            a_dir.expect("parent directory").to_str().cmp(&b_dir.expect("parent directory").to_str())
+                        })
+                        .then_with(|| a.file_offset.cmp(&b.file_offset))
                         .then_with(|| {
                             a.similarity
                                 .partial_cmp(&b.similarity)
