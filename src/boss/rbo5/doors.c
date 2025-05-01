@@ -2,33 +2,21 @@
 #include "rbo5.h"
 
 // hit during enter sequence
-extern s32 D_us_801805B8;
-extern s32 g_stone_flag;
-extern s32 D_us_801D43C0;
-extern s32 D_us_801D43C4;
+s32 D_us_801805B8 = 0;
+s32 g_stone_flag = 0;
+
+static s32 D_us_801D43C0;
+static s32 D_us_801D43C4;
 extern EInit g_EInitInteractable;
 
-#ifdef VERSION_PSP
-extern s32 D_pspeu_0926BCC8;
-extern s32 D_pspeu_0926BCB8;
-extern s32 D_pspeu_0926BCB0;
-extern s32 D_pspeu_0926BCA0;
-extern s32 D_pspeu_0926BC98;
-#define E_ID(ID_17) D_pspeu_0926BCC8
-#define E_ID(ID_19) D_pspeu_0926BCB8
-#define E_ID(ID_1A) D_pspeu_0926BCB0
-#define E_ID(ID_1C) D_pspeu_0926BCA0
-#define E_ID(ID_1D) D_pspeu_0926BC98
-#endif
-
 void func_us_801B3690(Entity* self) {
-    s32 i;          // s2
-    Entity* dop;    // s0
-    Entity* entity; // s1
-    s32 offsetX;    // s4
-    s32 offsetY;    // s3
-    s32 tangent;    // s5
-    s16 angle;      // s6
+    s32 i;
+    Entity* dop;
+    Entity* entity;
+    s32 offsetX;
+    s32 offsetY;
+    s32 tangent;
+    s16 angle;
 
     FntPrint("pl_demo_timer:%02x\n", g_Player.demo_timer);
     FntPrint("step:%02x\n", self->step);
@@ -184,13 +172,19 @@ void func_us_801B3690(Entity* self) {
 }
 
 extern EInit D_us_8018046C;
-extern s16 D_us_801805C0[];
-extern s16 D_us_801805CC[];
-extern s16 D_us_801805D8[];
-extern u8 D_us_801805E4[];
-extern u8 D_us_801805EC[];
-extern u8 D_us_801805F4[];
-extern u8 D_us_801805FC[];
+static s16 D_us_801805C0[] = {
+    0x80, 0x80, 0x100, 0x300, 0x500, 0x700,
+};
+static s16 D_us_801805CC[] = {
+    0xC, 0xC, 0x12, 0x16, 0x20, 0x26,
+};
+static s16 D_us_801805D8[] = {
+    0x100, 0x100, 0xF8, 0xF2, 0xEE, 0xEC,
+};
+static u8 D_us_801805E4[] = {1, 0x62, 0x1, 0x63, 0};
+static u8 D_us_801805EC[] = {1, 0x64, 0x1, 0x65, 0};
+static u8 D_us_801805F4[] = {2, 0x62, 0x2, 0x63, 0};
+static u8 D_us_801805FC[] = {2, 0x64, 0x2, 0x65, 0};
 
 void func_us_801B3B0C(Entity* self) {
     s32 flag;
@@ -345,14 +339,35 @@ void func_us_801B3B0C(Entity* self) {
     }
 }
 
+// possible split
+
 INCLUDE_ASM("boss/rbo5/nonmatchings/doors", func_us_801B40A8);
+
+// possible split
+
+static s32 D_us_80180604[] = {
+    0,      0x200,  0x400,  0x600,  0x800,  0xA00,  0xC00,  0xE00,
+    0x1000, 0x1200, 0x1400, 0x1600, 0x1800, 0x1A00, 0x1C00, 0x1E00,
+};
 
 // light effects
 INCLUDE_ASM("boss/rbo5/nonmatchings/doors", func_us_801B4210);
 
-extern s16 D_us_80180644[];
-extern s16 D_us_8018066C[];
-extern s16 D_us_80180658[];
+
+static s16 D_us_80180644[] = {
+    0, 0x600, 0xE00, 0x100, 0x800,
+    0xA00, 0x200, 0x400, 0xC00, 0,
+};
+
+static s16 D_us_80180658[] = {
+    4, 8, 13, -24, -20,
+    -12, 21, -12, 2, 0,
+};
+
+static s16 D_us_8018066C[] = {
+    20, 8, 12, 13, 16,
+    6, 12, 16, 8, 4,
+};
 
 void func_us_801B4A30(Entity* self) {
     s32 primIndex;
@@ -525,8 +540,25 @@ void func_us_801B4A30(Entity* self) {
     }
 }
 
-extern s16 D_us_80180680[];
-extern s16 D_us_80180694[];
+// possible split
+
+static s16 D_us_80180680[] = {
+    0x1E0, 0x61, 0x6E, 0x6F, 0x1FF, 0x1E0,
+};
+
+static u8 D_us_8018068C[] = {
+    0, 0, 1, 1, 1, 0, 0, 0,
+};
+
+static s16 D_us_80180694[] = {
+    0x0373, 0x0000, 0x0000, 0x0000, 0x075E, 0x0001, 0x0001, 0x0001,
+    0x0000, 0x0000, 0x0000, 0x072D, 0x0001, 0x0001, 0x0001, 0x075D,
+    0x0000, 0x0000, 0x0000, 0x03F2, 0x0001, 0x0001, 0x0001, 0x075C,
+    0x0000, 0x0000, 0x0000, 0x0375, 0x0001, 0x0001, 0x0001, 0x0765,
+    0x0375, 0x0000, 0x0000, 0x0969, 0x0762, 0x0001, 0x0001, 0x0764,
+    0x0933, 0x0000, 0x0000, 0x0951, 0x0761, 0x0001, 0x0001, 0x0763,
+};
+
 void func_us_801B5004(Tilemap* map, s32 arg1) {
     Tilemap* tmap;
     s16 tilePos;
@@ -543,5 +575,7 @@ void func_us_801B5004(Tilemap* map, s32 arg1) {
         tilePos += tmap->hSize << 4;
     }
 }
+
+extern s32 D_us_801805B0;
 
 INCLUDE_ASM("boss/rbo5/nonmatchings/doors", func_us_801B5070);

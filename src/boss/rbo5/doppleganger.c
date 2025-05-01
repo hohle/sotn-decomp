@@ -1,6 +1,32 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "rbo5.h"
 
+s32 D_us_801805B0 = 0;
+STATIC_PAD_DATA(4);
+
+static s32 D_us_801D32F4;
+static s32 D_us_801D32F8;
+static s32 D_us_801D32FC;
+static s32 D_us_801D3300;
+static s32 D_us_801D3304;
+static s32 D_us_801D3308;
+static s32 D_us_801D330C;
+static s32 D_us_801D3310;
+static s32 D_us_801D3314;
+static s32 D_us_801D3318;
+static s32 D_us_801D331C;
+static s32 D_us_801D3320;
+static u8 D_us_801D3324;
+STATIC_PAD_BSS(3);
+static u8 D_us_801D3328;
+STATIC_PAD_BSS(3);
+static u8 D_us_801D332C;
+STATIC_PAD_BSS(3);
+static u8 D_us_801D3330;
+STATIC_PAD_BSS(3);
+
+Point16 D_us_801D3334[16];
+
 extern s32 D_us_801D36E8[];
 extern s32 D_us_801D3768[];
 extern s32 D_us_801D4344;
@@ -112,7 +138,7 @@ void EntityDoppleganger40(void) {
             step = DOPPLEGANGER.step;
             step_s = DOPPLEGANGER.step_s;
             pos.x.val = D_us_80181298[g_CurrentEntity->nFramesInvincibility];
-            SetPlayerStep(Dop_Kill);
+            SetDopplegangerStep(Dop_Kill);
         } else {
             for (i = 0; i < LEN(g_Dop.timers); i++) {
                 if (g_Dop.timers[i]) {
@@ -214,10 +240,10 @@ void EntityDoppleganger40(void) {
                     case 2:
                         break;
                     case 3:
-                        SetPlayerStep(Dop_Hit);
+                        SetDopplegangerStep(Dop_Hit);
                         break;
                     case 7:
-                        SetPlayerStep(Dop_StatusStone);
+                        SetDopplegangerStep(Dop_StatusStone);
                         break;
                     case 4:
                     case 5:
@@ -250,7 +276,7 @@ void EntityDoppleganger40(void) {
                     DOPPLEGANGER.facingLeft++;
                     DOPPLEGANGER.facingLeft &= 1;
                 }
-                SetPlayerStep(6);
+                SetDopplegangerStep(6);
                 g_Dop.unk66 = 0;
             }
 
@@ -268,7 +294,7 @@ void EntityDoppleganger40(void) {
                     DOPPLEGANGER.facingLeft++;
                     DOPPLEGANGER.facingLeft &= 1;
                 }
-                SetPlayerStep(8);
+                SetDopplegangerStep(8);
                 g_api.PlaySfx(SFX_TRANSFORM_LOW);
             }
 
@@ -283,48 +309,48 @@ void EntityDoppleganger40(void) {
 
     switch (DOPPLEGANGER.step) {
     case Dop_Stand:
-        PlayerStepStand();
+        DopplegangerStepStand();
         break;
     case Dop_Walk:
-        PlayerStepWalk();
+        DopplegangerStepWalk();
         break;
     case Dop_Crouch:
-        PlayerStepCrouch();
+        DopplegangerStepCrouch();
         break;
     case Dop_Fall:
-        PlayerStepFall();
+        DopplegangerStepFall();
         break;
     case Dop_Jump:
-        PlayerStepJump();
+        DopplegangerStepJump();
         break;
     case Dop_MorphBat:
         ControlBatForm();
         break;
     case Dop_UnmorphBat:
-        PlayerStepUnmorphBat();
+        DopplegangerStepUnmorphBat();
         break;
     case Dop_MorphMist:
         ControlMistForm();
         break;
     case Dop_UnmorphMist:
-        PlayerStepUnmorphMist();
+        DopplegangerStepUnmorphMist();
         break;
     case Dop_HighJump:
-        PlayerStepHighJump();
+        DopplegangerStepHighJump();
         break;
     case Dop_SwordWarp:
-        PlayerStepSwordWarp();
+        DopplegangerStepSwordWarp();
         break;
     case Dop_Hit:
         DopplegangerHandleDamage(&pos, step, step_s);
         break;
     case Dop_Kill:
-        PlayerStepKill(&pos, step, step_s);
+        DopplegangerStepKill(&pos, step, step_s);
         g_api.TimeAttackController(
             TIMEATTACK_EVENT_DOPPLEGANGER_40_DEFEAT, true);
         break;
     case Dop_StatusStone:
-        PlayerStepStone(var_s5);
+        DopplegangerStepStone(var_s5);
         break;
     }
 
@@ -496,7 +522,11 @@ void EntityDoppleganger40(void) {
     FntPrint("noroi:%02x\n", g_Dop.timers[1]);
 }
 
-INCLUDE_ASM("boss/rbo5/nonmatchings/doppleganger", MemCardSetPort);
+// TODO: not MemCardSetPort
+void MemCardSetPort(int port) {
+    D_us_801D32F4 = port;
+    D_us_801D32F8 = 0;
+}
 
 INCLUDE_ASM("boss/rbo5/nonmatchings/doppleganger", func_us_801C1DC8);
 

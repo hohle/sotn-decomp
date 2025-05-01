@@ -4,22 +4,9 @@
 s32 D_us_801805A0 = 0;
 s32 D_us_801805A4 = 0;
 
-extern s32 D_us_801D4DF0;
-extern s32 D_us_801D4DF4;
+static s32 D_us_801D4DF0;
+static s32 D_us_801D4DF4;
 extern EInit g_EInitInteractable;
-
-#ifdef VERSION_PSP
-extern s32 D_pspeu_0926BCC8;
-extern s32 D_pspeu_0926BCB8;
-extern s32 D_pspeu_0926BCB0;
-extern s32 D_pspeu_0926BCA0;
-extern s32 D_pspeu_0926BC98;
-#define E_ID(ID_17) D_pspeu_0926BCC8
-#define E_ID(ID_19) D_pspeu_0926BCB8
-#define E_ID(ID_1A) D_pspeu_0926BCB0
-#define E_ID(ID_1C) D_pspeu_0926BCA0
-#define E_ID(ID_1D) D_pspeu_0926BC98
-#endif
 
 // hit during enter sequence
 void func_us_801B4BF0(Entity* self) {
@@ -178,7 +165,6 @@ void func_us_801B4BF0(Entity* self) {
 
 // hit during enter sequence
 extern EInit D_us_80180458;
-extern s32 D_us_80181570;
 static s16 D_us_801805A8[] = {
     0x80, 0x80, 0x100, 0x300, 0x500, 0x700,
 };
@@ -189,9 +175,9 @@ static s16 D_us_801805C0[] = {
     0x100, 0x100, 0xF8, 0xF2, 0xEE, 0xEC,
 };
 static u8 D_us_801805CC[] = {1, 0x62, 0x1, 0x63, 0};
-extern u8 D_us_801805D4[] = {1, 0x64, 0x1, 0x65, 0};
-extern u8 D_us_801805DC[] = {2, 0x62, 0x2, 0x63, 0};
-extern u8 D_us_801805E4[] = {2, 0x64, 0x2, 0x65, 0};
+static u8 D_us_801805D4[] = {1, 0x64, 0x1, 0x65, 0};
+static u8 D_us_801805DC[] = {2, 0x62, 0x2, 0x63, 0};
+static u8 D_us_801805E4[] = {2, 0x64, 0x2, 0x65, 0};
 
 void func_us_801B5040(Entity* self) {
     s32 flag;
@@ -346,6 +332,8 @@ void func_us_801B5040(Entity* self) {
     }
 }
 
+// possible split
+
 void func_us_801B55DC(Entity* self) {
     s32 offsetX;
 
@@ -398,10 +386,34 @@ void func_us_801B55DC(Entity* self) {
     }
 }
 
+// possible split
+
+
+static s32 D_us_801805EC[] = {
+    0,      0x200,  0x400,  0x600,  0x800,  0xA00,  0xC00,  0xE00,
+    0x1000, 0x1200, 0x1400, 0x1600, 0x1800, 0x1A00, 0x1C00, 0x1E00,
+};
+
+
 // light effects
 INCLUDE_ASM("boss/bo4/nonmatchings/doors", func_us_801B5774);
 
 INCLUDE_RODATA("boss/bo4/nonmatchings/doors", D_us_801B4168);
+
+static s16 D_us_8018062C[] = {
+    0, 0x600, 0xE00, 0x100, 0x800,
+    0xA00, 0x200, 0x400, 0xC00, 0,
+};
+
+static s16 D_us_80180640[] = {
+    4, 8, 13, -24, -20,
+    -12, 21, -12, 2, 0,
+};
+
+static s16 D_us_80180654[] = {
+    20, 8, 12, 13, 16,
+    6, 12, 16, 8, 4,
+};
 
 // hit during enter sequence
 INCLUDE_ASM("boss/bo4/nonmatchings/doors", func_us_801B5FB0);
