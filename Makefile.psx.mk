@@ -388,26 +388,21 @@ $(ASM_DIR)/weapon/data/w_%.data.s: # create a fake empty file if all the data ha
 	touch $@
 $(ASM_DIR)/weapon/data/w_%.sbss.s: # create a fake empty file if all the bss section has been imported
 	touch $@
-$(BUILD_DIR)/weapon/w0_%.elf: $(BUILD_DIR)/$(SRC_DIR)/weapon/w_%.c.o $(BUILD_DIR)/$(ASM_DIR)/weapon/data/w_%.data.s.o $(BUILD_DIR)/$(ASM_DIR)/weapon/data/w_%.sbss.s.o
+
+$(BUILD_DIR)/weapon/w0_%.elf: WEAPON_RANK=0
+$(BUILD_DIR)/weapon/w1_%.elf: WEAPON_RANK=1
+$(BUILD_DIR)/weapon/w0_%.elf $(BUILD_DIR)/weapon/w1_%.elf: $(BUILD_DIR)/$(SRC_DIR)/weapon/w_%.c.o $(BUILD_DIR)/$(ASM_DIR)/weapon/data/w_%.data.s.o $(BUILD_DIR)/$(ASM_DIR)/weapon/data/w_%.sbss.s.o
 	$(LD) $(LD_FLAGS) --no-check-sections -o $@ \
-		-Map $(BUILD_DIR)/weapon/w0_$*.map \
-		-T weapon0.ld \
+		-Map $(BUILD_DIR)/weapon/w$(WEAPON_RANK)_$*.map \
+		-T weapon$(WEAPON_RANK).ld \
 		-T $(CONFIG_DIR)/undefined_syms.$(VERSION).txt \
 		-T $(CONFIG_DIR)/undefined_syms_auto.$(VERSION).weapon.txt \
 		-T $(CONFIG_DIR)/undefined_funcs_auto.$(VERSION).weapon.txt \
 		$^
-$(BUILD_DIR)/weapon/w1_%.elf: $(BUILD_DIR)/$(SRC_DIR)/weapon/w_%.c.o $(BUILD_DIR)/$(ASM_DIR)/weapon/data/w_%.data.s.o $(BUILD_DIR)/$(ASM_DIR)/weapon/data/w_%.sbss.s.o
-	$(LD) $(LD_FLAGS) --no-check-sections -o $@ \
-		-Map $(BUILD_DIR)/weapon/w1_$*.map \
-		-T weapon1.ld \
-		-T $(CONFIG_DIR)/undefined_syms.$(VERSION).txt \
-		-T $(CONFIG_DIR)/undefined_syms_auto.$(VERSION).weapon.txt \
-		-T $(CONFIG_DIR)/undefined_funcs_auto.$(VERSION).weapon.txt \
-		$^
+
+$(BUILD_DIR)/$(SRC_DIR)/weapon/w_029.c.o: PSXCC_FLAGS+= -O1
 $(BUILD_DIR)/$(SRC_DIR)/weapon/w_%.c.o: $(SRC_DIR)/weapon/w_%.c $(MASPSX_APP) $(CC1PSX) | weapon_dirs
 	$(CPP) $(CPP_FLAGS) -lang-c -DW_$* $< | $(SOTNSTR_APP) process | $(ICONV) | $(CC) $(CC_FLAGS) $(PSXCC_FLAGS) | $(MASPSX) | $(AS) $(AS_FLAGS) -o $@
-$(BUILD_DIR)/$(SRC_DIR)/weapon/w_029.c.o: $(SRC_DIR)/weapon/w_029.c $(MASPSX_APP) $(CC1PSX) | weapon_dirs
-	$(CPP) $(CPP_FLAGS) -lang-c -DW_029 $< | $(SOTNSTR_APP) process | $(ICONV) | $(CC) $(CC_FLAGS) $(PSXCC_FLAGS) -O1 | $(MASPSX) | $(AS) $(AS_FLAGS) -o $@
 $(BUILD_DIR)/weapon/f0_%.elf: $(BUILD_DIR)/$(ASSETS_DIR)/weapon/f_%.o | weapon_dirs
 	$(LD) -r -b binary -o $@ $<
 $(BUILD_DIR)/weapon/f1_%.elf: $(BUILD_DIR)/$(ASSETS_DIR)/weapon/f_%.o
