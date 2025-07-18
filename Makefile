@@ -141,18 +141,25 @@ extract_us: extract_assets
 extract_hd: extract_assets
 extract_pspeu: extract_assets
 
-.PHONY: build
+.PHONEY: gen_build
+gen_build:
+	VERSION=$(VERSION) $(PYTHON) tools/builds/gen.py
+
+.PHONY: build build_%
 build: ##@ build game files
 build: build_$(VERSION)
-build_us: bin/cc1-psx-26 $(MASPSX_APP) $(SOTNASSETS)
-	VERSION=us .venv/bin/python3 tools/builds/gen.py
+build_us: VERSION=us
+build_us: bin/cc1-psx-26 $(MASPSX_APP) $(SOTNASSETS) gen_build
 	ninja
-build_hd: bin/cc1-psx-26 $(MASPSX_APP) $(SOTNASSETS)
-	VERSION=hd .venv/bin/python3 tools/builds/gen.py
+build_hd: VERSION=hd
+build_hd: bin/cc1-psx-26 $(MASPSX_APP) $(SOTNASSETS) gen_build
 	ninja
-build_pspeu: $(SOTNSTR_APP) $(SOTNASSETS) $(ALLEGREX) $(MWCCPSP) $(MWCCGAP_APP) $(ALLEGREX) | $(VENV_DIR)/bin
-	VERSION=pspeu .venv/bin/python3 tools/builds/gen.py
+build_pspeu: VERSION=pspeu
+build_pspeu: $(SOTNSTR_APP) $(SOTNASSETS) $(ALLEGREX) $(MWCCPSP) $(MWCCGAP_APP) $(ALLEGREX) gen_build | $(VENV_DIR)/bin
 	ninja
+build_picci:
+	cmake -B build/pc -G Ninja -DWANT_LIBSND_LLE=1 -DCMAKE_BUILD_TYPE=Debug
+	cmake --build build/pc
 
 .PHONY: clean
 clean: ##@ clean extracted files, assets, and build artifacts
