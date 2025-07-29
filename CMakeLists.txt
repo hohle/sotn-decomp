@@ -478,10 +478,13 @@ SET(SOURCE_FILES_BOSS_BO4
     src/boss/bo4/e_room_bg.c
     src/boss/bo4/e_room_fg.c
     src/boss/bo4/e_stage_name.c
-    src/boss/bo4/gen
+    src/boss/bo4/gen/e_laydef.c
+    src/boss/bo4/gen/e_layout.c
+    src/boss/bo4/gen/rooms.c
     src/boss/bo4/header.c
     src/boss/bo4/popup.c
     src/boss/bo4/prim_helpers.c
+    src/boss/bo4/spritesheets.c
     src/boss/bo4/st_common.c
     src/boss/bo4/st_update.c
     src/boss/bo4/tile_data.c
