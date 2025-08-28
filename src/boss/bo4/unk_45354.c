@@ -30,26 +30,30 @@ void func_us_801C5354(s32 resetAnims, s32 arg1) {
     }
 }
 
-void func_8010E0A8(void) {
+#ifndef VERSION_PC
+static void func_8010E0A8(void) UNUSED {
     g_Entities[STAGE_ENTITY_START + UNK_ENTITY_1].ext.entSlot1.unk2 = 0;
 }
+#endif
 
-void func_8010E0B8(void) {
+void OVL_EXPORT(func_8010E0B8)(void) {
     g_Entities[STAGE_ENTITY_START + UNK_ENTITY_1].ext.entSlot1.unk1 = 0;
     g_Entities[STAGE_ENTITY_START + UNK_ENTITY_1].ext.entSlot1.unk0 = 0;
 }
 
 // similar to DRA's func_8010E168. share's the function signature but
 // not the entity creation logic, a0 is ignored
-void func_us_801C5430(s16 a0, s16 minTime) {
+void OVL_EXPORT(func_us_801C5430)(s16 a0, s16 minTime) {
     if (g_Dop.timers[ALU_T_INVINCIBLE_CONSUMABLES] <= minTime) {
         g_Dop.timers[ALU_T_INVINCIBLE_CONSUMABLES] = minTime;
     }
 }
 
+#ifndef VERSION_PC
 #include "../../decelerate.h"
+#endif
 
-s32 CheckMoveDirection(void) {
+s32 OVL_EXPORT(CheckMoveDirection)(void) {
     if (g_Dop.unk44 & 2) {
         return 0;
     }
@@ -87,7 +91,9 @@ s32 func_us_801C55A8(s32 minX, s32 maxX) {
     return false;
 }
 
+#ifndef VERSION_PC
 #include "../../set_speed_x.h"
+#endif
 
 void func_8010E3B8(s32 velocityX) {
     if (DOPPLEGANGER.entityRoomIndex == 1) {
@@ -181,7 +187,7 @@ void func_8010E6AC(bool forceAnim13) {
     } else {
         SetDopplegangerAnim(7);
         // Factory blueprint 1 has child 2, which is EntitySmokePuff
-        CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(1, 5), 0);
+        OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(1, 5), 0);
     }
 
     if (g_Dop.unk4C) {
@@ -198,7 +204,7 @@ void func_8010E6AC(bool forceAnim13) {
 }
 
 void func_us_801C58E4(void) {
-    if (CheckMoveDirection() != 0) {
+    if (OVL_EXPORT(CheckMoveDirection)() != 0) {
         SetDopplegangerAnim(0x1A);
         SetSpeedX(FIX(3.0 / 2.0));
         g_Dop.unk44 = 0;
@@ -234,7 +240,7 @@ void func_us_801C59DC(void) {
 }
 
 void func_us_801C5A4C(void) {
-    if (CheckMoveDirection() != 0) {
+    if (OVL_EXPORT(CheckMoveDirection)() != 0) {
         SetSpeedX(0x30000);
     } else {
         DOPPLEGANGER.velocityX = 0;
@@ -244,7 +250,7 @@ void func_us_801C5A4C(void) {
     SetDopplegangerAnim(0x21);
     g_Dop.unk4A = 0;
     g_Dop.unk44 &= 0xFFFE;
-    CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(2, 0), 0);
+    OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(2, 0), 0);
 }
 
 static s16 D_us_8018132C[] = {
@@ -294,7 +300,7 @@ s32 func_us_801C5B68(void) {
         }
     }
 
-    CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(3, 0), 0);
+    OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(3, 0), 0);
 
     g_Dop.timers[ALU_T_10] = 4;
     if (DOPPLEGANGER.step_s >= 0x40) {
@@ -323,7 +329,7 @@ void func_8010ED54(u8 anim) {
     DOPPLEGANGER.velocityX = DOPPLEGANGER.velocityY = 0;
     SetDopplegangerStep(16);
     SetDopplegangerAnim(anim);
-    CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(61, 20), 0);
+    OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(61, 20), 0);
     g_Dop.unk48 = 0;
 }
 
@@ -354,7 +360,7 @@ s32 func_us_801C5CF8(void) {
     }
 
     if (g_Dop.timers[ALU_T_CURSE]) {
-        CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x39, 1), 0);
+        OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x39, 1), 0);
 
         switch (DOPPLEGANGER.step) {
         case Dop_Stand:
@@ -380,7 +386,7 @@ s32 func_us_801C5CF8(void) {
     }
 
     if (attackPressed == PAD_SQUARE) {
-        CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x30, 0), 0);
+        OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x30, 0), 0);
         DOPPLEGANGER.step_s = 0x41;
         g_Dop.unk46 = 0x8002;
         g_Dop.unk54 = 0xD;
@@ -388,7 +394,7 @@ s32 func_us_801C5CF8(void) {
     } else {
         g_Dop.unk46 = 0x8003;
         DOPPLEGANGER.step_s = 0x42;
-        CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x30, 1), 0);
+        OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x30, 1), 0);
         g_Dop.unk54 = 8;
         animBase = 0xA7;
     }
@@ -440,7 +446,7 @@ void func_us_801C5FDC(void) {
     SetSpeedX(FIX(-3.5));
     g_CurrentEntity->velocityY = FIX(0.0);
     SetDopplegangerAnim(0xDB);
-    CreateEntFactoryFromEntity(g_CurrentEntity, 0, 0);
+    OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, 0, 0);
 }
 
 bool func_us_801C6040(s32 arg0) {
@@ -450,7 +456,7 @@ bool func_us_801C6040(s32 arg0) {
 
     if (arg0 & 8) {
         if (g_Dop.unk46 == 0) {
-            CheckMoveDirection();
+            OVL_EXPORT(CheckMoveDirection)();
         }
     }
 
@@ -505,7 +511,7 @@ bool func_us_801C6040(s32 arg0) {
                 if (DOPPLEGANGER.velocityY > FIX(6.875)) {
                     func_8010E470(1, 0U);
                     g_api.PlaySfx(SFX_STOMP_HARD_B);
-                    CreateEntFactoryFromEntity(g_CurrentEntity, 0, 0);
+                    OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, 0, 0);
                 } else {
                     if (g_Dop.unk44 & 0x10) {
                         func_8010E6AC(1);
@@ -525,13 +531,13 @@ bool func_us_801C6040(s32 arg0) {
                     func_8010E470(1, 0);
                 }
                 g_api.PlaySfx(SFX_STOMP_HARD_B);
-                CreateEntFactoryFromEntity(g_CurrentEntity, 0, 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, 0, 0);
             } else if (g_Dop.unk44 & 0x10) {
                 func_8010E6AC(1);
                 g_api.PlaySfx(SFX_STOMP_SOFT_B);
             } else if (abs(DOPPLEGANGER.velocityX) > FIX(2)) {
                 g_api.PlaySfx(SFX_STOMP_HARD_B);
-                CreateEntFactoryFromEntity(g_CurrentEntity, 0, 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, 0, 0);
                 func_8010E570(DOPPLEGANGER.velocityX);
             } else {
                 g_api.PlaySfx(SFX_STOMP_SOFT_B);
@@ -543,7 +549,7 @@ bool func_us_801C6040(s32 arg0) {
         if ((arg0 & 0x20000) && (g_Dop.vram_flag & 1)) {
             func_8010E470(3, DOPPLEGANGER.velocityX);
             g_api.PlaySfx(SFX_STOMP_HARD_B);
-            CreateEntFactoryFromEntity(g_CurrentEntity, 0, 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, 0, 0);
             return true;
         }
     }
@@ -585,10 +591,10 @@ bool func_us_801C6040(s32 arg0) {
 
 void func_80111CC0(void) {
     if (g_Dop.timers[ALU_T_CURSE] != 0) {
-        CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 0x17), 0);
+        OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 0x17), 0);
     }
     if (g_Dop.timers[ALU_T_POISON] != 0) {
-        CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 0x16), 0);
+        OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 0x16), 0);
     }
 }
 
@@ -658,7 +664,7 @@ void DopplegangerStepStand(void) {
             var_s0 |= 0x8000;
         }
 
-        if (var_s0 & 1 && CheckMoveDirection() != 0) {
+        if (var_s0 & 1 && OVL_EXPORT(CheckMoveDirection)() != 0) {
             func_8010E6AC(0);
             var_s0 |= 0x8000;
         }
@@ -671,7 +677,7 @@ void DopplegangerStepStand(void) {
 void DopplegangerStepWalk(void) {
     if (func_us_801C6040(0x4301C) == false) {
         SetSpeedX(FIX(1.5));
-        if (CheckMoveDirection() == 0) {
+        if (OVL_EXPORT(CheckMoveDirection)() == 0) {
             func_8010E570(0);
         }
     }
@@ -705,7 +711,7 @@ void DopplegangerStepJump(void) {
 
     switch (DOPPLEGANGER.step_s) {
     case 0:
-        moveDirection = CheckMoveDirection();
+        moveDirection = OVL_EXPORT(CheckMoveDirection)();
         if (moveDirection) {
             if (DOPPLEGANGER.ext.player.anim == 22 ||
                 DOPPLEGANGER.ext.player.anim == 25) {
@@ -727,7 +733,7 @@ void DopplegangerStepJump(void) {
         }
         break;
     case 1:
-        moveDirection = CheckMoveDirection();
+        moveDirection = OVL_EXPORT(CheckMoveDirection)();
         if (moveDirection != 0) {
             SetSpeedX(FIX(1.5));
         }
@@ -765,7 +771,7 @@ void DopplegangerStepJump(void) {
 void DopplegangerStepFall(void) {
     if (func_us_801C6040(0x9029) == false) {
         DecelerateX(FIX(1.0 / 16.0));
-        if (CheckMoveDirection() != 0) {
+        if (OVL_EXPORT(CheckMoveDirection)() != 0) {
             SetSpeedX(FIX(3.0 / 4.0));
         }
     }
@@ -858,7 +864,7 @@ void DopplegangerStepCrouch(void) {
             var_s0 |= 0x8000;
         }
 
-        if (var_s0 & 1 && CheckMoveDirection()) {
+        if (var_s0 & 1 && OVL_EXPORT(CheckMoveDirection)()) {
             func_8010E6AC(0);
             var_s0 |= 0x8000;
         }

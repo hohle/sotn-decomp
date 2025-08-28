@@ -548,8 +548,6 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_TT_001}
     ${SOURCE_FILES_TT_002}
 )
-
-
 if (USE_PLAYER_MARIA)
     add_compile_definitions(USE_PLAYER_MARIA)
     list(APPEND SOURCE_FILES_CORE

@@ -3,7 +3,7 @@
 #include "../../dra/mist.h"
 #include "../../dra/subwpn_dagger.h"
 
-Entity* CreateEntFactoryFromEntity(Entity* source, u32 factoryParams, s16 arg2);
+Entity* OVL_EXPORT(CreateEntFactoryFromEntity)(Entity* source, u32 factoryParams, s16 arg2);
 
 // n.b.! this is the same as rbo5/unk_4648C.c
 
@@ -12,7 +12,7 @@ void func_us_801C6E7C(s32 arg0) {
 
     DOPPLEGANGER.posY.i.hi -= 22;
     DOPPLEGANGER.posX.i.hi = move + DOPPLEGANGER.posX.i.hi;
-    CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(4, 1), 0);
+    OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(4, 1), 0);
     DOPPLEGANGER.posY.i.hi = DOPPLEGANGER.posY.i.hi + 22;
     DOPPLEGANGER.posX.i.hi = DOPPLEGANGER.posX.i.hi - move;
 
@@ -185,14 +185,14 @@ void DopplegangerHandleDamage(DamageParam* damage, s16 step, s16 step_s) {
                     DOPPLEGANGER.ext.player.anim = 0x33;
                 }
 
-                CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0, 6), 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0, 6), 0);
                 break;
             case 2:
                 DOPPLEGANGER.velocityY = 0;
                 func_8010E3B8(FIX(-1.25));
                 DOPPLEGANGER.step_s = 7;
                 DOPPLEGANGER.ext.player.anim = 0x23;
-                CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0, 0), 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0, 0), 0);
                 break;
             default:
             case 3:
@@ -215,44 +215,44 @@ void DopplegangerHandleDamage(DamageParam* damage, s16 step, s16 step_s) {
 
         if (damage->effects & EFFECT_UNK_8000) {
             g_api.PlaySfx(SFX_FM_EXPLODE_SWISHES);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 0x45), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 0x45), 0);
             g_Dop.unk40 = 0x8160;
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(17, 1), 0);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(18, 0), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(17, 1), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(18, 0), 0);
             g_Dop.timers[ALU_T_HITEFFECT] = 0x10;
         } else if (damage->effects & EFFECT_UNK_0100) {
             g_Dop.timers[ALU_T_CURSE] = 0x400;
             g_Dop.unk40 = 0x8165;
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 23), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 23), 0);
         } else if (damage->effects & EFFECT_SOLID_FROM_BELOW) {
             g_Dop.timers[ALU_T_POISON] = 0x400;
             g_Dop.unk40 = 0x8164;
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 22), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 22), 0);
         } else if (damage->effects & EFFECT_UNK_4000) {
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2D, 0), 0);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 0x46), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2D, 0), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 0x46), 0);
             g_Dop.timers[ALU_T_HITEFFECT] = 0x18;
             g_Dop.unk40 = 0x8202;
         } else if (damage->effects & EFFECT_UNK_2000) {
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2E, 0), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2E, 0), 0);
             g_Dop.timers[ALU_T_HITEFFECT] = 0xC;
             g_Dop.unk40 = 0x8169;
             DOPPLEGANGER.ext.player.anim = 0x2E;
         } else if (damage->effects & EFFECT_UNK_1000) {
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x72, 0), 0);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 0x63), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x72, 0), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 0x63), 0);
             g_Dop.timers[ALU_T_HITEFFECT] = 8;
             g_Dop.unk40 = 0x8164;
         } else if (damage->effects & EFFECT_UNK_0800) {
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x71, 0), 0);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 0x62), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x71, 0), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 0x62), 0);
             g_Dop.timers[ALU_T_HITEFFECT] = 16;
             g_Dop.unk40 = 0x8164;
         } else if (!(damage->effects &
                      (EFFECT_UNK_8000 | EFFECT_UNK_4000 | EFFECT_UNK_2000 |
                       EFFECT_UNK_1000 | EFFECT_UNK_0800 | EFFECT_UNK_0200 |
                       EFFECT_SOLID_FROM_BELOW | EFFECT_SOLID_FROM_ABOVE))) {
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 0x58), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 0x58), 0);
         }
         break;
     case 1:
@@ -329,28 +329,28 @@ void DopplegangerStepKill(DamageParam* damage, s16 dopStep, s16 arg2) {
         DOPPLEGANGER.rotPivotX = 0;
         if (damage->effects & ELEMENT_FIRE) {
             func_80118C28(3);
-            CreateEntFactoryFromEntity(
+            OVL_EXPORT(CreateEntFactoryFromEntity)(
                 g_CurrentEntity, FACTORY(BP_BLINK_WHITE, 0x4F), 0);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(BP_51, 2), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(BP_51, 2), 0);
             D_us_801D3D38 = 1;
         } else if (damage->effects & ELEMENT_THUNDER) {
             func_80118C28(9);
-            CreateEntFactoryFromEntity(
+            OVL_EXPORT(CreateEntFactoryFromEntity)(
                 g_CurrentEntity, FACTORY(BP_BLINK_WHITE, 0x59), 0);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(BP_45, 1), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(BP_45, 1), 0);
             D_us_801D3D38 = 2;
         } else if (damage->effects & ELEMENT_ICE) {
             func_80118C28(10);
-            CreateEntFactoryFromEntity(
+            OVL_EXPORT(CreateEntFactoryFromEntity)(
                 g_CurrentEntity, FACTORY(BP_BLINK_WHITE, 0x5A), 0);
-            CreateEntFactoryFromEntity(g_CurrentEntity, BP_HIT_BY_ICE, 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, BP_HIT_BY_ICE, 0);
             D_us_801D3D38 = 3;
             DOPPLEGANGER.drawMode = DRAW_TPAGE2 | DRAW_TPAGE;
         } else {
             func_80118C28(1);
-            CreateEntFactoryFromEntity(
+            OVL_EXPORT(CreateEntFactoryFromEntity)(
                 g_CurrentEntity, FACTORY(BP_BLINK_WHITE, 0x53), 0);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(BP_49, 5), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(BP_49, 5), 0);
             D_us_801D3D38 = 0;
         }
         plDraw->r0 = plDraw->g0 = plDraw->b0 = plDraw->r1 = plDraw->g1 =
@@ -436,7 +436,7 @@ void DopplegangerStepKill(DamageParam* damage, s16 dopStep, s16 arg2) {
         }
         if (--D_us_801D3D3C == 0) {
             SetDopplegangerAnim(0x3E);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(BP_16, 3), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(BP_16, 3), 0);
             DOPPLEGANGER.step_s++;
         }
         break;
@@ -464,7 +464,7 @@ void DopplegangerStepKill(DamageParam* damage, s16 dopStep, s16 arg2) {
 
 extern AnimationFrame D_us_80183B0C[];
 
-s32 BatFormFinished(void) {
+s32 OVL_EXPORT(BatFormFinished)(void) {
     if ((DOPPLEGANGER.step_s == 0) || !(g_Dop.padTapped & 8)) {
         return false;
     }
@@ -475,7 +475,7 @@ s32 BatFormFinished(void) {
     DOPPLEGANGER.palette = PAL_OVL(0x20D);
     g_Dop.unk66 = 0;
     g_Dop.unk68 = 0;
-    CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(44, 0x21), 0);
+    OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(44, 0x21), 0);
     DOPPLEGANGER.velocityY >>= 1;
     return true;
 }
@@ -506,13 +506,13 @@ static s32 CheckWingSmashInput(void) {
 static s32 g_WingSmashTimer;
 extern s32 D_us_801D4A1C;
 
-void ControlBatForm(void) {
+void OVL_EXPORT(ControlBatForm)(void) {
     Entity* newEntity;
     s32 pressingCross;
     s16 x_offset;
     u32 directionsPressed;
 
-    if (BatFormFinished()) {
+    if (OVL_EXPORT(BatFormFinished)()) {
         return;
     }
 
@@ -526,9 +526,9 @@ void ControlBatForm(void) {
         SetDopplegangerAnim(0xC6);
         SetSpeedX(FIX(6));
         DOPPLEGANGER.step_s = 3;
-        CreateEntFactoryFromEntity(
+        OVL_EXPORT(CreateEntFactoryFromEntity)(
             g_CurrentEntity, FACTORY(BP_BLINK_WHITE, 0x5c), 0);
-        CreateEntFactoryFromEntity(g_CurrentEntity, BP_67, 0);
+        OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, BP_67, 0);
         g_WingSmashTimer = 0x40;
     }
 
@@ -549,7 +549,7 @@ void ControlBatForm(void) {
             }
         } else {
             if (g_Dop.unk66 == 0) {
-                newEntity = CreateEntFactoryFromEntity(
+                newEntity = OVL_EXPORT(CreateEntFactoryFromEntity)(
                     g_CurrentEntity, FACTORY(BP_BLINK_WHITE, 0x20), 0);
 
                 func_8010FAF4();
@@ -580,7 +580,7 @@ void ControlBatForm(void) {
         DOPPLEGANGER.poseTimer = 1;
         DOPPLEGANGER.pose = 2;
         DOPPLEGANGER.palette = PAL_OVL(0x200);
-        CheckMoveDirection();
+        OVL_EXPORT(CheckMoveDirection)();
         DOPPLEGANGER.step_s++;
         break;
     case 1:
@@ -727,7 +727,7 @@ void ControlBatForm(void) {
         if (!DOPPLEGANGER.facingLeft && (g_Dop.vram_flag & 4) ||
             DOPPLEGANGER.facingLeft && (g_Dop.vram_flag & 8)) {
             g_Dop.padTapped = PAD_R1;
-            BatFormFinished();
+            OVL_EXPORT(BatFormFinished)();
             g_api.func_80102CD8(2);
             g_api.PlaySfx(SFX_WALL_DEBRIS_B);
             DOPPLEGANGER.velocityX = 0;
@@ -738,7 +738,7 @@ void ControlBatForm(void) {
         // When wing smash ends, force an un-transform
         if (--g_WingSmashTimer == 0) {
             g_Dop.padTapped = PAD_R1;
-            BatFormFinished();
+            OVL_EXPORT(BatFormFinished)();
             g_Dop.demo_timer = 32;
             g_Dop.padSim = 0;
         } else {
@@ -774,10 +774,10 @@ void ControlBatForm(void) {
                 DOPPLEGANGER.velocityY = FIX(6);
             }
             if (g_GameTimer % 3 == 0) {
-                CreateEntFactoryFromEntity(
+                OVL_EXPORT(CreateEntFactoryFromEntity)(
                     g_CurrentEntity, BP_WING_SMASH_TRAIL, 0);
                 if (g_Dop.vram_flag & 1) {
-                    CreateEntFactoryFromEntity(
+                    OVL_EXPORT(CreateEntFactoryFromEntity)(
                         g_CurrentEntity, FACTORY(BP_69, 9), 0);
                 }
                 if (g_Dop.vram_flag & 2) {
@@ -787,7 +787,7 @@ void ControlBatForm(void) {
                     }
                     DOPPLEGANGER.posY.i.hi -= 8;
                     DOPPLEGANGER.posX.i.hi += x_offset;
-                    CreateEntFactoryFromEntity(
+                    OVL_EXPORT(CreateEntFactoryFromEntity)(
                         g_CurrentEntity, FACTORY(BP_4, 1), 0);
                     DOPPLEGANGER.posY.i.hi += 8;
                     DOPPLEGANGER.posX.i.hi -= x_offset;
@@ -879,23 +879,23 @@ s32 func_us_801C8EE4(void) {
     if (DOPPLEGANGER.step_s == 0 || !(g_Dop.padTapped & PAD_R2)) {
         return false;
     }
-    CheckMoveDirection();
+    OVL_EXPORT(CheckMoveDirection)();
     SetDopplegangerStep(15);
     return true;
 }
 
-void ControlMistForm(void) {
+void OVL_EXPORT(ControlMistForm)(void) {
     u32 padDirection;
 
     if (func_us_801C8EE4() == 0) {
         padDirection = g_Dop.padPressed & PAD_DIRECTION_MASK;
         switch (DOPPLEGANGER.step_s) {
         case 0:
-            CheckMoveDirection();
+            OVL_EXPORT(CheckMoveDirection)();
             g_Dop.unk44 = g_Dop.unk46 = g_Dop.unk48 = 0;
             g_api.func_800EA5E4(0x8003U);
             func_8010FAF4();
-            CreateEntFactoryFromEntity(g_CurrentEntity, 0x49U, 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, 0x49U, 0);
             if (DOPPLEGANGER.velocityX > 0) {
                 DOPPLEGANGER.velocityX = FIX(1);
             }
@@ -1080,7 +1080,7 @@ void DopplegangerStepUnmorphMist(void) {
         if (g_Entities[E_ID_50].step == 5) {
             DOPPLEGANGER.palette = PAL_OVL(0x200);
             func_8010FAF4();
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0x2C, 0x5B), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(0x2C, 0x5B), 0);
             func_us_801C58E4();
             if (!(g_Dop.vram_flag & 0x8000)) {
                 DOPPLEGANGER.velocityY = FIX(-1);
@@ -1096,7 +1096,7 @@ void DopplegangerStepSwordWarp(void) {
     if (DOPPLEGANGER.step_s == 0) {
         if (g_Entities[E_BOSS_WEAPON].entityId == E_NONE) {
             D_us_801D3D44 = 0x10;
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(61, 0x15), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(61, 0x15), 0);
             DOPPLEGANGER.step_s++;
         }
     } else if (--D_us_801D3D44 == 0) {
@@ -1128,20 +1128,20 @@ void DopplegangerStepStone(s32 arg0) {
         break;
 
     case 1:
-        func_us_801C5430(1, 4);
+        OVL_EXPORT(func_us_801C5430)(1, 4);
         DOPPLEGANGER.palette = PAL_OVL(0x161);
         if (func_us_801C6040(0x20280) != 0) {
             DOPPLEGANGER.step = Dop_StatusStone;
             DOPPLEGANGER.velocityX = DOPPLEGANGER.velocityY = 0;
             g_api.func_80102CD8(1);
             g_api.PlaySfx(SFX_WALL_DEBRIS_B);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(39, 0), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(39, 0), 0);
             if (g_Dop.unk6A == 0) {
                 D_us_801D3D48 = 0x20;
             }
             DOPPLEGANGER.palette = PAL_OVL(0x19E);
             SetDopplegangerAnim(0x38);
-            CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(16, 3), 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(16, 3), 0);
             DOPPLEGANGER.step_s = 2;
         }
         break;
@@ -1151,10 +1151,10 @@ void DopplegangerStepStone(s32 arg0) {
             if (--D_us_801D3D48 == 0) {
                 DOPPLEGANGER.step = Dop_Kill;
                 g_api.PlaySfx(SFX_BO4_UNK_7E6);
-                CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(16, 3), 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(16, 3), 0);
                 DOPPLEGANGER.step_s = 16;
             }
-            func_us_801C5430(1, 4);
+            OVL_EXPORT(func_us_801C5430)(1, 4);
             break;
         }
 
@@ -1166,16 +1166,16 @@ void DopplegangerStepStone(s32 arg0) {
 
             if (g_Dop.unk5E == 0) {
                 SetDopplegangerAnim(0x3B);
-                CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(16, 3), 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(16, 3), 0);
                 g_api.PlaySfx(SFX_BO4_UNK_7DD);
                 DOPPLEGANGER.step = Dop_Hit;
                 DOPPLEGANGER.step_s = 8;
                 DOPPLEGANGER.palette = PAL_OVL(0x200);
             } else {
-                func_us_801C5430(1, 4);
+                OVL_EXPORT(func_us_801C5430)(1, 4);
                 DOPPLEGANGER.step_s = 3;
-                CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(13, 3), 0);
-                CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(31, 3), 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(13, 3), 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(g_CurrentEntity, FACTORY(31, 3), 0);
                 DOPPLEGANGER.palette = PAL_OVL(0x19E);
             }
         } else {
@@ -1206,7 +1206,9 @@ void DopplegangerStepStone(s32 arg0) {
     }
 }
 
+#ifndef VERSION_PC
 #include "../../get_free_entity.h"
+#endif
 
 // this is the same as unionD_800ACFB4 in DRA
 typedef union {
@@ -1456,19 +1458,19 @@ void DopEntityHitByHoly(Entity* self) {
 void PrintDummySet(void) { FntPrint("dummy set\n"); }
 
 void func_us_801CA2AC(Entity*);
-void EntitySmokePuff(Entity*);
-void EntityGravityBootBeam(Entity*);
-void EntitySubwpnKnife(Entity*);
+void OVL_EXPORT(EntitySmokePuff)(Entity*);
+void OVL_EXPORT(EntityGravityBootBeam)(Entity*);
+void OVL_EXPORT(EntitySubwpnKnife)(Entity*);
 void func_us_801CD178(Entity*);
 void EntityDopplegangerBlinkWhite(Entity*);
 void func_us_801CD89C(Entity*);
-void EntitySubwpnReboundStone(Entity*);
+void OVL_EXPORT(EntitySubwpnReboundStone)(Entity*);
 void DopEntityHitByLightning(Entity*);
 void EntityDopplegangerOutline(Entity*);
 void EntityDopplegangerDissolves(Entity*);
-void EntityHitByIce(Entity*);
-void EntityMist(Entity*);
-void EntityWingSmashTrail(Entity*);
+void OVL_EXPORT(EntityHitByIce)(Entity*);
+void OVL_EXPORT(EntityMist)(Entity*);
+void OVL_EXPORT(EntityWingSmashTrail)(Entity*);
 void func_us_801CA748(Entity*);
 void DopEntityHitByHoly(Entity*);
 void DopEntityHitByDark(Entity*);
@@ -1477,9 +1479,9 @@ void DopplegangerUnarmedAttack(Entity*);
 static PfnEntityUpdate D_us_801813D0[] = {
     PrintDummySet,
     func_us_801CA2AC,
-    EntitySmokePuff,
-    EntityGravityBootBeam,
-    EntitySubwpnKnife,
+    OVL_EXPORT(EntitySmokePuff),
+    OVL_EXPORT(EntityGravityBootBeam),
+    OVL_EXPORT(EntitySubwpnKnife),
     func_us_801CD178,
     PrintDummySet,
     PrintDummySet,
@@ -1495,7 +1497,7 @@ static PfnEntityUpdate D_us_801813D0[] = {
     PrintDummySet,
     PrintDummySet,
     PrintDummySet,
-    EntitySubwpnReboundStone,
+    OVL_EXPORT(EntitySubwpnReboundStone),
     PrintDummySet,
     PrintDummySet,
     PrintDummySet,
@@ -1508,9 +1510,9 @@ static PfnEntityUpdate D_us_801813D0[] = {
     DopEntityHitByLightning,
     EntityDopplegangerOutline,
     EntityDopplegangerDissolves,
-    EntityHitByIce,
-    EntityMist,
-    EntityWingSmashTrail,
+    OVL_EXPORT(EntityHitByIce),
+    OVL_EXPORT(EntityMist),
+    OVL_EXPORT(EntityWingSmashTrail),
     func_us_801CA748,
     PrintDummySet,
     PrintDummySet,
@@ -1560,7 +1562,7 @@ void func_us_801CA014(void) {
                 DestroyEntity(g_CurrentEntity);
             } else {
                 if (entity->flags & FLAG_UNK_20000000) {
-                    UpdateAnim(0, &D_us_8018136C[0].af);
+                    OVL_EXPORT(UpdateAnim)(0, &D_us_8018136C[0].af);
                 }
                 entity->flags |= FLAG_NOT_AN_ENEMY;
             }
@@ -1583,7 +1585,7 @@ void func_us_801CA014(void) {
     }
 }
 
-Entity* CreateEntFactoryFromEntity(
+Entity* OVL_EXPORT(CreateEntFactoryFromEntity)(
     Entity* source, u32 factoryParams, s16 arg2) {
     Entity* newFactory = GetFreeEntity(E_ID_44, E_ID_50);
 
@@ -1813,15 +1815,15 @@ static AnimationFrame D_us_801817A8[] = {
 };
 
 static u8 D_us_8018180C[NUM_VERTICAL_SENSORS * 2] = {
-    2, 9, 3, 10, 1, 8, 4, 11, 0, 7, 5, 12, 6, 13, 0, 0,
+    2, 9, 3, 10, 1, 8, 4, 11, 0, 7, 5, 12, 6, 13,
 };
 
 static u8 D_us_8018181C[10] = {
-    2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 0, 0,
+    2, 9, 3, 10, 4, 11, 5, 12, 6, 13,
 };
 extern Point16 g_DopSensorsWall[NUM_VERTICAL_SENSORS * 2];
 
-void EntitySmokePuff(Entity* self) {
+void OVL_EXPORT(EntitySmokePuff)(Entity* self) {
     byte stackpad[40];
     s16 posX;
     s32 i;
@@ -2904,7 +2906,7 @@ void EntityDopplegangerBlinkWhite(Entity* self) {
     }
     func_us_801C5354(1, 1);
     if (((maskedParams & 0x3F) == 0) || ((maskedParams & 0x3F) == 7)) {
-        func_us_801C5430(1, 0xA);
+        OVL_EXPORT(func_us_801C5430)(1, 0xA);
     }
 }
 
@@ -3352,7 +3354,7 @@ void EntityDopplegangerOutline(Entity* self) {
     func_us_801C5354(1, 1);
 }
 
-void EntityGravityBootBeam(Entity* self) {
+void OVL_EXPORT(EntityGravityBootBeam)(Entity* self) {
     Primitive* prim;
     s16 halfWidth;
     s32 i;
@@ -3431,7 +3433,7 @@ void EntityGravityBootBeam(Entity* self) {
 }
 
 // The blue outlines of the bat that show up when wing smashing
-void EntityWingSmashTrail(Entity* self) {
+void OVL_EXPORT(EntityWingSmashTrail)(Entity* self) {
     if (!(DOPPLEGANGER.step_s == 3 && DOPPLEGANGER.step == Dop_MorphBat)) {
         DestroyEntity(self);
         return;
@@ -3819,7 +3821,7 @@ void func_us_801CD89C(Entity* self) {
         if ((self->pose == 8) && (self->anim != D_us_801817A8)) {
             self->drawMode = DRAW_TPAGE;
             if (!(paramsLo & 1) && (self->poseTimer == 1)) {
-                CreateEntFactoryFromEntity(self, FACTORY(4, 4), 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(self, FACTORY(4, 4), 0);
             }
         }
 
@@ -4015,7 +4017,7 @@ static Point16* D_us_80181DF8[] = {
     &D_us_80181DF0, &D_us_80181DE4, &D_us_80181DF4, &D_us_80181DC8,
 };
 
-void EntityHitByIce(Entity* self) {
+void OVL_EXPORT(EntityHitByIce)(Entity* self) {
     s32 i;
     s16 xShift;
     s16 yShift;
@@ -4335,7 +4337,7 @@ static s32 D_us_801D40AC;
 STATIC_PAD_BSS(0x68);
 
 // spawns mist (player transform)
-void EntityMist(Entity* self) {
+void OVL_EXPORT(EntityMist)(Entity* self) {
     Primitive* prim;
     Primitive* mistPrim;
     mistStruct* mistStruct;
@@ -5028,7 +5030,7 @@ void EntityDopplegangerDissolves(Entity* self) {
 #include "../../rebound_stone.h"
 
 extern EInit EInitReboundStone;
-void EntitySubwpnReboundStone(Entity* self) {
+void OVL_EXPORT(EntitySubwpnReboundStone)(Entity* self) {
     s16 playerX;
     s16 playerY;
     Collider collider;
@@ -5094,7 +5096,7 @@ void EntitySubwpnReboundStone(Entity* self) {
         break;
     case 1:
         if (self->flags & FLAG_DEAD) {
-            CreateEntFactoryFromEntity(self, BP_10, 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(self, BP_10, 0);
             g_api.PlaySfx(SFX_UI_TINK);
             self->step = 2;
             break;
@@ -5258,7 +5260,7 @@ void EntitySubwpnReboundStone(Entity* self) {
 
     block_93:
         if (self->ext.reboundStone.unk82) {
-            CreateEntFactoryFromEntity(self, 10, 0);
+            OVL_EXPORT(CreateEntFactoryFromEntity)(self, 10, 0);
             g_api.PlaySfx(SFX_UI_TINK);
         }
         if (self->posX.i.hi < -0x40 || self->posX.i.hi > 0x140 ||
@@ -5328,7 +5330,7 @@ void EntitySubwpnReboundStone(Entity* self) {
     }
 }
 
-s32 UpdateUnarmedAnim(s8*, AnimationFrame*);
+s32 OVL_EXPORT(UpdateUnarmedAnim)(s8*, AnimationFrame*);
 extern EInit D_us_80180440;
 extern EInit D_us_8018044C;
 extern DopWeaponAnimation D_us_80184278[];
@@ -5370,14 +5372,14 @@ void DopplegangerUnarmedAttack(Entity* self) {
     if (DOPPLEGANGER.poseTimer == 1 && DOPPLEGANGER.pose == anim->soundFrame) {
         g_api.PlaySfx(anim->soundId);
     }
-    if (UpdateUnarmedAnim(anim->frameProps, anim->frames) < 0) {
+    if (OVL_EXPORT(UpdateUnarmedAnim)(anim->frameProps, anim->frames) < 0) {
         DestroyEntity(self);
     }
 }
 
 extern EInit EInitSubwpnKnife;
 
-void EntitySubwpnKnife(Entity* self) {
+void OVL_EXPORT(EntitySubwpnKnife)(Entity* self) {
     Collider collider;
     Primitive* prim;
     s32 i;
@@ -5461,7 +5463,7 @@ void EntitySubwpnKnife(Entity* self) {
                 self->velocityY = FIX(-2.5);
                 self->hitboxState = 0;
                 self->posX.i.hi += xCol;
-                CreateEntFactoryFromEntity(self, FACTORY(BP_10, 0), 0);
+                OVL_EXPORT(CreateEntFactoryFromEntity)(self, FACTORY(BP_10, 0), 0);
                 self->posX.i.hi -= xCol;
                 if (collider.effects & (EFFECT_SOLID | EFFECT_UNK_0002)) {
                     // n.b.! this is the same sound effect as the other side
