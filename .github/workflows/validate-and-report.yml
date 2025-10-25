@@ -19,6 +19,7 @@ concurrency:
 
 jobs:
   build-and-test:
+    environment: CI
     strategy:
       matrix:
         version: ["us", "hd", "pspeu"]
@@ -35,9 +36,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ matrix.version }}
-      FROGRESS_API_BASE_URL: ${{ secrets.FROGRESS_API_BASE_URL }}
-      FROGRESS_API_SECRET: ${{ secrets.FROGRESS_API_SECRET }}
-      DISCORD_PROGRESS_WEBHOOK: ${{ secrets.DISCORD_PROGRESS_WEBHOOK }}
     steps:
       - name: Install requirements
         run: sudo apt-get install gcc-mipsel-linux-gnu
@@ -103,12 +101,12 @@ jobs:
   # unlike the matrix build above, this task builds all versions of the
   # game from the same build graph
   build-all:
+    environment: CI
     # Building and testing cannot work if the repository owner is not hohle
     # due to the missing secrets to clone the CI dependencies
     if: github.repository == 'hohle/sotn-decomp'
     runs-on: ubuntu-latest
     env:
-      DISCORD_PROGRESS_WEBHOOK: ${{ secrets.DISCORD_PROGRESS_WEBHOOK }}
     steps:
       - name: Install requirements
         run: sudo apt-get install gcc-mipsel-linux-gnu
@@ -177,6 +175,7 @@ jobs:
         run: make
 
   generate-duplicates-report:
+    environment: CI
     strategy:
       matrix:
         version: ["us"]
@@ -247,6 +246,7 @@ jobs:
         working-directory: gh-duplicates
 
   generate-duplicates-report-psp:
+    environment: CI
     strategy:
       matrix:
         version: ["pspeu"]
