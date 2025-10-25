@@ -37,9 +37,6 @@ jobs:
     env:
       VERSION: ${{ matrix.version }}
     steps:
-      - name: Disable man-db Auto Updates
-        run: |
-            sudo rm /var/lib/man-db/auto-update
       - name: Clone main repo (PR)
         if: github.event_name == 'pull_request_target'
         uses: actions/checkout@v4
@@ -67,11 +64,12 @@ jobs:
         id: get-dependencies
         with:
           path: 'disks/dependencies'
-          key: sotn-${{ matrix.dependency }}-deps-2
+          key: sotn-${{ matrix.dependency }}-deps-3
       - name: Get dependencies (uncached)
         if: steps.get-dependencies.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
+          lfs: true
           repository: hohle/sotn-decomp-dependencies
           ref: ${{ matrix.dependency }}
           token: ${{ secrets.SOTN_DECOMP_DEPENDENCIES_TOKEN }}
@@ -82,7 +80,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: 'disks/dependencies'
-          key: sotn-${{ matrix.dependency }}-deps-2
+          key: sotn-${{ matrix.dependency }}-deps-3
 # end
       - name: Setting up dependencies
         working-directory: disks
@@ -124,9 +122,6 @@ jobs:
     if: github.repository == 'hohle/sotn-decomp'
     runs-on: ubuntu-latest
     steps:
-      - name: Disable man-db Auto Updates
-        run: |
-            sudo rm /var/lib/man-db/auto-update
       - name: Install requirements
         run: sudo apt-get install gcc-mipsel-linux-gnu
       - name: Clone main repo (PR)
@@ -148,11 +143,12 @@ jobs:
         id: get-dependencies-us
         with:
           path: 'disks/dependencies/us'
-          key: sotn-us-deps-2
+          key: sotn-us-deps-3
       - name: Get dependencies (us) (uncached)
         if: steps.get-dependencies-us.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
+          lfs: true
           repository: hohle/sotn-decomp-dependencies
           ref: us
           token: ${{ secrets.SOTN_DECOMP_DEPENDENCIES_TOKEN }}
@@ -162,17 +158,18 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: 'disks/dependencies/us'
-          key: sotn-us-deps-2
+          key: sotn-us-deps-3
       - name: Get dependencies (pspeu/hd)
         uses: actions/cache@v4
         id: get-dependencies-pspeu
         with:
           path: 'disks/dependencies/pspeu'
-          key: sotn-pspeu-deps-2
+          key: sotn-pspeu-deps-3
       - name: Get dependencies (pspeu/hd) (uncached)
         if: steps.get-dependencies-pspeu.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
+          lfs: true
           repository: hohle/sotn-decomp-dependencies
           ref: pspeu
           token: ${{ secrets.SOTN_DECOMP_DEPENDENCIES_TOKEN }}
@@ -182,7 +179,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: 'disks/dependencies/pspeu'
-          key: sotn-pspeu-deps-2
+          key: sotn-pspeu-deps-3
       - name: Setting up dependencies
         working-directory: disks
         run: |
@@ -208,9 +205,6 @@ jobs:
     env:
       VERSION: ${{ matrix.version }}
     steps:
-      - name: Disable man-db Auto Updates
-        run: |
-            sudo rm /var/lib/man-db/auto-update
       - name: Install requirements
         run: sudo apt-get install gcc-mipsel-linux-gnu
       - name: Clone main repository
@@ -223,7 +217,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: 'disks/dependencies'
-          key: sotn-${{ matrix.dependency }}-deps-2
+          key: sotn-${{ matrix.dependency }}-deps-3
       - name: Setting up dependencies
         working-directory: disks
         run: cat dependencies/* | tar -zxf -
@@ -290,7 +284,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: 'disks/dependencies'
-          key: sotn-${{ matrix.dependency }}-deps-2
+          key: sotn-${{ matrix.dependency }}-deps-3
       - name: Setting up dependencies
         working-directory: disks
         run: cat dependencies/* | tar -zxf -
