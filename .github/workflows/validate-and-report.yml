@@ -62,7 +62,7 @@ jobs:
         id: get-dependencies
         with:
           path: 'disks/dependencies'
-          key: sotn-${{ matrix.dependency }}-deps
+          key: sotn-${{ matrix.dependency }}-deps-2
       - name: Get dependencies (uncached)
         if: steps.get-dependencies.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
@@ -77,7 +77,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: 'disks/dependencies'
-          key: sotn-${{ matrix.dependency }}-deps
+          key: sotn-${{ matrix.dependency }}-deps-2
 # end
       - name: Setting up dependencies
         working-directory: disks
@@ -134,7 +134,7 @@ jobs:
         id: get-dependencies-us
         with:
           path: 'disks/dependencies/us'
-          key: sotn-us-deps
+          key: sotn-us-deps-2
       - name: Get dependencies (us) (uncached)
         if: steps.get-dependencies-us.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
@@ -148,13 +148,13 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: 'disks/dependencies/us'
-          key: sotn-us-deps
+          key: sotn-us-deps-2
       - name: Get dependencies (pspeu/hd)
         uses: actions/cache@v4
         id: get-dependencies-pspeu
         with:
           path: 'disks/dependencies/pspeu'
-          key: sotn-pspeu-deps
+          key: sotn-pspeu-deps-2
       - name: Get dependencies (pspeu/hd) (uncached)
         if: steps.get-dependencies-pspeu.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
@@ -168,7 +168,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: 'disks/dependencies/pspeu'
-          key: sotn-pspeu-deps
+          key: sotn-pspeu-deps-2
       - name: Setting up dependencies
         working-directory: disks
         run: |
@@ -208,7 +208,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: 'disks/dependencies'
-          key: sotn-${{ matrix.dependency }}-deps
+          key: sotn-${{ matrix.dependency }}-deps-2
       - name: Setting up dependencies
         working-directory: disks
         run: cat dependencies/* | tar -zxf -
@@ -275,7 +275,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: 'disks/dependencies'
-          key: sotn-${{ matrix.dependency }}-deps
+          key: sotn-${{ matrix.dependency }}-deps-2
       - name: Setting up dependencies
         working-directory: disks
         run: cat dependencies/* | tar -zxf -
