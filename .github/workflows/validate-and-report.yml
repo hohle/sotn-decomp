@@ -110,7 +110,6 @@ jobs:
     # due to the missing secrets to clone the CI dependencies
     if: github.repository == 'hohle/sotn-decomp'
     runs-on: ubuntu-latest
-    env:
     steps:
       - name: Disable man-db Auto Updates
         run: |
