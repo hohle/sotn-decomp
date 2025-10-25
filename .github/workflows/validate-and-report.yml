@@ -172,6 +172,7 @@ jobs:
       - name: Setting up dependencies
         working-directory: disks
         run: |
+            find . ; \
             cat dependencies/us/* | tar -zxf - ; \
             cat dependencies/pspeu/* | tar -zxf -
       - name: Extract dependencies
