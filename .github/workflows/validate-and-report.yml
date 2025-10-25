@@ -39,7 +39,6 @@ jobs:
     steps:
       - name: Disable man-db Auto Updates
         run: |
-            sudo debconf-set man-db/auto-update false ; \
             sudo rm /var/lib/man-db/auto-update
       - name: Install requirements
         run: sudo apt-get install gcc-mipsel-linux-gnu
@@ -113,7 +112,6 @@ jobs:
     steps:
       - name: Disable man-db Auto Updates
         run: |
-            sudo debconf-set man-db/auto-update false ; \
             sudo rm /var/lib/man-db/auto-update
       - name: Install requirements
         run: sudo apt-get install gcc-mipsel-linux-gnu
@@ -197,7 +195,6 @@ jobs:
     steps:
       - name: Disable man-db Auto Updates
         run: |
-            sudo debconf-set man-db/auto-update false ; \
             sudo rm /var/lib/man-db/auto-update
       - name: Install requirements
         run: sudo apt-get install gcc-mipsel-linux-gnu
