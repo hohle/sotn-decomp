@@ -12,11 +12,11 @@ u8 gfx_stage_name_jp_lg[] = {
 };
 
 u8 gfx_confessional[] = {
-#include "gen/gfx_confessional.h"
+#include GEN_VERSION(gfx_confessional.h)
 };
 
 u8 gfx_chair[] = {
-#include "gen/gfx_chair.h"
+#include GEN_VERSION(gfx_chair.h)
 };
 
 u8 gfx_corner_guard[] = {
@@ -24,15 +24,15 @@ u8 gfx_corner_guard[] = {
 };
 
 u8 gfx_bone_pillar[] = {
-#include "gen/gfx_bone_pillar.h"
+#include GEN_VERSION(gfx_bone_pillar.h)
 };
 
 u8 gfx_bone_pillar_fire[] = {
-#include "gen/gfx_bone_pillar_fire.h"
+#include GEN_VERSION(gfx_bone_pillar_fire.h)
 };
 
 u8 gfx_bone_halberd[] = {
-#include "gen/gfx_bone_halberd.h"
+#include GEN_VERSION(gfx_bone_halberd.h)
 };
 
 u8 gfx_winged_guard[] = {
@@ -40,7 +40,7 @@ u8 gfx_winged_guard[] = {
 };
 
 u8 gfx_ghost_bat[] = {
-#include "gen/gfx_ghost_bat.h"
+#include GEN_VERSION(gfx_ghost_bat.h)
 };
 
 u8 gfx_crow[] = {
@@ -52,41 +52,41 @@ u8 gfx_skelerang[] = {
 };
 
 u8 gfx_skelerang_spittle_bone[] = {
-#include "gen/gfx_skelerang_spittle_bone.h"
+#include GEN_VERSION(gfx_skelerang_spittle_bone.h)
 };
 
 u8 gfx_hunting_girl[] = {
-#include "gen/gfx_hunting_girl.h"
+#include GEN_VERSION(gfx_hunting_girl.h)
 };
 
 u8 gfx_spectral_sword[] = {
-#include "gen/gfx_spectral_sword.h"
+#include GEN_VERSION(gfx_spectral_sword.h)
 };
 
 #ifndef VERSION_PSP
 u8 gfx_sealed_door[] = {
-#include "gen/gfx_sealed_door.h"
+#include GEN_VERSION(gfx_sealed_door.h)
 };
 #endif
 
 u8 gfx_breakable[] = {
-#include "gen/gfx_breakable.h"
+#include GEN_VERSION(gfx_breakable.h)
 };
 
 u8 gfx_portrait_alucard[] = {
-#include "gen/gfx_portrait_alucard.h"
+#include GEN_VERSION(gfx_portrait_alucard.h)
 };
 
 u8 gfx_portrait_maria[] = {
-#include "gen/gfx_portrait_maria.h"
+#include GEN_VERSION(gfx_portrait_maria.h)
 };
 
 u8 gfx_cutscene_1[] = {
-#include "gen/gfx_cutscene_1.h"
+#include GEN_VERSION(gfx_cutscene_1.h)
 };
 
 u8 gfx_cutscene_2[] = {
-#include "gen/gfx_cutscene_2.h"
+#include GEN_VERSION(gfx_cutscene_2.h)
 };
 
 #ifndef VERSION_PSP
@@ -95,7 +95,7 @@ u8 gfx_stage_name_en[] = {
 };
 #else
 u8 gfx_sealed_door[] = {
-#include "gen/gfx_sealed_door.h"
+#include GEN_VERSION(gfx_sealed_door.h)
 };
 #endif
 
