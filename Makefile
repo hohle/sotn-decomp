@@ -535,3 +535,8 @@ trace-build:
 	make build_all
 	../ninjatracing/ninjatracing .ninja_log > build_trace.json
 	../catapult/tracing/bin/trace2html build_trace.json --output=build_trace.html
+
+trace-splat:
+	touch config/splat.hd.dra.yaml
+	python3  -m cProfile -o trace.hd.dra.prof .venv/bin/splat split config/splat.hd.dra.yaml
+	flameprof --width 10240 --threshold 0.05 trace.hd.dra.prof > trace.hd.dra.svg
