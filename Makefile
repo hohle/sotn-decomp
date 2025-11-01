@@ -530,3 +530,8 @@ get-phony:
 get-silent:
 	echo ".SILENT:" > make.silent.targets
 	$(foreach target,$(MUFFLED_TARGETS),echo $(target) >> make.silent.targets;)
+
+trace-build:
+	make build_all
+	../ninjatracing/ninjatracing .ninja_log > build_trace.json
+	../catapult/tracing/bin/trace2html build_trace.json --output=build_trace.html
