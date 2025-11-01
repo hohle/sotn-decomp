@@ -537,6 +537,6 @@ trace-build:
 	../catapult/tracing/bin/trace2html build_trace.json --output=build_trace.html
 
 trace-splat:
-	touch config/splat.hd.dra.yaml
-	python3  -m cProfile -o trace.hd.dra.prof .venv/bin/splat split config/splat.hd.dra.yaml
-	flameprof --width 10240 --threshold 0.05 trace.hd.dra.prof > trace.hd.dra.svg
+	touch config/splat.us.dra.yaml
+	time python3  -m cProfile -o trace.us.dra.prof .venv/bin/splat split config/splat.us.dra.yaml
+	flameprof --width 10240 --threshold 0.05 trace.us.dra.prof > trace.us.dra.svg
