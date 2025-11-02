@@ -1361,7 +1361,7 @@ def hydrate_psx_matching_symbols(
 
 
 def hydrate_psx_duplicate_symbols(
-    splat_config, ovl_name: str, version: str, options: Options
+    splat_config_path: str, splat_config, ovl_name: str, version: str, options: Options
 ):
     """
     Hydrate the symbol list by comparing the extracted functions with those already detected
@@ -1373,7 +1373,8 @@ def hydrate_psx_duplicate_symbols(
 
     spinner_start("disassembling matched functions")
     make("force_symbols")
-    git("clean", "-fdx", f"asm/{version}/", "-e", f"{get_asm_path(splat_config)}")
+    split(splat_config_path, True)
+
     # cross-reference only what makes sense to cross-reference
     if ovl_name == "dra":
         samples = ["dra"]
@@ -1395,7 +1396,6 @@ def hydrate_psx_duplicate_symbols(
         executor.map(
             lambda name: split(get_splat_config_path(name, "us"), True), samples
         )
-    git("checkout", "config/")
 
     spinner_start("finding duplicates across overlays")
     left_asm_path = os.path.join(get_asm_path(splat_config), "nonmatchings")
@@ -1555,7 +1555,7 @@ def make_config(ovl_name: str, version: str, options):
             spinner_start(f"renamed {found} matched functions, splitting again")
             shutil.rmtree(get_asm_path(splat_config))
             split(splat_config_path, False)
-        found = hydrate_psx_duplicate_symbols(splat_config, ovl_name, version, options)
+        found = hydrate_psx_duplicate_symbols(splat_config_path, splat_config, ovl_name, version, options)
         if found > 0:
             spinner_start(f"renamed {found} functions, splitting again")
             shutil.rmtree(get_asm_path(splat_config))
