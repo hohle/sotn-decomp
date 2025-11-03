@@ -1,11 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "ric.h"
 
-#if defined(VERSION_PSP)
-extern AnimationFrame* g_RicEmptyAnimGroup[ZERO_LEN]; // BSS
-#else
 static AnimationFrame* g_RicEmptyAnimGroup[ZERO_LEN] = {};
-#endif
 
 static u8 D_80154674[][4] = {
     {16, 127, 63, 0},
@@ -42,11 +38,7 @@ static Entity* RicGetFreeEntityReverse(s16 start, s16 end) {
     return NULL;
 }
 
-#if defined(VERSION_PSP)
-extern s32 D_80174F80[11];
-#else
 static s32 D_80174F80[11];
-#endif
 void func_8015F9F0(Entity* entity) {
     s32 i;
     s32 enemyId;
@@ -67,12 +59,6 @@ void func_8015F9F0(Entity* entity) {
     }
 }
 
-#if defined(VERSION_PSP)
-extern u8 D_80174FAC;
-extern u8 D_80174FB0;
-extern u8 D_80174FB4;
-extern u8 D_80174FB8;
-#else
 static u8 D_80174FAC;
 STATIC_PAD_BSS(3);
 static u8 D_80174FB0;
@@ -81,7 +67,6 @@ static u8 D_80174FB4;
 STATIC_PAD_BSS(3);
 static u8 D_80174FB8;
 STATIC_PAD_BSS(3);
-#endif
 void func_8015FA5C(s32 arg0) {
     D_80174FAC = D_80154674[arg0][0];
     D_80174FB0 = D_80154674[arg0][1];
@@ -188,11 +173,7 @@ s32 func_8015FDB0(Primitive* prim, s16 posX, s16 posY) {
 }
 
 // Corresponding DRA function is func_80119F70
-#if defined(VERSION_PSP)
-extern Point16 D_80174FBC[16];
-#else
 static Point16 D_80174FBC[16];
-#endif
 void RicEntityHitByHoly(Entity* entity) {
     Primitive* prim;
     s32 i;
@@ -278,11 +259,7 @@ static AnimationFrame anim_smoke_dark[] = {
     POSE(2, 5, 0),  POSE(2, 6, 0),  POSE(2, 7, 0),  POSE(2, 8, 0),
     POSE(2, 9, 0),  POSE(2, 10, 0), POSE(2, 11, 0), POSE(2, 12, 0),
     POSE(2, 13, 0), POSE_END};
-#if defined(VERSION_PSP)
-extern s32 D_80174FFC;
-#else
 static s32 D_80174FFC;
-#endif
 void RicEntityHitByDark(Entity* entity) {
     s16 x, y;
 
@@ -1719,11 +1696,7 @@ bool func_80162E9C(Entity* entity) {
 
 // EntityPlayerBlinkWhite (Richter's version).
 // Same general logic flow as in DRA but lots of missing cases.
-#if defined(VERSION_PSP)
-extern s32 D_80154F7C[];
-#else
 static s32 D_80154F7C[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-#endif
 static s16 D_80154FBC[][10] = {
     {0, 0, 0, 0x15F, 0x0100, 0x0100, 0x0100, 0x0060, 0x31, 0x200},
     {0, 2, 6, 0x15F, 0x0100, 0x0100, 0x0100, 0x0040, 0x31, 0x200},
@@ -2765,11 +2738,7 @@ static void func_80166044() {
 // Entity ID 66. Made by blueprint 77 (the very last one).
 // Created in 3 spots in 2 functions (total of 6 calls).
 // DRA version is very similar.
-#if defined(VERSION_PSP)
-extern Point16 D_80175000[32];
-#else
 static Point16 D_80175000[32];
-#endif
 void RicEntityTeleport(Entity* self) {
     Primitive* prim;
     s32 w;

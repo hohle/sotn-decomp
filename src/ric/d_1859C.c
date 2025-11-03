@@ -1,18 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "ric.h"
 
-#if defined(VERSION_PSP)
-extern s32 D_8015459C;
-extern s16 g_DeadPrologueTimer;
-extern s16 D_801545AA;
-extern s16 D_801545AC;
-#else
 s32 D_8015459C = 0;
+#if !defined(VERSION_PSP)
 RECT D_801545A0 = {512, 256, 32, 80};
+#endif
 s16 g_DeadPrologueTimer = 0;
 s16 D_801545AA = 0;
 s16 D_801545AC = 0;
-#endif
 u8 D_801545B0[] = {10, 8, 8, 6, 6, 4, 4,  4,  4, 4,
                    4,  4, 4, 4, 4, 4, -1, -1, 0, 0};
 u8 D_801545C4[] = {4, 4, 4, 4, 6, 6, 6, 6, 8, 8, 16, 16, 16, 16, 16, 16};

@@ -198,13 +198,9 @@ void RicEntityRevivalColumn(Entity* self) {
 static AnimationFrame anim_cross_boomerang[] = {
     POSE(36, 1, 0), POSE(1, 2, 0), POSE(1, 3, 0), POSE(1, 4, 0), POSE(1, 5, 0),
     POSE(1, 6, 0),  POSE(1, 7, 0), POSE(1, 8, 0), POSE_LOOP(0)};
-#if defined(VERSION_PSP)
-extern Point16 D_80175088[4][128];
-extern s32 D_80175888;
-#else
 static Point16 D_80175088[4][128];
 static s32 D_80175888;
-#endif
+
 void RicEntitySubwpnCross(Entity* self) {
     s16 playerHitboxX;
     s16 playerHitboxY;

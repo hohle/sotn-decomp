@@ -882,13 +882,6 @@ void RicStepBossGrab(void) {
     }
 }
 
-// Compare to DRA PlayerStepKill
-enum DeathKind {
-    DEATH_GENERIC,
-    DEATH_BY_FIRE,
-    DEATH_BY_THUNDER,
-    DEATH_BY_ICE,
-};
 #if defined(VERSION_PSP)
 extern u8 dead_dissolve_bmp[0x1400];
 extern s16 D_80174F68;
@@ -902,6 +895,7 @@ STATIC_PAD_BSS(2);
 static s16 D_80174F6C;
 STATIC_PAD_BSS(2);
 static enum DeathKind death_kind;
+extern RECT D_801545A0;
 #endif
 void RicStepDead(
     s32 damageEffects, s32 damageKind, s32 prevStep, s32 prevStepS) {

@@ -369,6 +369,14 @@ enum RicSubweapons {
     NUM_WEAPONS,
 };
 
+// Compare to DRA PlayerStepKill
+enum DeathKind {
+    DEATH_GENERIC,
+    DEATH_BY_FIRE,
+    DEATH_BY_THUNDER,
+    DEATH_BY_ICE,
+};
+
 extern PlayerOvl RIC_player;
 
 extern s16* D_801530AC[];
@@ -398,7 +406,6 @@ extern s32 g_IsPrologueStage;
 extern u16 D_80154574[];
 extern u16 D_80154594[];
 extern s32 D_8015459C;
-extern RECT D_801545A0;
 extern s16 g_DeadPrologueTimer;
 extern s16 D_801545AA;
 extern s16 D_801545AC;
@@ -420,7 +427,6 @@ extern u8 uv_anim_801548F4[6][8];
 extern s8 D_80156A28;
 extern s8 D_80156904;
 
-extern ButtonComboState g_RicComboButtons[2];
 extern DebugInfo g_RicDebug;
 extern s32 D_80175958[32];
 extern s32 D_801759D8[32];

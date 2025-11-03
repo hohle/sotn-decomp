@@ -78,7 +78,10 @@ static s16 func_80156DE4(void) {
     return 0;
 }
 
+extern s32 g_IsPrologueStage;
 extern s32 D_pspeu_092D7A68;
+extern ButtonComboState g_RicComboButtons[2];
+
 extern u8 hud_fr[];
 extern u8 hud_sp[];
 extern u8 hud_ge[];

@@ -93,5 +93,12 @@ segments:
       # - [0x30370, .rodata, pl_blueprints] # RicEntityPlayerBlinkWhite
       - [0x303B0, .rodata, pl_subweapon_holywater] # RicEntitySubwpnHolyWater
       - [0x303C8, .rodata, pl_subweapon_cross]
-      - {start: 0x30400, type: bss, vram: 0x92D6600}
+      - {start: 0x30400, type: .bss, vram: 0x092D6600, name: d_1859C}
+      - {start: 0x30420, type: bss, vram: 0x092D6620, name: pl_steps}
+      - {start: 0x31858, type: .bss, vram: 0x092D7A58, name: pl_subweapons}
+      - {start: 0x31860, type: bss, vram: 0x092D7A60, name: pl_main}
+      - {start: 0x31980, type: bss, vram: 0x092D7B80, name: 319C4 }
+      - {start: 0x319E0, type: .bss, vram: 0x092D7BE0, name: pl_blueprints}
+      - {start: 0x31B40, type: .bss, vram: 0x092D7D40, name: pl_whip }
+      - {start: 0x31B78, type: .bss, vram: 0x092D7D78, name: pl_subweapon_cross }
   - [0x30400]
