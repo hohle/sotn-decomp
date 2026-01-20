@@ -43,7 +43,7 @@ segments:
     align: 128
     subalign: 8
     subsegments:
-      - [0x80, c, st0_psp/lang]
+      - [0x80, c, st0/lang]
       - [0x1E8, c, st0/prologue_scroll]
       - [0x1578, c, st0/cutscene]
       - [0x3F58, c, st0/2A8DC]
@@ -53,7 +53,7 @@ segments:
       - [0xB3A0, c, st0/3101C_psp]
       - [0xC3E0, c, st0/3AB08]
       - [0xE658, c, st0/3C5C0]
-      - [0xF320, c, st0_psp/st_init_st0]
+      - [0xF320, c, st0/st_init_psp]
       - [0xF560, c, st0/2805C]
       - [0xFD18, c, st0/e_room_bg]
       - [0xFDF8, c, st0/2A218] # EntityCutscene
@@ -85,7 +85,7 @@ segments:
       - [0x1FCD0, data] # g_gen_rooms.c
       - [0x25278, .data, st0/3AB08]
       - [0x256E8, .data, st0/3C5C0]
-      - [0x25898, data, st_init_st0]
+      - [0x25898, data, st0/st_init_psp]
       - [0x419E0, .data, st0/2805C]
       - [0x41B28, data]
       - [0x41B68, .data, st0/background_block_init]
@@ -114,7 +114,7 @@ segments:
       - [0x42718, bss, 42718]
       - [0x42728, .bss, st0/2C564]
       - [0x42730, bss, 42730]
-      - [0x42748, .bss, st0_psp/st_init_st0]
+      - [0x42748, .bss, st0/st_init_psp]
       - [0x42838, .bss, st0/3101C_psp]
       - [0x43B88, .bss, st0/2DAC8]
       - [0x43E28, .bss, st0/cutscene]

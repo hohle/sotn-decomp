@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-#include "../st0/st0.h"
+#include "st0.h"
 #include "../pfn_entity_update.h"
 
 extern LayoutEntity* D_8D2DF54;

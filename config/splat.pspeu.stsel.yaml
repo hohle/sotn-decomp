@@ -43,7 +43,7 @@ segments:
     align: 128
     subalign: 8
     subsegments:
-      - [0x80, c, sel_psp/st_init_sel]
+      - [0x80, c, sel/st_init_psp]
       - [0x7B8, c, sel_psp/7B8]
       - [0x7D40, c, sel_psp/7D40]
       - [0x9408, c, sel/34048]
@@ -54,7 +54,7 @@ segments:
       - [0x10D00, .data, sel/764]
       - [0x10DC0, .data, sel/banks]
       - [0x10F78, .data, sel/sprites]
-      - [0x12DF0, .data, sel_psp/st_init_sel]
+      - [0x12DF0, .data, sel/st_init_psp]
       - [0x45178, .data, sel/F9A8]
       - [0x4BAC8, .data, sel/CD54]
       - [0x4C388, .data, sel_psp/7B8]
@@ -67,7 +67,7 @@ segments:
       - [0x4E340, .rodata, sel_psp/A578]
       - [0x4E360, .rodata, sel_psp/BB50]
       - [0x4E430, .rodata, sel_psp/cutscene]
-      - [0x4E500, .bss, sel_psp/st_init_sel]
+      - [0x4E500, .bss, sel/st_init_psp]
       - [0x4E530, .bss, sel_psp/7B8]
       - [0x4E688, .bss, sel_psp/7D40]
       - [0x4E6E0, .bss, sel_psp/94D8]

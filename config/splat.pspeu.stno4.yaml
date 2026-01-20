@@ -44,7 +44,7 @@ segments:
     subalign: 8
     subsegments:
       - [0x80, c, no4/e_bat]
-      - [0x568, c, no4_psp/st_init_no4]
+      - [0x568, c, no4/st_init_psp]
       - [0xA98, c, no4/e_breakable]
       - [0xEA0, c, no4/e_room_bg]
       - [0xF80, c, no4/e_lock_camera]
@@ -116,7 +116,7 @@ segments:
       - [0x68C00, .rodata, no4/e_spear_guard]
       - [0x68C38, .rodata, no4/cutscene]
       - [0x68D00, bss, 68D00]
-      - [0x68D10, .bss, no4_psp/st_init_no4]
+      - [0x68D10, .bss, no4/st_init_psp]
       - [0x68FB0, bss, 68FB0]
       - [0x68FB8, .bss, no4/e_lock_camera]
       - [0x68FC0, bss, 68FC0]

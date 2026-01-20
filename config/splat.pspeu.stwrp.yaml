@@ -55,7 +55,7 @@ segments:
       - [0xBDA0, c, wrp/e_room_fg]
       - [0xBEB8, c, wrp/st_common]
       - [0xC9A0, c, wrp/prim_helpers]
-      - [0xD0E0, c, wrp_psp/st_init_wrp]
+      - [0xD0E0, c, wrp/st_init_psp]
       - [0xD1B8, c, wrp/e_breakable]
       - [0xD338, c, wrp/e_room_bg]
       - [0xD448, c, wrp/e_lock_camera]
@@ -96,7 +96,7 @@ segments:
       - {start: 0x14580, type: .bss, vram: 0x0924BC20, name: wrp/e_collect}
       - {start: 0x14580, type: .bss, vram: 0x0924BC68, name: wrp/e_collect}
       - {start: 0x14580, type: .bss, vram: 0x0924BC80, name: wrp_psp/layers}
-      - {start: 0x14580, type: .bss, vram: 0x0924BC90, name: wrp_psp/st_init_wrp}
+      - {start: 0x14580, type: .bss, vram: 0x0924BC90, name: wrp/st_init_psp}
       - {start: 0x14580, type: .bss, vram: 0x0924BCC8, name: wrp/e_breakable}
       - {start: 0x14580, type: .bss, vram: 0x0924BCD0, name: wrp/stage_data}
       - {start: 0x14580, type: .bss, vram: 0x0924CCD0, name: wrp_psp/d_prize_drops}

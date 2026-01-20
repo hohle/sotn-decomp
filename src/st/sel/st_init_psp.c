@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-#include "../sel/sel.h"
+#include "sel.h"
 #include <cutscene.h>
 
 extern Overlay OVL_EXPORT(Overlay);
@@ -14,23 +14,23 @@ u8* D_psp_09285B80;
 
 // DATA
 static u8 cutscene_script_it[] = {
-#include "../sel/gen/cutscene_script_it.h"
+#include "gen/cutscene_script_it.h"
 };
 
 static u8 cutscene_script_sp[] = {
-#include "../sel/gen/cutscene_script_sp.h"
+#include "gen/cutscene_script_sp.h"
 };
 
 static u8 cutscene_script_fr[] = {
-#include "../sel/gen/cutscene_script_fr.h"
+#include "gen/cutscene_script_fr.h"
 };
 
 static u8 cutscene_script_ge[] = {
-#include "../sel/gen/cutscene_script_ge.h"
+#include "gen/cutscene_script_ge.h"
 };
 
 static u8 cutscene_script_en[] = {
-#include "../sel/gen/cutscene_script_en.h"
+#include "gen/cutscene_script_en.h"
 };
 
 static u8 credits_data_it[] = {
@@ -56,11 +56,11 @@ static u8 credits_data_en[] = {
 u8* D_8018C404 = D_psp_08D39D3C;
 
 static u16 D_psp_0924EA78[] = {
-#include "../sel/gen/D_psp_0924EA78.h"
+#include "gen/D_psp_0924EA78.h"
 };
 
 static u8 D_psp_0924EA98[] = {
-#include "../sel/gen/D_psp_0924EA98.h"
+#include "gen/D_psp_0924EA98.h"
 };
 
 s32 D_psp_0924F800 = 0xE;
@@ -68,131 +68,131 @@ s32 D_psp_0924F800 = 0xE;
 s32 D_psp_0924F808 = 0x1D;
 
 static u16 D_psp_0924F810[] = {
-#include "../sel/gen/D_psp_0924F810.h"
+#include "gen/D_psp_0924F810.h"
 };
 
 static u8 D_psp_0924F850[] = {
-#include "../sel/gen/D_psp_0924F850.h"
+#include "gen/D_psp_0924F850.h"
 };
 
 static u8 D_psp_09253850[] = {
-#include "../sel/gen/D_psp_09253850.h"
+#include "gen/D_psp_09253850.h"
 };
 
 static u8 D_psp_09257850[] = {
-#include "../sel/gen/D_psp_09257850.h"
+#include "gen/D_psp_09257850.h"
 };
 
 static u8 D_psp_0925B850[] = {
-#include "../sel/gen/D_psp_0925B850.h"
+#include "gen/D_psp_0925B850.h"
 };
 
 static u16 D_psp_0925F850[] = {
-#include "../sel/gen/D_psp_0925F850.h"
+#include "gen/D_psp_0925F850.h"
 };
 
 static u8 D_psp_0925FA50[] = {
-#include "../sel/gen/D_psp_0925FA50.h"
+#include "gen/D_psp_0925FA50.h"
 };
 
 static u8 D_psp_09260550[] = {
-#include "../sel/gen/D_psp_09260550.h"
+#include "gen/D_psp_09260550.h"
 };
 
 static u8 D_psp_09261030[] = {
-#include "../sel/gen/D_psp_09261030.h"
+#include "gen/D_psp_09261030.h"
 };
 
 static u8 D_psp_09261AF8[] = {
-#include "../sel/gen/D_psp_09261AF8.h"
+#include "gen/D_psp_09261AF8.h"
 };
 
 static u8 D_psp_09262618[] = {
-#include "../sel/gen/D_psp_09262618.h"
+#include "gen/D_psp_09262618.h"
 };
 
 static u8 D_psp_092630D8[] = {
-#include "../sel/gen/D_psp_092630D8.h"
+#include "gen/D_psp_092630D8.h"
 };
 
 static u8 D_psp_09263700[] = {
-#include "../sel/gen/D_psp_09263700.h"
+#include "gen/D_psp_09263700.h"
 };
 
 static u8 D_psp_09263CE0[] = {
-#include "../sel/gen/D_psp_09263CE0.h"
+#include "gen/D_psp_09263CE0.h"
 };
 
 static u8 D_psp_09264290[] = {
-#include "../sel/gen/D_psp_09264290.h"
+#include "gen/D_psp_09264290.h"
 };
 
 static u8 D_psp_09264868[] = {
-#include "../sel/gen/D_psp_09264868.h"
+#include "gen/D_psp_09264868.h"
 };
 
 static u8 D_psp_09264E90[] = {
-#include "../sel/gen/D_psp_09264E90.h"
+#include "gen/D_psp_09264E90.h"
 };
 
 static u8 D_psp_09266578[] = {
-#include "../sel/gen/D_psp_09266578.h"
+#include "gen/D_psp_09266578.h"
 };
 
 static u8 D_psp_09267B08[] = {
-#include "../sel/gen/D_psp_09267B08.h"
+#include "gen/D_psp_09267B08.h"
 };
 
 static u8 D_psp_09269440[] = {
-#include "../sel/gen/D_psp_09269440.h"
+#include "gen/D_psp_09269440.h"
 };
 
 static u8 D_psp_0926A9E8[] = {
-#include "../sel/gen/D_psp_0926A9E8.h"
+#include "gen/D_psp_0926A9E8.h"
 };
 
 static u8 D_psp_0926BFB0[] = {
-#include "../sel/gen/D_psp_0926BFB0.h"
+#include "gen/D_psp_0926BFB0.h"
 };
 
 static u8 D_psp_0926D980[] = {
-#include "../sel/gen/D_psp_0926D980.h"
+#include "gen/D_psp_0926D980.h"
 };
 
 static u8 D_psp_0926F188[] = {
-#include "../sel/gen/D_psp_0926F188.h"
+#include "gen/D_psp_0926F188.h"
 };
 
 static u8 D_psp_09270758[] = {
-#include "../sel/gen/D_psp_09270758.h"
+#include "gen/D_psp_09270758.h"
 };
 
 static u8 D_psp_09272158[] = {
-#include "../sel/gen/D_psp_09272158.h"
+#include "gen/D_psp_09272158.h"
 };
 
 static u8 D_psp_092738F8[] = {
-#include "../sel/gen/D_psp_092738F8.h"
+#include "gen/D_psp_092738F8.h"
 };
 
 static u8 D_psp_09274EC8[] = {
-#include "../sel/gen/D_psp_09274EC8.h"
+#include "gen/D_psp_09274EC8.h"
 };
 
 static u8 D_psp_092767E0[] = {
-#include "../sel/gen/D_psp_092767E0.h"
+#include "gen/D_psp_092767E0.h"
 };
 
 static u8 D_psp_09277F88[] = {
-#include "../sel/gen/D_psp_09277F88.h"
+#include "gen/D_psp_09277F88.h"
 };
 
 static u8 D_psp_09279558[] = {
-#include "../sel/gen/D_psp_09279558.h"
+#include "gen/D_psp_09279558.h"
 };
 
 static u8 D_psp_0927AF10[] = {
-#include "../sel/gen/D_psp_0927AF10.h"
+#include "gen/D_psp_0927AF10.h"
 };
 
 static u_long* D_psp_0927C6F0[] = {
