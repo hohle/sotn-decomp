@@ -116,7 +116,7 @@ jobs:
   build-all:
     # Building and testing cannot work if the repository owner is not Xeeynamo
     # due to the missing secrets to clone the CI dependencies
-    if: github.repository == 'Xeeynamo/sotn-decomp'
+    if: github.repository == 'hohle/sotn-decomp'
     runs-on: ubuntu-latest
     env:
       DISCORD_PROGRESS_WEBHOOK: ${{ secrets.DISCORD_PROGRESS_WEBHOOK }}
@@ -147,7 +147,7 @@ jobs:
         if: steps.get-dependencies-us.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
-          repository: xeeynamo/sotn-decomp-dependencies
+          repository: hohle/sotn-decomp-dependencies
           ref: us
           token: ${{ secrets.SOTN_DECOMP_DEPENDENCIES_TOKEN }}
           path: 'disks/dependencies/us'
@@ -167,7 +167,7 @@ jobs:
         if: steps.get-dependencies-pspeu.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
-          repository: xeeynamo/sotn-decomp-dependencies
+          repository: hohle/sotn-decomp-dependencies
           ref: pspeu
           token: ${{ secrets.SOTN_DECOMP_DEPENDENCIES_TOKEN }}
           path: 'disks/dependencies/pspeu'
