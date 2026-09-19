@@ -106,5 +106,6 @@ extern s32 E_ID(PRISONER);
 extern s32 E_ID(3D_BACKGROUND_HOUSE);
 extern s32 E_ID(BOSS_DOORS);
 extern s32 E_ID(LASER_EXPLOSION);
+extern s32 E_ID(UNK_2F);
 extern s32 E_ID(UNK_33);
 #endif
