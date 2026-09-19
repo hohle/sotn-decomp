@@ -4316,6 +4316,26 @@ typedef struct {
     /* 0x9C */ struct Entity* parent;
 } ET_801AEFE0;
 
+
+typedef struct {
+    /* 0x7C */ u32 : 32;
+    /* 0x80 */ s16 timer;
+    /* 0x82 */ u16 : 16;
+    /* 0x84 */ u8 unk84;
+    /* 0x85 */ u8 unk85;
+    /* 0x86 */ u8 : 8;
+    /* 0x87 */ u8 : 8;
+    /* 0x88 */ u32 : 32;
+    /* 0x8C */ u32 : 32;
+    /* 0x90 */ u32 : 32;
+    /* 0x94 */ u32 : 32;
+    /* 0x98 */ u32 : 32;
+    /* 0x9C */ u32 : 32;
+    /* 0xA0 */ u32 : 32;
+    /* 0xA4 */ struct Entity* parent;
+    /* 0xA8 */ u8 unkA8;
+} ET_OlroxAfterImage;
+
 typedef struct {
     /* 0x7C */ Primitive* prim1;
     /* 0x80 */ Primitive* prim2;
@@ -4822,6 +4842,7 @@ typedef union { // offset=0x7C
     ET_801980E4 et_801980E4;
     ET_801A19CC et_801A19CC;
     ET_8019921C et_8019921C;
+    ET_OlroxAfterImage olroxAfterImage;
     ET_OlroxDrool olroxDrool;
     ET_OlroxLaser olroxLaser;
     ET_Gorgon gorgon;
