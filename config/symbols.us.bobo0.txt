@@ -72,18 +72,7 @@ CreateEntityFromEntity = 0x801BE7C8; // source=match
 EntityRedDoor = 0x801BE8BC; // source=match
 DestroyEntity = 0x801BF4F4; // source=match
 AnimateEntity = 0x801BF624; // source=match
-GetDistanceToPlayerX = 0x801BF7F4; // source=match
-GetSideToPlayer = 0x801BF864; // source=match
-MoveEntity = 0x801BF8A8; // source=match
-UnkCollisionFunc3 = 0x801BF904; // source=match
-UnkCollisionFunc2 = 0x801BFB7C; // source=match
 AllocEntity = 0x801BFD64; // source=match
-SetEntityVelocityFromAngle = 0x801BFE0C; // source=match
-Ratan2Shifted = 0x801BFE78; // source=match
-GetAngleBetweenEntitiesShifted = 0x801BFEB0; // source=match
-AdjustValueWithinThreshold = 0x801BFF40; // source=match
-SetStep = 0x801C0134; // source=match
-SetSubStep = 0x801C0154; // source=match
 InitializeEntity = 0x801C0204; // source=match
 EntityDummy = 0x801C0300; // source=match
 EntityPrizeDrop = 0x801C0F14; // source=match
@@ -117,3 +106,10 @@ EntitySoulStealOrb = 0x801CC254; // source=match
 EntityEnemyBlood = 0x801CC5E8; // source=match
 EntityRoomForeground = 0x801CCA98; // source=match
 FindFirstUnkPrim2 = 0x801CD41C; // source=match
+func_801CDC80 = 0x801B15BC;
+EntityTrueFormTail = 0x801B619C;
+EntityTrueFormHands = 0x801B76E4;
+EntityBlastAttack = 0x801AF31C;
+EntityPortalSkulls = 0x801AF604;
+EntityGroundBlast = 0x801AE858;
+EntityPortal = 0x801AF8C0;

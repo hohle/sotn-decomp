@@ -47,10 +47,10 @@ typedef enum EntityID {
     E_UNK_27,               // func_pspeu_0923CB80
     E_BIG_RED_FIREBALL,     // EntityBigRedFireball
     E_PRISONER,             // EntityPrisoner
-    E_UNK_2A,               // func_us_801B001C
+    E_FURNITURE,            // func_us_801B001C
     E_UNK_2B,               // func_us_801AD338
     E_OLROX_AFTER_IMAGE,    // EntityOlroxAfterImage
-    E_UNK_2D,               // func_us_801AFAF4/func_pspeu_0925CBE8
+    E_UNK_2D,               // func_us_801AFAF4
     E_UNK_2E,           // func_us_801AF8C0/func_pspeu_0925C938 (EntityPortal)
     E_UNK_2F,           // func_us_801AF604/func_pspeu_0925C580
     E_UNK_30,           // func_us_801AF31C/func_pspeu_0925C178
@@ -106,6 +106,13 @@ extern s32 E_ID(PRISONER);
 extern s32 E_ID(3D_BACKGROUND_HOUSE);
 extern s32 E_ID(BOSS_DOORS);
 extern s32 E_ID(LASER_EXPLOSION);
+extern s32 E_ID(FURNITURE);
+extern s32 E_ID(OLROX_AFTER_IMAGE);
+extern s32 E_ID(UNK_2D);
+extern s32 E_ID(UNK_2E);
+extern s32 E_ID(UNK_30);
+extern s32 E_ID(UNK_31);
+extern s32 E_ID(UNK_32);
 extern s32 E_ID(UNK_2F);
 extern s32 E_ID(UNK_33);
 #endif
