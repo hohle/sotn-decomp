@@ -1660,9 +1660,9 @@ typedef struct {
     /* 8003C7E8 */ void (*func_800EA5AC)(u32 a, u32 r, u32 g, u32 b);
     /* 8003C7EC */ void (*SetFadeMode)(FadeModes fadeMode);
     // this signature differs from `func_800EB758`. the last
-    // argument is 16-bits instead of 8.
+    // argument is 32-bits instead of 8.
     /* 8003C7F0 */ void (*func_800EB758)(
-        s16 pivotX, s16 pivotY, Entity* e, u16 flags, POLY_GT4* p, u16 flipX);
+        s16 pivotX, s16 pivotY, Entity* e, u16 flags, POLY_GT4* p, s32 flipX);
     /* 8003C7F4 */ Entity* (*CreateEntFactoryFromEntity)(
         Entity* self, u32 flags, s32 arg2);
     /* 8003C7F8 */ bool (*func_80131F68)(void);

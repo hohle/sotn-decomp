@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+#include "bo0_entity.h"
 #include <stage.h>
 
 #define STAGE_IS_NO2
@@ -51,37 +52,37 @@ typedef enum EntityID {
     E_UNK_2B,               // func_us_801AD338
     E_OLROX_AFTER_IMAGE,    // EntityOlroxAfterImage
     E_UNK_2D,               // func_us_801AFAF4
-    E_UNK_2E,           // func_us_801AF8C0/func_pspeu_0925C938 (EntityPortal)
-    E_UNK_2F,           // func_us_801AF604/func_pspeu_0925C580
-    E_UNK_30,           // func_us_801AF31C/func_pspeu_0925C178
-    E_UNK_31,           // func_us_801AE858/func_pspeu_0925B1B0
-    E_UNK_32,           // func_us_801B0930
-    E_UNK_33,           // func_us_801B365C/func_pspeu_092611E8
-    E_UNK_34,           // func_us_801B5470/func_pspeu_09264380
-    E_UNK_35,           // func_us_801B551C/func_pspeu_09264460
-    E_UNK_36,           // func_us_801B619C/func_pspeu_092657B8
-    E_UNK_37,           // func_us_801B6CA4/func_pspeu_092667C8
-    E_UNK_38,           // func_us_801B76E4/func_pspeu_09267730
-    E_LASER_ATTACK,     // EntityLaserAttack
-    E_FIREBALL_ATTACK,  // EntityFireballAttack
-    E_UNK_3B,           // func_us_801B7BAC/func_pspeu_09267E48
-    E_UNK_3C,           // func_us_801B7CC8/func_pspeu_09267FC0
-    E_OLROX_DROOL,      // EntityRealOlroxDrool
-    E_UNK_3E,           // func_us_801BA4AC
-    E_LIFE_UP_SPAWN,    // EntityLifeUpSpawn
-    E_OWL_KNIGHT,       // EntityOwlKnight
-    E_OWL,              // EntityOwl
-    E_OWL_KNIGHT_SWORD, // EntityOwlKnightSword
-    E_OWL_TARGET,       // EntityOwlTarget
-    E_BLOODY_ZOMBIE,    // EntityBloodyZombie
-    E_BLOOD_DRIPS,      // EntityBloodDrips
-    E_BLOOD_SPLATTER,   // EntityBloodSplatter
-    E_LASER_EXPLOSION,  // EntityLaserExplosion
-    E_SPIKES_DAMAGE,    // EntitySpikesDamage
-    E_BOSS_DOORS,       // EntityBossDoors
-    E_UNK_4A,           // func_pspeu_09251648
-    E_CHAIR,            // EntityChair
-    E_UNK_4C,           // 0x00000000
+    E_UNK_2E,               // EntityPortal
+    E_UNK_2F,               // EntityPortalSkulls
+    E_UNK_30,               // EntityBlastAttack
+    E_UNK_31,               // EntityGroundBlast
+    E_UNK_32,               // func_us_801B0930
+    E_UNK_33,               // func_us_801B365C/func_pspeu_092611E8
+    E_UNK_34,               // func_us_801B5470/func_pspeu_09264380
+    E_UNK_35,               // func_us_801B551C/func_pspeu_09264460
+    E_UNK_36,               // EntityTrueFormTail
+    E_UNK_37,               // func_us_801B6CA4/func_pspeu_092667C8
+    E_UNK_38,               // EntityTrueFormHands
+    E_LASER_ATTACK,         // EntityLaserAttack
+    E_FIREBALL_ATTACK,      // EntityFireballAttack
+    E_UNK_3B,               // func_us_801B7BAC/func_pspeu_09267E48
+    E_UNK_3C,               // func_us_801B7CC8/func_pspeu_09267FC0
+    E_OLROX_DROOL,          // EntityRealOlroxDrool
+    E_UNK_3E,               // func_us_801BA4AC
+    E_LIFE_UP_SPAWN,        // EntityLifeUpSpawn
+    E_OWL_KNIGHT,           // EntityOwlKnight
+    E_OWL,                  // EntityOwl
+    E_OWL_KNIGHT_SWORD,     // EntityOwlKnightSword
+    E_OWL_TARGET,           // EntityOwlTarget
+    E_BLOODY_ZOMBIE,        // EntityBloodyZombie
+    E_BLOOD_DRIPS,          // EntityBloodDrips
+    E_BLOOD_SPLATTER,       // EntityBloodSplatter
+    E_LASER_EXPLOSION,      // EntityLaserExplosion
+    E_SPIKES_DAMAGE,        // EntitySpikesDamage
+    E_BOSS_DOORS,           // EntityBossDoors
+    E_UNK_4A,               // func_pspeu_09251648
+    E_CHAIR,                // EntityChair
+    E_UNK_4C,               // 0x00000000
     NUM_ENTITIES,
 };
 

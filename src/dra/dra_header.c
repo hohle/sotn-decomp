@@ -22,7 +22,7 @@ void func_800EA538(s32 arg0);
 void func_800EA5AC(u32 a, u32 r, u32 g, u32 b);
 void SetFadeMode(FadeModes fadeMode);
 void func_800EB758(
-    s16 pivotX, s16 pivotY, Entity* e, u16 flags, POLY_GT4* p, u16 flipX);
+    s16 pivotX, s16 pivotY, Entity* e, u16 flags, POLY_GT4* p, s32 flipX);
 Entity* CreateEntFactoryFromEntity(Entity* source, u32 flags, s32 arg2);
 bool func_80131F68(void);
 DR_ENV* func_800EDB08(POLY_GT4* poly);
