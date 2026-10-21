@@ -78,7 +78,6 @@ CreateEntityFromCurrentEntity = 0x801BE754; // source=match
 CreateEntityFromEntity = 0x801BE7C8; // source=match
 EntityRedDoor = 0x801BE8BC; // source=match
 DestroyEntity = 0x801BF4F4; // source=match
-AnimateEntity = 0x801BF624; // source=match
 AllocEntity = 0x801BFD64; // source=match
 InitializeEntity = 0x801C0204; // source=match
 EntityDummy = 0x801C0300; // source=match
@@ -94,7 +93,6 @@ EntityGreyPuff = 0x801C3810; // source=match
 EntityIntenseExplosion = 0x801C41B0; // source=match
 EntityBigRedFireball = 0x801C44FC; // source=match
 UnkRecursivePrimFunc2 = 0x801C4CB4; // source=match
-PlaySfxPositional = 0x801C55AC; // source=match
 EntityStageNamePopup = 0x801C5874; // source=match
 EntitySkelerang = 0x801C64F8; // source=match
 EntitySkelerangBoomerang = 0x801C6C80; // source=match

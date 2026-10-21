@@ -116,4 +116,9 @@ extern s32 E_ID(UNK_31);
 extern s32 E_ID(UNK_32);
 extern s32 E_ID(UNK_2F);
 extern s32 E_ID(UNK_33);
+extern s32 E_ID(FIREBALL_ATTACK);
+extern s32 E_ID(LASER_ATTACK);
+extern s32 E_ID(OLROX_DROOL);
+extern s32 E_ID(UNK_3E);
+extern s32 E_ID(LIFE_UP_SPAWN);
 #endif
