@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import ninja_syntax
 import os
 from pathlib import Path
+import re
 import sys
 import yaml
 
@@ -42,8 +43,15 @@ def is_hd(ver: str) -> bool:
 
 def is_weapon(ovl_name: str) -> bool:
     return (
-        ovl_name == "weapon" or ovl_name.startswith("w0_") or ovl_name.startswith("w1_")
+        ovl_name == "weapon" or ovl_name == "weapon1" or
+            ovl_name.startswith("w0_") or ovl_name.startswith("w1_")
     )
+
+def weapon_hand(ovl_name: str) -> int:
+    if ovl_name == "weapon1":
+        return 1
+    else:
+        return 0
 
 
 def is_servant(ovl_name: str) -> bool:
@@ -391,12 +399,12 @@ def add_gfx_stage(
     )
 
 
-def add_gfx_weapon(nw: ninja_syntax, ver: str, base_file: str, linker_path: str):
-    ovl_id = os.path.basename(base_file).strip("f_")
+def add_gfx_weapon(nw: ninja_syntax, ver: str, base_file: str, linker_path: str, hand_id: int):
+    ovl_id = os.path.basename(base_file).strip("f_").strip("f1_")
     in_file = f"{base_file}.png"
     step_raw = build_path(ver, f"{base_file}.bin")
-    step_elf = build_path(ver, f"weapon/f0_{ovl_id}.elf")
-    step_bin = build_path(ver, f"weapon/f0_{ovl_id}.bin")
+    step_elf = build_path(ver, f"weapon/f{hand_id}_{ovl_id}.elf")
+    step_bin = build_path(ver, f"weapon/f{hand_id}_{ovl_id}.bin")
     nw.build(
         rule="psx-strip",
         outputs=step_bin,
@@ -420,8 +428,8 @@ def add_gfx_weapon(nw: ninja_syntax, ver: str, base_file: str, linker_path: str)
     return step_bin
 
 
-def add_weapon_splat_config(nw: ninja_syntax.Writer, ver: str, splat_config):
-    hand_id = 0  # hardcoded for the time being
+def add_weapon_splat_config(nw: ninja_syntax.Writer, ver: str, splat_config, hand_id):
+    # hand_id = 0  # hardcoded for the time being
     platform = str(splat_config["options"]["platform"])
     asset_path = str(splat_config["options"]["asset_path"])
     ld_path = str(splat_config["options"]["ld_script_path"])
@@ -465,31 +473,41 @@ def add_weapon_splat_config(nw: ninja_syntax.Writer, ver: str, splat_config):
             if not sotn_progress_report:
                 weapons.append(
                     add_gfx_weapon(
-                        nw, ver, os.path.join(asset_path, weapon_gfx), ld_path
+                        nw, ver, os.path.join(asset_path, weapon_gfx), ld_path, hand_id,
                     )
                 )
             continue
         if segment["type"] != "code":
             continue
-        weapon_id = weapon_gfx[2:]
+        weapon_id = re.sub(r'^f\d*_', '', weapon_gfx)
         cpp_flags = f"-DW_{weapon_id} -DWEAPON{hand_id}"
         objs = []
+        if hand_id == 1:
+            print(f"weapon id: {weapon_id}")
         for subsegment in segment["subsegments"]:
             kind = subsegment[1]
             if kind == "data":
-                obj = add_s(nw, ver, f"{asm_path}/data/w_{weapon_id}.data.s", ld_path)
+                if hand_id == 1:
+                    obj = add_s(nw, ver, f"{asm_path}/data/w1_{weapon_id}.data.s", ld_path)
+                else:
+                    obj = add_s(nw, ver, f"{asm_path}/data/w_{weapon_id}.data.s", ld_path)
                 objs.append(obj)
             elif kind == "sbss":
                 obj = add_s(nw, ver, f"{asm_path}/data/w_{weapon_id}.sbss.s", ld_path)
                 objs.append(obj)
             elif kind == "c":
-                obj = add_c(nw, ver, f"{src_path}/w_{weapon_id}.c", ld_path, cpp_flags)
+                if hand_id == 1:
+                    obj = add_c(nw, ver, f"{src_path}/w1_{weapon_id}.c", ld_path, cpp_flags)
+                else:
+                    obj = add_c(nw, ver, f"{src_path}/w_{weapon_id}.c", ld_path, cpp_flags)
                 objs.insert(0, obj)  # the C file needs to always be linked first
             elif kind == ".data":
                 continue
             elif kind == ".rodata":
                 continue
             elif kind == ".bss":
+                continue
+            elif kind == "asm":
                 continue
             else:
                 raise Exception(f"unknown subsegment type {kind}")
@@ -525,7 +543,7 @@ def add_weapon_splat_config(nw: ninja_syntax.Writer, ver: str, splat_config):
         return
     nw.build(
         rule="concat",
-        outputs=build_path(ver, f"WEAPON0.BIN"),
+        outputs=build_path(ver, f"WEAPON{hand_id}.BIN"),
         inputs=weapons,
     )
 
@@ -578,7 +596,8 @@ def add_splat_config(nw: ninja_syntax.Writer, ver: str, file_name: str):
     # the bespoke builder below. PSP ships each weapon as its own w0_/w1_
     # overlay, so those go through the generic overlay path instead.
     if not is_psp(ver) and is_weapon(ovl_name):
-        add_weapon_splat_config(nw, ver, splat_config)
+        print(f"adding weapon {weapon_hand(ovl_name)} for {file_name}")
+        add_weapon_splat_config(nw, ver, splat_config, weapon_hand(ovl_name))
         return
     target_path = str(splat_config["options"]["target_path"])
     asset_path = str(splat_config["options"]["asset_path"])
