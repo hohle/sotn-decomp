@@ -51,6 +51,8 @@ typedef struct {
 #define HAND_ID 0
 #endif
 
+extern s32 g_HandId;
+
 // Weapon Factories all encode `g_HandId` at the top of the params
 #define WFACTORY(id, param) (((g_HandId + 1) << 12) + FACTORY(id, param))
 

@@ -7,16 +7,6 @@
 
 #include "weapon_private.h"
 
-extern s32 g_HandId;
-
-#ifdef VERSION_PSP
-// when HAND_ID is zero, MetroWerks puts this in BSS. this may
-// have been in a separate file because it is located at the
-// front of .data (when HAND_ID = 1) on PSP/mwcc, but at the end
-// of .data (regardless of value) on PSX/gcc.
-s32 g_HandId = HAND_ID;
-#endif
-
 // PSP keeps a separate copy of the generated animsets per hand.
 // clang-format off
 #define inner_path(hand, n) CPP_STR(PATH_JOIN(gen/w##hand, n))

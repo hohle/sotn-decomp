@@ -45,5 +45,6 @@ segments:
     subsegments:
       - [0x80, c, w_000]
       - [0x6CC, .data, w_000]
-      - {start: 0x1980, type: bss, vram: 0x92F4780}
+      - {start: 0x1980, type: .bss, 0x92F4780, name: right_hand}
+      #- {start: 0x1980, type: bss, vram: 0x92F4780}
   - [0x1980]
