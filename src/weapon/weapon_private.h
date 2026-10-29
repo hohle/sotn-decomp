@@ -30,27 +30,6 @@ typedef struct {
     /* 0xD */ u8 unused;
 } WeaponParams;
 
-// Used in weapon/w_051
-typedef struct {
-    s16 isFlipped;
-    s16 timer;
-    s16 rotation;
-} AnimProperties;
-
-// Used in weapon/w_029
-typedef struct {
-    f32 posX;
-    f32 posY;
-    s16 unk8;
-    u16 unkA;
-    s16 unkC;
-    s16 unkE;
-    s16 unk10;
-    s16 spawnDelay;
-    s16 unk14;
-    s16 state;
-} FireShieldDragon;
-
 #if defined(WEAPON0)
 #define HAND_ID 0
 #elif defined(WEAPON1)
@@ -103,13 +82,6 @@ void WeaponUnused30(void);
 void WeaponUnused34(void);
 void WeaponUnused38(void);
 void WeaponUnused3C(void);
-
-void DestroyEntity(Entity* entity);
-static void SetSpriteBank1(SpriteParts* animset);
-static void SetSpriteBank2(SpriteParts* animset);
-static void DecelerateX(s32 amount);
-static void DecelerateY(s32 amount);
-static void SetSpeedX(s32 speed);
 
 static Weapon header = {
     EntityWeaponAttack, func_ptr_80170004, func_ptr_80170008,
