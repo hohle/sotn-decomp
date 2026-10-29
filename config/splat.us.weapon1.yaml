@@ -41,8 +41,9 @@ segments:
     align: 4
     subalign: 4
     subsegments:
-      - [0x04000, data, w1_000]
-      - [0x050D4, c, w1_000]
+      - [0x04000, .data, w1_000]
+      - [0x050D0, .data, left_hand]
+      - [0x050D4, c, w_000]
   - name: f1_001
     type: grey4
     start: 0x07000

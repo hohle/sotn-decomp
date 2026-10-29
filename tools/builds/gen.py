@@ -486,22 +486,20 @@ def add_weapon_splat_config(nw: ninja_syntax.Writer, ver: str, splat_config, han
             print(f"weapon id: {weapon_id}")
         for subsegment in segment["subsegments"]:
             kind = subsegment[1]
+            name = subsegment[2]
             if kind == "data":
-                if hand_id == 1:
-                    obj = add_s(nw, ver, f"{asm_path}/data/w1_{weapon_id}.data.s", ld_path)
-                else:
-                    obj = add_s(nw, ver, f"{asm_path}/data/w_{weapon_id}.data.s", ld_path)
+                obj = add_s(nw, ver, f"{asm_path}/data/{name}.data.s", ld_path)
                 objs.append(obj)
             elif kind == "sbss":
                 obj = add_s(nw, ver, f"{asm_path}/data/w_{weapon_id}.sbss.s", ld_path)
                 objs.append(obj)
             elif kind == "c":
-                if hand_id == 1:
-                    obj = add_c(nw, ver, f"{src_path}/w1_{weapon_id}.c", ld_path, cpp_flags)
-                else:
-                    obj = add_c(nw, ver, f"{src_path}/w_{weapon_id}.c", ld_path, cpp_flags)
+                obj = add_c(nw, ver, f"{src_path}/{name}.c", ld_path, cpp_flags)
                 objs.insert(0, obj)  # the C file needs to always be linked first
             elif kind == ".data":
+                if name == 'left_hand' or name == 'right_hand':
+                    obj = add_c(nw, ver, f"{src_path}/{name}.c", ld_path, cpp_flags)
+                    objs.append(obj)  # the C file needs to always be linked first
                 continue
             elif kind == ".rodata":
                 continue
