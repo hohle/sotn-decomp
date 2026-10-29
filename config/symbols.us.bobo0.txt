@@ -14,3 +14,4 @@ MakeExplosions = 0x801C4444; // source=match
 UnkRecursivePrimFunc2 = 0x801C4CB4; // source=match
 PlaySfxPositional = 0x801C55AC; // source=match
 FindFirstUnkPrim2 = 0x801CD41C; // source=match
+g_EInitOlroxTrueFormLeg = 0x80180708; // todo maybe limb?
