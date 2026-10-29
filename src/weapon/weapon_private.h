@@ -8,6 +8,15 @@
 #define WEAPON0 // forces WEAPON0 for the time being
 #endif
 
+// macros for including assets dynamically based
+// on HAND_ID.
+//
+// PSP keeps a separate copy of the generated animsets per hand.
+// clang-format off
+#define inner_path(hand, n) CPP_STR(PATH_JOIN(gen/w##hand, n))
+// clang-format on
+#define path(hand, n) inner_path(hand, n)
+
 // Used in weapon/w_046, weapon/w_053, weapon/w_056
 typedef struct {
     /* 0x0 */ s16 uFlag; // flipX

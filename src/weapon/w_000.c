@@ -7,12 +7,6 @@
 
 #include "weapon_private.h"
 
-// PSP keeps a separate copy of the generated animsets per hand.
-// clang-format off
-#define inner_path(hand, n) CPP_STR(PATH_JOIN(gen/w##hand, n))
-// clang-format on
-#define path(hand, n) inner_path(hand, n)
-
 #ifdef VERSION_PSP
 #include path(HAND_ID, w_000_1.h)
 #include path(HAND_ID, w_000_2.h)
