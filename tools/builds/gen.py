@@ -482,8 +482,6 @@ def add_weapon_splat_config(nw: ninja_syntax.Writer, ver: str, splat_config, han
         weapon_id = re.sub(r'^f\d*_', '', weapon_gfx)
         cpp_flags = f"-DW_{weapon_id} -DWEAPON{hand_id}"
         objs = []
-        if hand_id == 1:
-            print(f"weapon id: {weapon_id}")
         for subsegment in segment["subsegments"]:
             kind = subsegment[1]
             name = subsegment[2]
@@ -497,7 +495,7 @@ def add_weapon_splat_config(nw: ninja_syntax.Writer, ver: str, splat_config, han
                 obj = add_c(nw, ver, f"{src_path}/{name}.c", ld_path, cpp_flags)
                 objs.insert(0, obj)  # the C file needs to always be linked first
             elif kind == ".data":
-                if name == 'left_hand' or name == 'right_hand':
+                if name == 'left_hand' or name == 'right_hand' or name.startswith('w_init'):
                     obj = add_c(nw, ver, f"{src_path}/{name}.c", ld_path, cpp_flags)
                     objs.append(obj)  # the C file needs to always be linked first
                 continue
@@ -594,7 +592,6 @@ def add_splat_config(nw: ninja_syntax.Writer, ver: str, file_name: str):
     # the bespoke builder below. PSP ships each weapon as its own w0_/w1_
     # overlay, so those go through the generic overlay path instead.
     if not is_psp(ver) and is_weapon(ovl_name):
-        print(f"adding weapon {weapon_hand(ovl_name)} for {file_name}")
         add_weapon_splat_config(nw, ver, splat_config, weapon_hand(ovl_name))
         return
     target_path = str(splat_config["options"]["target_path"])

@@ -66,34 +66,34 @@ extern s32 g_HandId;
 // entry points and overlay table rather than sharing the ones below.
 #ifndef VERSION_PSP
 // exported
-static void EntityWeaponAttack(Entity* self);
-static void LoadWeaponPalette(s32 clutIndex);
+void EntityWeaponAttack(Entity* self);
+void LoadWeaponPalette(s32 clutIndex);
 #ifndef FUNC_04_VOID
-static s32 func_ptr_80170004(Entity* self);
+s32 func_ptr_80170004(Entity* self);
 #else
-static void func_ptr_80170004(Entity* self);
+void func_ptr_80170004(Entity* self);
 #endif
-static void func_ptr_80170008(Entity* self);
+void func_ptr_80170008(Entity* self);
 #ifdef FUNC_0C_S32
-static s32 func_ptr_8017000C(Entity* self);
+s32 func_ptr_8017000C(Entity* self);
 #else
-static void func_ptr_8017000C(Entity* self);
+void func_ptr_8017000C(Entity* self);
 #endif
-static s32 func_ptr_80170010(Entity* self);
-static s32 func_ptr_80170014(Entity* self);
-static int GetWeaponId(void);
+s32 func_ptr_80170010(Entity* self);
+s32 func_ptr_80170014(Entity* self);
+int GetWeaponId(void);
 #ifdef SHIELDSPELL_S32
-static s32 EntityWeaponShieldSpell(Entity* self);
+s32 EntityWeaponShieldSpell(Entity* self);
 #else
-static void EntityWeaponShieldSpell(Entity* self);
+void EntityWeaponShieldSpell(Entity* self);
 #endif
-static void func_ptr_80170024(Entity* self);
-static void func_ptr_80170028(Entity* self);
-static void WeaponUnused2C(void);
-static void WeaponUnused30(void);
-static void WeaponUnused34(void);
-static void WeaponUnused38(void);
-static void WeaponUnused3C(void);
+void func_ptr_80170024(Entity* self);
+void func_ptr_80170028(Entity* self);
+void WeaponUnused2C(void);
+void WeaponUnused30(void);
+void WeaponUnused34(void);
+void WeaponUnused38(void);
+void WeaponUnused3C(void);
 
 void DestroyEntity(Entity* entity);
 static void SetSpriteBank1(SpriteParts* animset);
